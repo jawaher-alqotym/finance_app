@@ -3,6 +3,7 @@ import 'package:finance_app/screens/NewSavingPage.dart';
 import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/screens/Home.dart';
+import 'package:finance_app/screens/insight_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ExpensesPage(),
+      home: InsightPage(),
     );
   }
 }
+
