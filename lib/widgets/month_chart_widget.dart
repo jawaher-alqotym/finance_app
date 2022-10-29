@@ -4,13 +4,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 // Ring Chart to include in insight page
 
-Widget chartWidget(BuildContext context) {
+Widget month_chartWidget(BuildContext context) {
   return CircularPercentIndicator(
     radius: 100.0,
     lineWidth: 10.0,
     percent: .40,
-    backgroundColor: Color.fromRGBO(255, 203, 102, 0.5),
-    progressColor: Color.fromRGBO(255, 203, 102, 1),
+    backgroundColor: Color.fromRGBO(226, 92, 92, 0.5),
+    progressColor: Color.fromRGBO(226, 92, 92, 1),
     animation: true,
     animationDuration: 1200,
     circularStrokeCap: CircularStrokeCap.round,
@@ -22,7 +22,7 @@ Widget chartWidget(BuildContext context) {
           child: new Text(
             "470 SAR",
             style: TextStyle(
-                color: Color.fromRGBO(255, 203, 102, 1), fontSize: 20),
+                color: Color.fromRGBO(226, 92, 92, 1), fontSize: 20),
           ),
         ),
         Row(
@@ -30,12 +30,12 @@ Widget chartWidget(BuildContext context) {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 3),
-              child: SvgPicture.asset('assets/down_arrow.svg'),
+              child: SvgPicture.asset('assets/down_arrow.svg', color: Color.fromRGBO(226, 92, 92, 1),),
             ),
             new Text(
-              "20% from last week",
+              "20% from last month",
               style: TextStyle(
-                  color: Color.fromRGBO(255, 203, 102, 1), fontSize: 12),
+                  color: Color.fromRGBO(226, 92, 92, 1), fontSize: 12),
             ),
           ],
         ),

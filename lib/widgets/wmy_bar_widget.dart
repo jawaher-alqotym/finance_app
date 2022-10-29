@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:finance_app/widgets/chart_widget.dart';
+import 'package:finance_app/widgets/month_chart_widget.dart';
+
 // Week Month Year insight toggle switch bar
 Widget wmyBarWidget(BuildContext context) {
-
   return ToggleSwitch(
     minWidth: 350.0,
     minHeight: 44,
@@ -33,7 +35,14 @@ Widget wmyBarWidget(BuildContext context) {
     totalSwitches: 3,
     labels: ['Week', 'Month', 'Year'],
     onToggle: (index) {
-      print('switched to: $index');
+     // if(index == 0){ // week
+     // }
+     // else if(index == 1){ // month
+     // }
+     // else{ // year
+     //  }
+     // print(is_wmy);
     },
+    changeOnTap: true,
   );
 }
