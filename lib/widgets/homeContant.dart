@@ -54,12 +54,13 @@ class _HomeContantState extends State<HomeContant> {
                       right: 220.0,
                     ),
                     child: TextButton(
-                      onPressed: () =>
-                          showBottomSheet(
-                            shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(26.0),),
-                            backgroundColor: Colors.white,
-                              context: context,
-                              builder: (context)=> buildSheet()),
+                      onPressed: () => showBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(26.0),
+                          ),
+                          backgroundColor: Colors.white,
+                          context: context,
+                          builder: (context) => buildSheet()),
                       child: Text(
                         "$balance SR +",
                         style: TextStyle(
@@ -116,13 +117,7 @@ class _HomeContantState extends State<HomeContant> {
         FloatingButton(),
       ],
     );
-
-
   }
 
-  Widget buildSheet() =>Container(
-
-
-  );
-
+  Widget buildSheet() => Container();
 }
