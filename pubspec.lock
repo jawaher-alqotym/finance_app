@@ -74,6 +74,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.6.5"
   intl:
     dependency: transitive
     description:
@@ -130,7 +137,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-
   percent_indicator:
     dependency: "direct main"
     description:
@@ -229,5 +235,4 @@ packages:
     version: "6.1.0"
 sdks:
   dart: ">=2.18.2 <3.0.0"
-  flutter: ">=2.11.0-0.1.pre"
-
+  flutter: ">=2.12.0"

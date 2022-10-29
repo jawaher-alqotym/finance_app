@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/navBar.dart';
 import 'package:finance_app/widgets/floatingButton.dart';
 import 'package:finance_app/widgets/addBalance.dart';
+import 'package:finance_app/widgets/num_pad.dart';
 
 class HomeContant extends StatefulWidget {
   const HomeContant({super.key});
@@ -13,6 +14,8 @@ class HomeContant extends StatefulWidget {
 }
 
 class _HomeContantState extends State<HomeContant> {
+  // text controller
+  final TextEditingController _myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -55,6 +58,7 @@ class _HomeContantState extends State<HomeContant> {
                     ),
                     child: TextButton(
                       onPressed: () => showBottomSheet(
+                          enableDrag: true,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(26.0),
                           ),
@@ -102,7 +106,7 @@ class _HomeContantState extends State<HomeContant> {
                     Container(
                       margin: EdgeInsets.only(left: 30.0, top: 100.0),
                       child: Text(
-                        "Expences",
+                        "Expenses",
                         style:
                             TextStyle(fontSize: 20, color: Color(0xFF33404F)),
                       ),
@@ -119,5 +123,59 @@ class _HomeContantState extends State<HomeContant> {
     );
   }
 
-  Widget buildSheet() => Container();
+  Widget buildSheet() => Container(
+    height: (MediaQuery.of(context).size.height)-70,
+    width: MediaQuery.of(context).size.width,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Add Your Balance', style: TextStyle(fontWeight: FontWeight.w400 ,fontSize:16 ,color: Color.fromRGBO(51, 64, 79, 1)),),
+      // display the entered numbers
+      Padding(
+        padding: const EdgeInsets.all(20),
+        child: SizedBox(
+          height: 70,
+          child: Center(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w400,color: Color.fromRGBO(138, 135, 135, 0.5)),
+                    border: InputBorder.none,
+                    hintText: '0 SAR/Month'
+                ),
+                controller: _myController,
+                textAlign: TextAlign.center,
+                showCursor: false,
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                // Disable the default soft keybaord
+                keyboardType: TextInputType.none,
+              )),
+        ),
+      ),
+      // implement the custom NumPad
+      NumPad(
+        buttonSize: 20,
+        buttonColor: Colors.white,
+        iconColor: Color.fromRGBO(226, 92, 92, 1),
+        controller: _myController,
+        delete: () {
+          _myController.text = _myController.text
+              .substring(0, _myController.text.length - 1);
+        },
+        // do something with the input numbers
+        onSubmit: () {
+          debugPrint('Your added Balance: ${_myController.text}');
+          showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                content: Text(
+                  "Your added balance: \n ${_myController.text}",
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ));
+        },
+      ),
+      ],
+    ),
+
+  );
 }

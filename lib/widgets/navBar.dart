@@ -1,6 +1,9 @@
 /* lib/widgets/navbar.dart */
 
 import 'package:flutter/material.dart';
+import 'package:finance_app/screens/insight_page.dart';
+import 'package:get/get.dart';
+
 
 class navBar extends StatefulWidget {
   const navBar({super.key});
@@ -35,6 +38,6 @@ class _navBarState extends State<navBar> {
     );
   }
   void _onSearchButtonPressed(){
-    print("insights");
+    Get.to(InsightPage());
   }
 }
