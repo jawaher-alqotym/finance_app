@@ -1,5 +1,7 @@
 /* lib/widgets/floatingButtonChildren.dart */
 
+import 'package:finance_app/screens/ExpencesPage.dart';
+import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -37,6 +39,21 @@ class _FlowMenuState extends State<FlowMenu>
 
   Widget flowMenuItem(IconData icon) {
     final double buttonDiameter = 60;
+
+    void _Routing(icon) {
+      if (icon == Icons.wallet) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ExpensesPage()),
+        );
+      } else if (icon == Icons.attach_money) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const SavingPage()),
+        );
+      }
+    }
+
     return RawMaterialButton(
       elevation: 0,
       fillColor: Color(0xFF53d259),
@@ -48,6 +65,7 @@ class _FlowMenuState extends State<FlowMenu>
         menuAnimation.status == AnimationStatus.completed
             ? menuAnimation.reverse()
             : menuAnimation.forward();
+        _Routing(icon);
       },
       child: Icon(
         icon,

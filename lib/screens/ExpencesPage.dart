@@ -33,7 +33,9 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     margin: const EdgeInsets.only(
                         left: 350.0, right: 20.0, bottom: 15),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       icon: const Icon(
                         Icons.cancel,
                         color: Color.fromRGBO(83, 210, 88, 1),
