@@ -31,36 +31,37 @@ class _ExpensesAndSavingWidgetState extends State<ExpensesAndSavingWidget> {
                   children: [
                     Container(
                         child: CustomContainer(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.home,
-                              color: Color.fromARGB(255, 255, 255, 254),
-                            ),
-                            Text("Housing",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 254))),
-                          ],
-                        ),
+                      child: Row(
+                        //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ImageIcon(
+                            AssetImage("assets/icons/HomeIcon.png"),
+                            color: Color.fromARGB(255, 255, 255, 254),
+                          ),
+                          SizedBox(width: 10),
+                          Text("Housing",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color.fromARGB(255, 255, 255, 254))),
+                        ],
                       ),
                     )),
                     Container(
                       child: CustomContainer(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20, left: 20),
-                          child: Row(
-                            children: [
-                              Icon(Icons.local_grocery_store_sharp,
+                        child: Row(
+                          children: [
+                            ImageIcon(
+                              AssetImage("assets/icons/GreceryIcon.png"),
+                              color: Color.fromARGB(255, 255, 255, 254),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              "Grocery",
+                              style: TextStyle(
+                                  fontSize: 13,
                                   color: Color.fromARGB(255, 255, 255, 254)),
-                              Text(
-                                "Grocery",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 254)),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -72,36 +73,45 @@ class _ExpensesAndSavingWidgetState extends State<ExpensesAndSavingWidget> {
                   children: [
                     Container(
                         child: CustomContainer(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20),
-                        child: Row(
-                          children: [
-                            Icon(Icons.car_rental,
+                      child: Row(
+                        children: [
+                          ImageIcon(
+                            AssetImage("assets/icons/CarIcon.png"),
+                            color: Color.fromARGB(255, 255, 255, 254),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Car",
+                            style: TextStyle(
+                                fontSize: 13,
                                 color: Color.fromARGB(255, 255, 255, 254)),
-                            Text(
-                              "Car",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 255, 254)),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     )),
                     Container(
                       child: CustomContainer(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 20, left: 20),
-                          child: Row(
-                            children: [
-                              Icon(Icons.wifi,
-                                  color: Color.fromARGB(255, 255, 255, 254)),
-                              Text(
-                                "Internet ",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 254)),
-                              ),
-                            ],
-                          ),
+                        child: Row(
+                          children: [
+                            ImageIcon(
+                              AssetImage("assets/icons/WifiIcon.png"),
+                              color: Color.fromARGB(255, 255, 255, 254),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              "Phone&Internet",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color.fromARGB(
+                                    255,
+                                    255,
+                                    255,
+                                    254,
+                                  )),
+                            ),
+                          ],
                         ),
                       ),
                     ),

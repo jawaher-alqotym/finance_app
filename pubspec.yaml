@@ -32,5 +32,10 @@ flutter:
      - assets/images/insights.png
      - assets/images/background.png
      - assets/icons/Vector.svg
+     - assets/icons/HomeIcon.png
+     - assets/icons/CarIcon.png
+     - assets/icons/GreceryIcon.png
+     - assets/icons/WifiIcon.png
+     
 
 
