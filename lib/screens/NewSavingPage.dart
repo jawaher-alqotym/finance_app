@@ -71,8 +71,6 @@ class _nextRouteState extends State<NewSaving> {
                   ]),
             ),
             Container(
-              // child: Padding(
-              //   padding: const EdgeInsets.only(top: 20),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -149,7 +147,7 @@ class _nextRouteState extends State<NewSaving> {
                       ],
                     ),
                     SizedBox(
-                      height: 350,
+                      height: 340,
                     ),
                     Container(
                         margin: EdgeInsets.only(bottom: 50),
