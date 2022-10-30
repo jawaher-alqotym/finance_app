@@ -24,15 +24,19 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
+
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
+            automaticallyImplyLeading: false,
           ),
           body: HomeContant(),
         ),
       ],
+
     );
+
   }
 }

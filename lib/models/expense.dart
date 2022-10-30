@@ -3,12 +3,12 @@
 import 'package:finance_app/models/category.dart';
 
 class Expense {
-  DateTime? date;
+  DateTime date;
   double? amount;
   String? name;
   Catgory? catgory;
 
-  Expense({this.date, this.amount, this.name, this.catgory});
+  Expense({ required this.date, this.amount, this.name, this.catgory});
 
 
 }

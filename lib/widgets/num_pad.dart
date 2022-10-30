@@ -153,8 +153,11 @@ class NumPad extends StatelessWidget {
                 onPressed: () {
                   onSubmit();
                   // navigator?.pop(context);
-                  Get.to(Home());
-
+                //  Get.to(Home());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Home()),
+                  );
 
                 },
               ),

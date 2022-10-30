@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 
 class Catgory {
-  String? title;
-  Icon?   icon;
+  String title;
+  Icon   icon;
 
-  Catgory({this.title, this.icon});
+  Catgory({required this.title, required this.icon});
 }
