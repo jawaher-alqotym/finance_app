@@ -8,8 +8,6 @@ class ExpensesPage extends StatefulWidget {
 }
 
 class _ExpensesPageState extends State<ExpensesPage> {
-  final activeColor = Colors.white30;
-  final inactiveColor = Colors.white12;
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -29,10 +27,11 @@ class _ExpensesPageState extends State<ExpensesPage> {
             child: Column(
               children: [
                 Container(
-                    height: 20,
-                    margin: const EdgeInsets.only(
-                        left: 350.0, right: 20.0, bottom: 15),
+                    height: 30,
+                    width: 30,
+                    margin: const EdgeInsets.only(left: 320.0, bottom: 15),
                     child: IconButton(
+                      iconSize: 35,
                       onPressed: () {
                         Navigator.pop(context);
                       },

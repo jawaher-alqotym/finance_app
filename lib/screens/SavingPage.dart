@@ -23,9 +23,11 @@ class SavingPage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                    height: 20,
-                    margin: const EdgeInsets.only(left: 350.0, right: 20.0),
+                    height: 30,
+                    width: 30,
+                    margin: const EdgeInsets.only(left: 320.0, bottom: 15),
                     child: IconButton(
+                      iconSize: 35,
                       onPressed: () => {Navigator.pop(context)},
                       icon: const Icon(
                         Icons.cancel,
@@ -54,7 +56,7 @@ class SavingPage extends StatelessWidget {
                     )),
                 Container(child: ExpensesAndSavingWidget()),
                 Container(
-                    alignment: Alignment.bottomCenter,
+                    //  alignment: Alignment.center,
                     child: SizedBox(
                         width: 316,
                         height: 45.28,
@@ -66,6 +68,7 @@ class SavingPage extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(7.88),
                             ),
+
                             // foreground
                           ),
                           onPressed: () {},

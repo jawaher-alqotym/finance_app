@@ -1,3 +1,4 @@
+import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/screens/SavingPage.dart';
 import 'package:finance_app/widgets/SavingPercent.dart';
 import 'package:flutter/material.dart';
@@ -164,7 +165,9 @@ class _nextRouteState extends State<NewSaving> {
                                 ),
                                 // foreground
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               child: Text("save"),
                             )))
                   ],
