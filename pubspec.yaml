@@ -14,8 +14,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get: ^4.6.5
+  toggle_switch: ^2.0.1
   flutter_svg: ^1.1.6
+  syncfusion_flutter_charts: ^20.3.52
+  get: ^4.6.5
   cupertino_icons: ^1.0.2
   percent_indicator: ^4.2.2
 
@@ -34,5 +36,13 @@ flutter:
      - assets/images/insights.png
      - assets/images/background.png
      - assets/icons/Vector.svg
+     - assets/icons/HomeIcon.png
+     - assets/icons/CarIcon.png
+     - assets/icons/GreceryIcon.png
+     - assets/icons/WifiIcon.png
+     - assets/down_arrow.svg
+     - assets/monitor.svg
+     - assets/home_icon.svg
+     - assets/home_icon.png
 
 
