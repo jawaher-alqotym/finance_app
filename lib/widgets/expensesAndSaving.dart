@@ -20,7 +20,7 @@ class _ExpensesAndSavingWidgetState extends State<ExpensesAndSavingWidget> {
     return Container(
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(26.0),
           child: Container(
             height: 450,
             child: Column(
@@ -118,7 +118,7 @@ class _ExpensesAndSavingWidgetState extends State<ExpensesAndSavingWidget> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 13, top: 16),
+                  padding: const EdgeInsets.only(left: 20, top: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

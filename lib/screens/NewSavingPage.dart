@@ -28,7 +28,7 @@ class _nextRouteState extends State<NewSaving> {
             Container(
               padding: EdgeInsets.only(top: 60, left: 10),
               alignment: Alignment.centerLeft,
-              height: 200,
+              height: 300,
               width: double.infinity,
               // color: Colors.red,
               child: Column(
