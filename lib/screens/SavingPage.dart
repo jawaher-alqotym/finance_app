@@ -17,7 +17,7 @@ class SavingPage extends StatelessWidget {
           padding: const EdgeInsets.only(top: 160),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(26)),
               color: Colors.white,
             ),
             child: Column(
@@ -25,7 +25,7 @@ class SavingPage extends StatelessWidget {
                 Container(
                     height: 30,
                     width: 30,
-                    margin: const EdgeInsets.only(left: 320.0, bottom: 15),
+                    margin: const EdgeInsets.only(left: 350.0, bottom: 15),
                     child: IconButton(
                       iconSize: 35,
                       onPressed: () => {Navigator.pop(context)},

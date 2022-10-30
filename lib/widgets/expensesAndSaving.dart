@@ -118,7 +118,7 @@ class _ExpensesAndSavingWidgetState extends State<ExpensesAndSavingWidget> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 13, top: 16),
+                  padding: const EdgeInsets.only(left: 20, top: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
