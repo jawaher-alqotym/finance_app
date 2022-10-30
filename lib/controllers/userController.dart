@@ -8,10 +8,12 @@ import 'package:finance_app/models/saving.dart';
 import 'package:finance_app/models/expense.dart';
 
 class UserController extends GetxController {
-  User user = new User(income: 0, savingList: <Saving>[], expenseList: <Expense>[]);
+  User user = new User(income: 0, savingList: <Saving>[    new Saving(0.30),
+    new Saving(0.50),], expenseList: <Expense>[]);
 
 
   updateIncome(newIncome){
+    print("in updateIncome $newIncome");
     this.user.income = newIncome;
 
   }

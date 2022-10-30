@@ -9,6 +9,9 @@ import 'package:finance_app/widgets/goals_widget.dart';
 import 'package:finance_app/widgets/spending_cati_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:finance_app/widgets/navBar.dart';
+import 'package:finance_app/widgets/floatingButton.dart';
+
 class InsightPage extends StatefulWidget {
   @override
   _InsightPageState createState() => _InsightPageState();
@@ -51,7 +54,7 @@ class _InsightPageState extends State<InsightPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 37.0, bottom: 30),
+                    padding: const EdgeInsets.only(left: 60.0, bottom: 30),
                     child: Text('My Goals', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
                   ),),
                   Padding(padding:
@@ -61,11 +64,13 @@ class _InsightPageState extends State<InsightPage> {
                 ],
               ),
               goalsWidget(context),
+
             ],
           ),
+
           Spacer(),
           Spacer(),
-          Spacer(),
+
         ],
       )),
     );

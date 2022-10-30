@@ -14,6 +14,11 @@ import 'package:get/route_manager.dart';
 import 'package:finance_app/widgets/addBalance.dart';
 import 'package:finance_app/widgets/num_pad.dart';
 
+import "package:finance_app/controllers/userController.dart";
+import "package:finance_app/models/user.dart";
+import "package:finance_app/models/saving.dart";
+import "package:finance_app/models/expense.dart";
+
 
 class HomeContant extends StatefulWidget {
   const HomeContant({super.key});
@@ -25,11 +30,13 @@ class HomeContant extends StatefulWidget {
 class _HomeContantState extends State<HomeContant> {
   // text controller
   final TextEditingController _myController = TextEditingController();
+  final userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     String welcomeMessage = "Good afternoon";
-    double balance = 0.0;
+
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -40,18 +47,18 @@ class _HomeContantState extends State<HomeContant> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 162.0),
+                    padding: const EdgeInsets.only(right: 0.0),
                     child: Text(
                       "$welcomeMessage",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: 27,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0, right: 200),
+                    padding: const EdgeInsets.only(top: 20.0, right: 0),
                     child: Text(
                       "Here's Your Balance",
                       style: TextStyle(
@@ -63,7 +70,7 @@ class _HomeContantState extends State<HomeContant> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      right: 220.0,
+                      right: 0.0,
                     ),
                     child: TextButton(
                       onPressed: () => showBottomSheet(
@@ -75,9 +82,9 @@ class _HomeContantState extends State<HomeContant> {
                           context: context,
                           builder: (context) => buildSheet()),
                       child: Text(
-                        "$balance SR +",
+                        "${userController.user.income} SR +",
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: userController.user.income > 0 ? Colors.white : Colors.grey,
                           fontSize: 32,
                           fontWeight: FontWeight.w600,
                         ),
@@ -122,8 +129,8 @@ class _HomeContantState extends State<HomeContant> {
                               margin: EdgeInsets.only(left: 0.0, top: 39.0, bottom: 32),
                               child: ListView.builder(
                                      scrollDirection: Axis.horizontal,
-                                     itemCount: 3,
-                                     itemBuilder: (context, index) =>  SavingCard()),
+                                     itemCount:  userController.user.savingList.length,
+                                     itemBuilder: (context, index) =>  SavingCard( percenst: userController.user.savingList[index].percenst, amount_of_saving: userController.user.savingList[index].amount_of_saving,)),
                             ),
                             ],
                         ),
@@ -204,15 +211,17 @@ class _HomeContantState extends State<HomeContant> {
         },
         // do something with the input numbers
         onSubmit: () {
+          userController.updateIncome(double.parse(_myController.text));
+          print(userController.user.income);
           debugPrint('Your added Balance: ${_myController.text}');
-          showDialog(
-              context: context,
-              builder: (_) => AlertDialog(
-                content: Text(
-                  "Your added balance: \n ${_myController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ));
+          // showDialog(
+          //     context: context,
+          //     builder: (_) => AlertDialog(
+          //       content: Text(
+          //         "Your added balance: \n ${_myController.text}",
+          //         style: const TextStyle(fontSize: 20),
+          //       ),
+          //     ));
         },
       ),
       ],
@@ -220,3 +229,4 @@ class _HomeContantState extends State<HomeContant> {
 
   );
 }
+
