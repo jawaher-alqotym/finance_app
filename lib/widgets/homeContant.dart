@@ -3,7 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/navBar.dart';
 import 'package:finance_app/widgets/floatingButton.dart';
-import 'package:finance_app/widgets/addBalance.dart';
+import 'package:finance_app/widgets/expenseCard.dart';
+import 'package:finance_app/widgets/savingCard.dart';
+
+
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 
 class HomeContant extends StatefulWidget {
   const HomeContant({super.key});
@@ -87,26 +92,58 @@ class _HomeContantState extends State<HomeContant> {
                 ),
                 height: 572,
                 width: screenWidth,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 30.0, top: 60.0),
-                      child: Text(
-                        "Savings",
-                        style:
-                            TextStyle(fontSize: 20, color: Color(0xFF33404F)),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SingleChildScrollView(
+                           child: Column(
+                             mainAxisSize: MainAxisSize.min,
+                             children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 256.0, top: 60.0),
+                                child: Text(
+                                  "Savings",
+                                  style:
+                                      TextStyle(fontWeight:  FontWeight.w600,fontSize: 20, color: Color(0xFF33404F)),
+                                ),
+                              ),
+                            Container(
+                              height: 90,
+                              margin: EdgeInsets.only(left: 0.0, top: 39.0, bottom: 32),
+                              child: ListView.builder(
+                                     scrollDirection: Axis.horizontal,
+                                     itemCount: 3,
+                                     itemBuilder: (context, index) =>  SavingCard()),
+                            ),
+                            ],
+                        ),
+                         ),
+
+                      SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Container(
+                              margin: EdgeInsets.only(right: 242.0,),
+                              child: Text(
+                                "Expences",
+                                style:
+                                    TextStyle(fontWeight:  FontWeight.w600, fontSize: 20, color: Color(0xFF33404F)),
+                              ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 30.0, top: 100.0),
-                      child: Text(
-                        "Expences",
-                        style:
-                            TextStyle(fontSize: 20, color: Color(0xFF33404F)),
-                      ),
-                    ),
-                  ],
+                              Container(
+                                height: 190,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: 2,
+                                    itemBuilder: (context, index) =>  ExpenseCard()),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
