@@ -20,7 +20,7 @@ class _ExpensesAndSavingWidgetState extends State<ExpensesAndSavingWidget> {
     return Container(
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(26.0),
           child: Container(
             height: 450,
             child: Column(
