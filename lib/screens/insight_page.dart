@@ -27,9 +27,9 @@ class _InsightPageState extends State<InsightPage> {
           wmyBarWidget(context),
           Spacer(),
           /** Needs to toggle between week and month chart **/
-          // chartWidget(context),
+          chartWidget(context),
           // month_chartWidget(context),
-          year_chartWidget(context),
+          // year_chartWidget(context),
           Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
