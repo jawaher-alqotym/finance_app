@@ -23,62 +23,63 @@ class _InsightPageState extends State<InsightPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Center(
-          child: Column(
-        children: [
+      body: Stack(
+        children: [ Column(
+          children: [
+        halfOvalWidget(context),
+        Spacer(),
+        wmyBarWidget(context),
+        Spacer(),
+        /** Needs to toggle between week and month chart **/
+        // chartWidget(context),
+        // month_chartWidget(context),
+        year_chartWidget(context),
+        Spacer(),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 25.0),
+              child: Text('Spending Categories', style: TextStyle(color: Color.fromRGBO(51, 64, 79, 1), fontWeight: FontWeight.w500),),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 61.0),
+              child: spendingWidget(context),
+            ),
+          ],
+        ),
+        Spacer(),
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60.0, bottom: 30),
+                  child: Text('My Goals', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
+                ),),
+                Padding(padding:
+                const EdgeInsets.only(right: 59.0, bottom: 24),
+                  child:addBtnWidget(context),
+                ),
+              ],
+            ),
+            goalsWidget(context),
+          ],
 
+        ),
 
-          halfOvalWidget(context),
-          Spacer(),
-          wmyBarWidget(context),
-          Spacer(),
-          /** Needs to toggle between week and month chart **/
-          // chartWidget(context),
-          // month_chartWidget(context),
-          year_chartWidget(context),
-          Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: Text('Spending Categories', style: TextStyle(color: Color.fromRGBO(51, 64, 79, 1), fontWeight: FontWeight.w500),),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 61.0),
-                child: spendingWidget(context),
-              ),
-            ],
-          ),
-          Spacer(),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 60.0, bottom: 30),
-                    child: Text('My Goals', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
-                  ),),
-                  Padding(padding:
-                  const EdgeInsets.only(right: 37.0, bottom: 24),
-                    child:addBtnWidget(context),
-                  ),
-                ],
-              ),
-              goalsWidget(context),
-              Container(
-                  height: 200,
-                  child: navBar()),
-            ],
-
-          ),
-
-          // Spacer(),
-          // Spacer(),
-        ],
-      ),
-      ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height/6,
+            )
+          ],
+        ),
+          Container(
+              height: MediaQuery.of(context).size.height,
+              child: navBar()),
+      ]
+    ),
     );
   }
 }

@@ -112,7 +112,7 @@ class _HomeContantState extends State<HomeContant> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
-                        child: Column(
+                        child: userController.user.savingList.length > 0 ?  Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
@@ -138,17 +138,18 @@ class _HomeContantState extends State<HomeContant> {
                                             .user.savingList[index].percenst,
                                         amount_of_saving: userController.user
                                             .savingList[index].amount_of_saving,
-                                      )),
+                                      ),
+                                ),
                             ),
                           ],
-                        ),
+                        ): Text(""),
                       ),
                       SingleChildScrollView(
-                        child: Column(
+                        child: userController.user.expenseList.length > 0 ? Column(
                           children: [
                             Container(
                               margin: EdgeInsets.only(
-                                right: 242.0,
+                                right: 242.0, top: 20
                               ),
                               child: Text(
                                 "Expences",
@@ -159,9 +160,9 @@ class _HomeContantState extends State<HomeContant> {
                               ),
                             ),
                             Container(
-                              height: 190,
+                              //height: 190,
                               child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
+                                  scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
                                   itemCount:
                                       userController.user.expenseList.length,
@@ -170,10 +171,11 @@ class _HomeContantState extends State<HomeContant> {
                                       amount: userController.user.expenseList[index].amount
                                       ,name: userController.user.expenseList[index].name,
                                        //catgory : userController.user.expenseList[index].catgory,
-                                  )),
+                                  ),
+                              ),
                             ),
                           ],
-                        ),
+                        ): Text(""),
                       ),
                     ],
                   ),
