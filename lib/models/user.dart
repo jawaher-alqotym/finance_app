@@ -6,7 +6,7 @@ import 'package:finance_app/models/expense.dart';
 
 class User {
   DateTime? login;
-  double income;
+  num income;
   List<Saving> savingList = <Saving>[];
   List<Expense> expenseList = <Expense>[];
 

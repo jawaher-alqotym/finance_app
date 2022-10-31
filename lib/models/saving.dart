@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 
 class Saving {
   double percenst =0.0;
-  double? amount_of_saving;
+  num? amount_of_saving;
   Catgory? catgory;
-  double? userIncoum;
+  num userIncoum = 9000;
 
   Saving(double percent){
          this.percenst = percent;
-         this.amount_of_saving =( 8000 * percent);
+         this.amount_of_saving =( userIncoum * percent).round();
          this.catgory = null;
   }
 

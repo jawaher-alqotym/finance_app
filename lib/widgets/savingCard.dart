@@ -7,7 +7,7 @@ import 'package:finance_app/models/category.dart';
 
 class SavingCard extends StatefulWidget {
   double percenst;
-  double? amount_of_saving;
+  num? amount_of_saving;
   Catgory? catgory;
 
   SavingCard({super.key, required this.percenst, this.amount_of_saving, this.catgory});

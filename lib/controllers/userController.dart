@@ -32,7 +32,7 @@ class UserController extends GetxController {
 
   updateIncome(newIncome){
     print("in updateIncome $newIncome");
-    this.user.income = newIncome;
+    this.user.income = newIncome.round();
 
   }
 

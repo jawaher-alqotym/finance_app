@@ -6,7 +6,7 @@ import 'package:finance_app/models/category.dart';
 
 class ExpenseCard extends StatefulWidget {
   DateTime date;
-  double? amount;
+  num? amount;
   String? name;
   Catgory? catgory;
 
@@ -66,7 +66,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                   ),
                    Padding(
                      padding: const EdgeInsets.only(right: 12.0, left: 55),
-                     child: Text("${widget.amount}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
+                     child: Text("-${widget.amount}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
                    ),
                  ],
                ),

@@ -4,7 +4,7 @@ import 'package:finance_app/models/category.dart';
 
 class Expense {
   DateTime date;
-  double? amount;
+  num? amount;
   String? name;
   Catgory? catgory;
 
