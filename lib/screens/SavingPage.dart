@@ -1,5 +1,6 @@
 import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/widgets/expensesandsaving.dart';
+import 'package:finance_app/widgets/savingWidget.dart';
 import 'package:flutter/material.dart';
 
 class SavingPage extends StatelessWidget {
@@ -54,7 +55,7 @@ class SavingPage extends StatelessWidget {
                           fontSize: 14,
                           color: Color.fromRGBO(83, 210, 88, 1)),
                     )),
-                Container(child: ExpensesAndSavingWidget()),
+                Container(child: SavingWidget()),
                 Container(
                     //  alignment: Alignment.center,
                     child: SizedBox(

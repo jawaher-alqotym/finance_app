@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 import 'customContainerForExpenesAndSaving.dart';
 
-class ExpensesWidget extends StatefulWidget {
-  const ExpensesWidget({super.key});
+class SavingWidget extends StatefulWidget {
+  const SavingWidget({super.key});
 
   @override
-  State<ExpensesWidget> createState() => _ExpensesWidgetState();
+  State<SavingWidget> createState() => _SavingWidgetState();
 }
 
-class _ExpensesWidgetState extends State<ExpensesWidget> {
+class _SavingWidgetState extends State<SavingWidget> {
   // declare it here
   @override
   Widget build(BuildContext context) {
