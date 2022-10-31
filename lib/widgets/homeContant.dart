@@ -92,7 +92,7 @@ class _HomeContantState extends State<HomeContant> {
                   ),
                 ],
               ),
-              height: 130,
+              height: 180,
               width: screenWidth,
             ),
             Padding(
@@ -183,7 +183,7 @@ class _HomeContantState extends State<HomeContant> {
           ],
         ),
         navBar(),
-        FloatingButton(),
+        //FloatingButton(),
       ],
     );
   }

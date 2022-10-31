@@ -44,5 +44,6 @@ flutter:
      - assets/monitor.svg
      - assets/home_icon.svg
      - assets/home_icon.png
+     - assets/images/Base.svg
 
 
