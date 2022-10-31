@@ -142,10 +142,10 @@ class FlowMenuDelegate extends FlowDelegate {
     return menuAnimation != oldDelegate.menuAnimation;
   }
 
-  @override
+  // @override
   void paintChildren(FlowPaintingContext context) {
     final xStart = context.size.width - 165 - 80; // 80 is the button size
-    final yStart = context.size.height - 53 - 80;
+    final yStart = context.size.height - 45 - 80;
 
     double dx = 0.0;
     double dy = 0.0;
