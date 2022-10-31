@@ -19,16 +19,21 @@ class ExpenseCard extends StatefulWidget {
 class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
+    DateTime now = new DateTime.now();
+    DateTime today = new DateTime(now.year, now.month, now.day);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 45.0, top: 15, bottom: 2),
-          child: Text("${widget.date.year} / ${widget.date.month} / ${widget.date.day}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter"),),
+          child: today == widget.date ?
+          Text("Today", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter"),)
+        :Text("${widget.date.year} - ${widget.date.month} - ${widget.date.day}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter"),),
         ),
         Container(
           height: 70,
-          margin: EdgeInsets.only(left: 45.0,),
+          margin: EdgeInsets.only(left: 45.0, right: 45.0, bottom: 0),
              decoration: BoxDecoration(
               color: const Color(0xFF33404F),
               borderRadius: BorderRadius.all(Radius.circular(8)),
