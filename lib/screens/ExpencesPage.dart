@@ -1,4 +1,4 @@
-import 'package:finance_app/widgets/expensesandsaving.dart';
+import 'package:finance_app/widgets/expenses.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesPage extends StatefulWidget {
@@ -60,7 +60,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                           fontSize: 14,
                           color: Color.fromRGBO(83, 210, 88, 1)),
                     )),
-                Container(child: ExpensesAndSavingWidget()),
+                Container(child: ExpensesWidget()),
                 Container(
                     alignment: Alignment.bottomCenter,
                     child: SizedBox(

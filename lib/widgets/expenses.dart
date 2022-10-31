@@ -125,9 +125,7 @@ class _ExpensesWidgetState extends State<ExpensesWidget> {
                       Container(
                         child: CustomContainer(
                             child: TextButton.icon(
-                                onPressed: () {
-                                  Navigator.of(context).push(_createRoute());
-                                },
+                                onPressed: () {},
                                 icon: Icon(Icons.add,
                                     color: Color.fromARGB(255, 255, 255, 254)),
                                 label: Text(""))),
