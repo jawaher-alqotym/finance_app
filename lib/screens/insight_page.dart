@@ -23,16 +23,19 @@ class _InsightPageState extends State<InsightPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Center(child: Column(
+      body: Center(
+          child: Column(
         children: [
+
+
           halfOvalWidget(context),
           Spacer(),
           wmyBarWidget(context),
           Spacer(),
           /** Needs to toggle between week and month chart **/
-          chartWidget(context),
+          // chartWidget(context),
           // month_chartWidget(context),
-          // year_chartWidget(context),
+          year_chartWidget(context),
           Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,15 +67,18 @@ class _InsightPageState extends State<InsightPage> {
                 ],
               ),
               goalsWidget(context),
-
+              Container(
+                  height: 200,
+                  child: navBar()),
             ],
+
           ),
 
-          Spacer(),
-          Spacer(),
-
+          // Spacer(),
+          // Spacer(),
         ],
-      )),
+      ),
+      ),
     );
   }
 }
