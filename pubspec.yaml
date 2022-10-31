@@ -14,16 +14,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  percent_indicator: ^4.2.2
   toggle_switch: ^2.0.1
   flutter_svg: ^1.1.6
   syncfusion_flutter_charts: ^20.3.52
   get: ^4.6.5
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:

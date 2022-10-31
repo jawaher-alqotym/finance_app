@@ -16,6 +16,7 @@ class _FlowMenuState extends State<FlowMenu>
     with SingleTickerProviderStateMixin {
   late AnimationController menuAnimation;
   IconData lastTapped = Icons.notifications;
+
   final List<IconData> menuItems = <IconData>[
     Icons.attach_money,
     Icons.wallet,
@@ -40,6 +41,38 @@ class _FlowMenuState extends State<FlowMenu>
   Widget flowMenuItem(IconData icon) {
     final double buttonDiameter = 60;
 
+// <<<<<<< HEAD
+//     void  _Routing(icon){
+//
+//       if(menuItems[menuItems.length - 2] ==  icon){
+//         print("wallet");
+//
+//       }else if(menuItems[menuItems.length - 3] == icon){
+//         print("monye");
+//
+//       }
+//
+//
+//     }
+//     return RawMaterialButton(
+//         elevation: 0,
+//         fillColor: Color(0xFF53d259),
+//         splashColor: Color(0xFF53d259),
+//         shape: const CircleBorder(),
+//         constraints: BoxConstraints.tight(Size(buttonDiameter, buttonDiameter)),
+//         onPressed: () {
+//           _updateMenu(icon);
+//           menuAnimation.status == AnimationStatus.completed
+//               ? menuAnimation.reverse()
+//               : menuAnimation.forward();
+//
+//           _Routing(icon);
+//         },
+//         child: Icon(
+//           icon,
+//           color: Color(0xFF33414f),
+//           size: 30.0,
+//         ),
     void _Routing(icon) {
       if (icon == Icons.wallet) {
         Navigator.push(
@@ -73,6 +106,7 @@ class _FlowMenuState extends State<FlowMenu>
         size: 30.0,
       ),
     );
+
   }
 
   @override
@@ -122,5 +156,7 @@ class FlowMenuDelegate extends FlowDelegate {
         ),
       );
     }
+
   }
+
 }

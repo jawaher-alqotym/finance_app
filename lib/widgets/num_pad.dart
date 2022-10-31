@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+
+import '../screens/Home.dart';
 
 // KeyPad widget
 // This widget is reusable and its buttons are customizable (color, size)
@@ -148,6 +152,13 @@ class NumPad extends StatelessWidget {
                 child: Text("Start", style: TextStyle(color: Color.fromRGBO(51, 64, 79, 1), fontSize: 20, fontWeight: FontWeight.w600),),
                 onPressed: () {
                   onSubmit();
+                  // navigator?.pop(context);
+                //  Get.to(Home());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Home()),
+                  );
+
                 },
               ),
             ),
