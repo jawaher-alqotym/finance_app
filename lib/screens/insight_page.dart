@@ -25,32 +25,18 @@ class _InsightPageState extends State<InsightPage> {
     return Scaffold(
       body: Center(child: Column(
         children: [
-
           halfOvalWidget(context),
-          Padding(
-            padding: const EdgeInsets.only(left: 350.0, bottom: 20),
-            child: IconButton(
-              iconSize: 35,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.cancel,
-                color: Color.fromRGBO(83, 210, 88, 1),
-              ),
-            ),
-          ),
+          Spacer(),
           wmyBarWidget(context),
           Spacer(),
           /** Needs to toggle between week and month chart **/
-          chartWidget(context),
+          // chartWidget(context),
           // month_chartWidget(context),
-          // year_chartWidget(context),
+          year_chartWidget(context),
           Spacer(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Padding(
                 padding: const EdgeInsets.only(bottom: 25.0),
                 child: Text('Spending Categories', style: TextStyle(color: Color.fromRGBO(51, 64, 79, 1), fontWeight: FontWeight.w500),),

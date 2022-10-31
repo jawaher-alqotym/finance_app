@@ -24,7 +24,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 45.0, top: 15, bottom: 2),
-          child: Text("${widget.date.year} - ${widget.date.month} - ${widget.date.day}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter"),),
+          child: Text("${widget.date.year} / ${widget.date.month} / ${widget.date.day}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter"),),
         ),
         Container(
           height: 70,

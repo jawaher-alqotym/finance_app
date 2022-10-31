@@ -30,7 +30,7 @@ Widget wmyBarWidget(BuildContext context) {
     activeFgColor: Colors.white,
     inactiveBgColor: Color.fromRGBO(51, 64, 79, 1),
     inactiveFgColor: Colors.white,
-    initialLabelIndex: 0,
+    initialLabelIndex: null,
     doubleTapDisable: false, // re-tap active widget to de-activate
     totalSwitches: 3,
     labels: ['Week', 'Month', 'Year'],
