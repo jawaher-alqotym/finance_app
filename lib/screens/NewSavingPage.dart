@@ -28,10 +28,48 @@ class _nextRouteState extends State<NewSaving> {
             Container(
               padding: EdgeInsets.only(top: 60, left: 10),
               alignment: Alignment.centerLeft,
-              height: 300,
+              height: 200,
               width: double.infinity,
               // color: Colors.red,
-
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 162.0, top: 20),
+                      child: Text(
+                        "$welcomeMessage",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, right: 200),
+                      child: Text(
+                        "Here's Your Balance",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 220.0,
+                      ),
+                      child: Text(
+                        "$balance SR ",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ]),
             ),
             Container(
               child: Container(
@@ -128,11 +166,7 @@ class _nextRouteState extends State<NewSaving> {
                                 // foreground
                               ),
                               onPressed: () {
-                              //  Navigator.pop(context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const Home()),
-                                );
+                                Navigator.pop(context);
                               },
                               child: Text("save"),
                             )))

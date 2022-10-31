@@ -73,17 +73,30 @@ class _FlowMenuState extends State<FlowMenu>
 //           color: Color(0xFF33414f),
 //           size: 30.0,
 //         ),
+
+    Route _createRouteExpensesPage() {
+      return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => ExpensesPage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return child;
+        },
+      );
+    }
+
+    Route _createRouteSavingPage() {
+      return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => SavingPage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return child;
+        },
+      );
+    }
+
     void _Routing(icon) {
       if (icon == Icons.wallet) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ExpensesPage()),
-        );
+        Navigator.of(context).push(_createRouteExpensesPage());
       } else if (icon == Icons.attach_money) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SavingPage()),
-        );
+        Navigator.of(context).push(_createRouteSavingPage());
       }
     }
 
@@ -106,7 +119,6 @@ class _FlowMenuState extends State<FlowMenu>
         size: 30.0,
       ),
     );
-
   }
 
   @override
@@ -156,7 +168,5 @@ class FlowMenuDelegate extends FlowDelegate {
         ),
       );
     }
-
   }
-
 }

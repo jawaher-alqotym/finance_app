@@ -30,14 +30,19 @@ class _navBarState extends State<navBar> {
             IconButton(
                 iconSize: 46.0,
                 padding: EdgeInsets.only(left: 32.0, bottom: 27),
-                onPressed: () => {_onHomeButtonPressed()},
+                onPressed: () => {
+                      //  _onHomeButtonPressed()
+                      Navigator.of(context).push(_createRoute())
+                    },
                 icon: Image.asset('assets/images/homeIcon.png')),
             // FlowMenu(),
+            ButtonBar(),
             IconButton(
                 iconSize: 46.0,
                 padding: EdgeInsets.only(right: 22.0, bottom: 27),
                 onPressed: () {
-                  _onSearchButtonPressed();
+                  //  _onSearchButtonPressed();
+                  Navigator.of(context).push(_createRouteInsightPage());
                 },
                 icon: Image.asset('assets/images/insights.png')),
           ],
@@ -46,20 +51,38 @@ class _navBarState extends State<navBar> {
           padding: const EdgeInsets.only(top: 35.0),
           child: FloatingButton(),
         )
-
       ],
     );
   }
 
-  void _onSearchButtonPressed() {
-    //Get.to(InsightPage());
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => InsightPage()),
+//   void _onSearchButtonPressed() {
+//     //Get.to(InsightPage());
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => InsightPage()),
+//     );
+//   }
+
+//   void _onHomeButtonPressed() {
+//     //  Get.to(Home());
+//   }
+// }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => const Home(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return child;
+      },
     );
   }
 
-  void _onHomeButtonPressed() {
-    Get.to(Home());
+  Route _createRouteInsightPage() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => InsightPage(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return child;
+      },
+    );
   }
 }
