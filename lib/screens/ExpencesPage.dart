@@ -1,5 +1,7 @@
+import 'package:finance_app/screens/add_new_expense_page.dart';
 import 'package:finance_app/widgets/expenses.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 class ExpensesPage extends StatefulWidget {
   const ExpensesPage({super.key});
@@ -77,7 +79,12 @@ class _ExpensesPageState extends State<ExpensesPage> {
                             // foreground
                           ),
                           onPressed: () {
-                            print("oooooo");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const addExpensesPage()),
+                            );
                           },
                           child: Text("Next"),
                         )))

@@ -3,7 +3,8 @@ import 'package:finance_app/screens/NewSavingPage.dart';
 import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/screens/Home.dart';
-
+import 'package:finance_app/screens/add_new_expense_page.dart';
+import 'package:finance_app/screens/insight_page.dart';
 import 'package:finance_app/controllers_binding.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -13,7 +14,6 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
