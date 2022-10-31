@@ -183,7 +183,6 @@ class _HomeContantState extends State<HomeContant> {
           ],
         ),
         navBar(),
-        //FloatingButton(),
       ],
     );
   }

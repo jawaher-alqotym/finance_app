@@ -23,8 +23,11 @@ class _InsightPageState extends State<InsightPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Center(child: Column(
+      body: Center(
+          child: Column(
         children: [
+
+
           halfOvalWidget(context),
           Spacer(),
           wmyBarWidget(context),
@@ -64,15 +67,18 @@ class _InsightPageState extends State<InsightPage> {
                 ],
               ),
               goalsWidget(context),
-
+              Container(
+                  height: 200,
+                  child: navBar()),
             ],
+
           ),
 
-          Spacer(),
-          Spacer(),
-
+          // Spacer(),
+          // Spacer(),
         ],
-      )),
+      ),
+      ),
     );
   }
 }
