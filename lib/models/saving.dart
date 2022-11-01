@@ -1,21 +1,18 @@
 /* lib/models/saving,dart */
 
 import 'package:finance_app/models/category.dart';
-import 'package:flutter/material.dart';
+import 'package:finance_app/models/user.dart';
 
 
 class Saving {
-  double percenst =0.0;
-  double? amount_of_saving;
+  DateTime? fromDate;
+  DateTime? toDate;
+  double percenst ;
   Catgory? catgory;
-  double? userIncoum;
+  String title ;
+  User? user;
 
-  Saving(double percent){
-         this.percenst = percent;
-         this.amount_of_saving =( 8000 * percent);
-         this.catgory = null;
-  }
-
+  Saving({ required this.percenst, this.fromDate, this.toDate, required this.title, this.catgory, this.user});
 
 
   }

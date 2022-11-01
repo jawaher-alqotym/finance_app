@@ -1,6 +1,5 @@
 import 'package:finance_app/screens/ExpencesPage.dart';
 import 'package:finance_app/screens/NewSavingPage.dart';
-import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/screens/add_new_expense_page.dart';
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ExpensesPage(),
+      home: Home(),
       initialBinding: ControllerBindings(),
     );
   }

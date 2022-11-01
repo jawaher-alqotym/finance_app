@@ -240,13 +240,14 @@ class _ExpensesPageState extends State<ExpensesPage> {
                                                   text: Text(
                                                     " العائلة",
                                                     style: TextStyle(
-                                                        fontSize: 13,
-                                                        color: Color.fromARGB(
-                                                          255,
-                                                          255,
-                                                          255,
-                                                          254,
-                                                        )),
+                                                      fontSize: 13,
+                                                      color: Color.fromARGB(
+                                                        255,
+                                                        255,
+                                                        255,
+                                                        254,
+                                                      ),
+                                                    ),
                                                   ),
                                                   icon: ImageIcon(
                                                     AssetImage(

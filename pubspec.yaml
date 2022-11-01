@@ -20,6 +20,8 @@ dependencies:
   get: ^4.6.5
   cupertino_icons: ^1.0.2
   percent_indicator: ^4.2.2
+  intl: ^0.17.0
+
 
 dev_dependencies:
   flutter_test:
@@ -32,8 +34,7 @@ flutter:
 
   uses-material-design: true
   assets:
-     - assets/images/homeIcon.png
-     - assets/images/insights.png
+     - assets/icons/insightsIcon.svg
      - assets/images/background.png
      - assets/icons/Vector.svg
      - assets/icons/HomeIcon.png
@@ -51,5 +52,8 @@ flutter:
      - assets/images/icons-cutlery.png
      - assets/images/Ellipse 249.png
      - assets/images/icons8-ok-512 1.png
+     - assets/icons/homeIcon.svg
+     - assets/icons/plusIcon.svg
+     - assets/icons/money.svg
 
 
