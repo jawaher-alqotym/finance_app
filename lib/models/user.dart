@@ -6,11 +6,13 @@ import 'package:finance_app/models/expense.dart';
 
 class User {
   DateTime? login;
+  String? name;
+  num oldIncome;
   num income;
   List<Saving> savingList = <Saving>[];
   List<Expense> expenseList = <Expense>[];
 
-  User({this.login, required this.income, required this.savingList, required this.expenseList});
+  User({required this.oldIncome, this.name, this.login, required this.income, required this.savingList, required this.expenseList});
 
 
 }

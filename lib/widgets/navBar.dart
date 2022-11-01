@@ -29,22 +29,22 @@ class _navBarState extends State<navBar> {
           children: [
             IconButton(
                 iconSize: 46.0,
-                padding: EdgeInsets.only(left: 32.0, bottom: 27),
-                onPressed: () => {
-                      //  _onHomeButtonPressed()
-                      Navigator.of(context).push(_createRoute())
-                    },
-                icon: Image.asset('assets/images/homeIcon.png')),
-            // FlowMenu(),
-            ButtonBar(),
-            IconButton(
-                iconSize: 46.0,
-                padding: EdgeInsets.only(right: 22.0, bottom: 27),
+                padding: EdgeInsets.only(left: 25.0, bottom: 27),
                 onPressed: () {
                   //  _onSearchButtonPressed();
                   Navigator.of(context).push(_createRouteInsightPage());
                 },
-                icon: Image.asset('assets/images/insights.png')),
+                icon: SvgPicture.asset('assets/icons/insightsIcon.svg')),
+            ButtonBar(),
+            IconButton(
+                iconSize: 46.0,
+                padding: EdgeInsets.only(right: 35.0, bottom: 27),
+                onPressed: () => {
+                      //  _onHomeButtonPressed()
+                      Navigator.of(context).push(_createRoute())
+                    },
+                icon: SvgPicture.asset('assets/icons/homeIcon.svg',),),
+            // FlowMenu(),
           ],
         ),
         Padding(
@@ -54,19 +54,6 @@ class _navBarState extends State<navBar> {
       ],
     );
   }
-
-//   void _onSearchButtonPressed() {
-//     //Get.to(InsightPage());
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(builder: (context) => InsightPage()),
-//     );
-//   }
-
-//   void _onHomeButtonPressed() {
-//     //  Get.to(Home());
-//   }
-// }
 
   Route _createRoute() {
     return PageRouteBuilder(

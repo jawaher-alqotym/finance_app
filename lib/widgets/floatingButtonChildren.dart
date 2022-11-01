@@ -4,6 +4,8 @@ import 'package:finance_app/screens/ExpencesPage.dart';
 import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class FlowMenu extends StatefulWidget {
   const FlowMenu({super.key});
@@ -14,16 +16,17 @@ class FlowMenu extends StatefulWidget {
 
 class _FlowMenuState extends State<FlowMenu>
     with SingleTickerProviderStateMixin {
-  late AnimationController menuAnimation;
-  IconData lastTapped = Icons.notifications;
+    late AnimationController menuAnimation;
+    SvgPicture lastTapped = SvgPicture.asset('assets/icons/homeIcon.svg',);
 
-  final List<IconData> menuItems = <IconData>[
-    Icons.attach_money,
-    Icons.wallet,
-    Icons.add,
+
+  final List<SvgPicture> menuItems = <SvgPicture>[
+    SvgPicture.asset('assets/icons/money.svg',),
+    SvgPicture.asset('assets/icons/Vector.svg',),
+    SvgPicture.asset('assets/icons/plusIcon.svg',),
   ];
 
-  void _updateMenu(IconData icon) {
+  void _updateMenu(SvgPicture icon) {
     if (icon != Icons.menu) {
       setState(() => lastTapped = icon);
     }
@@ -38,7 +41,7 @@ class _FlowMenuState extends State<FlowMenu>
     );
   }
 
-  Widget flowMenuItem(IconData icon) {
+  Widget flowMenuItem(SvgPicture icon) {
     final double buttonDiameter = 60;
 
 // <<<<<<< HEAD
@@ -93,9 +96,9 @@ class _FlowMenuState extends State<FlowMenu>
     }
 
     void _Routing(icon) {
-      if (icon == Icons.wallet) {
+      if (icon == menuItems[menuItems.length - 2]) {
         Navigator.of(context).push(_createRouteExpensesPage());
-      } else if (icon == Icons.attach_money) {
+      } else if (icon == menuItems[menuItems.length - 3]) {
         Navigator.of(context).push(_createRouteSavingPage());
       }
     }
@@ -113,11 +116,7 @@ class _FlowMenuState extends State<FlowMenu>
             : menuAnimation.forward();
         _Routing(icon);
       },
-      child: Icon(
-        icon,
-        color: Color(0xFF33414f),
-        size: 30.0,
-      ),
+      child: icon,
     );
   }
 
@@ -126,7 +125,7 @@ class _FlowMenuState extends State<FlowMenu>
     return Flow(
       delegate: FlowMenuDelegate(menuAnimation: menuAnimation),
       children:
-          menuItems.map<Widget>((IconData icon) => flowMenuItem(icon)).toList(),
+          menuItems.map<Widget>((SvgPicture icon) => flowMenuItem(icon)).toList(),
     );
   }
 }
@@ -145,7 +144,7 @@ class FlowMenuDelegate extends FlowDelegate {
   // @override
   void paintChildren(FlowPaintingContext context) {
     final xStart = context.size.width - 165 - 80; // 80 is the button size
-    final yStart = context.size.height - 45 - 80;
+    final yStart = context.size.height - 50 - 80;
 
     double dx = 0.0;
     double dy = 0.0;
