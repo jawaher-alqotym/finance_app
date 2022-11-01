@@ -45,5 +45,11 @@ flutter:
      - assets/home_icon.svg
      - assets/home_icon.png
      - assets/images/Base.svg
+     - assets/images/icons-student.png
+     - assets/images/icons-clinic.png
+     - assets/images/icons-family.png
+     - assets/images/icons-cutlery.png
+     - assets/images/Ellipse 249.png
+     - assets/images/icons8-ok-512 1.png
 
 

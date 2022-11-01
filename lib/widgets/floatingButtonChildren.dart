@@ -83,20 +83,20 @@ class _FlowMenuState extends State<FlowMenu>
       );
     }
 
-    Route _createRouteSavingPage() {
-      return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => SavingPage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return child;
-        },
-      );
-    }
+    // Route _createRouteSavingPage() {
+    //   return PageRouteBuilder(
+    //     pageBuilder: (context, animation, secondaryAnimation) => SavingPage(),
+    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //       return child;
+    //     },
+    //   );
+    // }
 
     void _Routing(icon) {
       if (icon == Icons.wallet) {
         Navigator.of(context).push(_createRouteExpensesPage());
       } else if (icon == Icons.attach_money) {
-        Navigator.of(context).push(_createRouteSavingPage());
+        //  Navigator.of(context).push(_createRouteSavingPage());
       }
     }
 

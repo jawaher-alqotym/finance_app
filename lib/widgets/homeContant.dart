@@ -112,70 +112,79 @@ class _HomeContantState extends State<HomeContant> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
-                        child: userController.user.savingList.length > 0 ?  Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 256.0, top: 60.0),
-                              child: Text(
-                                "Savings",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                    color: Color(0xFF33404F)),
-                              ),
-                            ),
-                            Container(
-                              height: 90,
-                              margin: EdgeInsets.only(
-                                  left: 0.0, top: 39.0, bottom: 32),
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      userController.user.savingList.length,
-                                  itemBuilder: (context, index) => SavingCard(
+                        child: userController.user.savingList.length > 0
+                            ? Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        right: 256.0, top: 60.0),
+                                    child: Text(
+                                      "Savings",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20,
+                                          color: Color(0xFF33404F)),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 90,
+                                    margin: EdgeInsets.only(
+                                        left: 0.0, top: 39.0, bottom: 32),
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          userController.user.savingList.length,
+                                      itemBuilder: (context, index) =>
+                                          SavingCard(
                                         percenst: userController
                                             .user.savingList[index].percenst,
                                         amount_of_saving: userController.user
                                             .savingList[index].amount_of_saving,
                                       ),
-                                ),
-                            ),
-                          ],
-                        ): Text(""),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(""),
                       ),
                       SingleChildScrollView(
-                        child: userController.user.expenseList.length > 0 ? Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                right: 242.0, top: 20
-                              ),
-                              child: Text(
-                                "Expences",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                    color: Color(0xFF33404F)),
-                              ),
-                            ),
-                            Container(
-                              //height: 190,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount:
-                                      userController.user.expenseList.length,
-                                  itemBuilder: (context, index) => ExpenseCard(
-                                      date: userController.user.expenseList[index].date,
-                                      amount: userController.user.expenseList[index].amount
-                                      ,name: userController.user.expenseList[index].name,
-                                       //catgory : userController.user.expenseList[index].catgory,
+                        child: userController.user.expenseList.length > 0
+                            ? Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        right: 242.0, top: 0, bottom: 10),
+                                    child: Text(
+                                      "Expences",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20,
+                                          color: Color(0xFF33404F)),
+                                    ),
                                   ),
-                              ),
-                            ),
-                          ],
-                        ): Text(""),
+                                  Container(
+                                    //height: 190,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: userController
+                                          .user.expenseList.length,
+                                      itemBuilder: (context, index) =>
+                                          ExpenseCard(
+                                        date: userController
+                                            .user.expenseList[index].date,
+                                        amount: userController
+                                            .user.expenseList[index].amount,
+                                        name: userController
+                                            .user.expenseList[index].name,
+                                        //catgory : userController.user.expenseList[index].catgory,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Text(""),
                       ),
                     ],
                   ),

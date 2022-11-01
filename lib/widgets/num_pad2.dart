@@ -128,7 +128,6 @@ class NumPad extends StatelessWidget {
                 ),
                 iconSize: buttonSize,
               ),
-
             ],
           ),
           Padding(
@@ -144,8 +143,16 @@ class NumPad extends StatelessWidget {
                     ),
                     backgroundColor: Color.fromRGBO(83, 210, 88, 1),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                child: Text("Add", style: TextStyle(color: Color.fromRGBO(51, 64, 79, 1), fontSize: 20, fontWeight: FontWeight.w600),),
+                    textStyle:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                child: Text(
+                  "اضافة",
+                  style: TextStyle(
+                      color: Color.fromRGBO(51, 64, 79, 1),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'DM Sans'),
+                ),
                 onPressed: () {
                   onSubmit();
                 },
@@ -208,7 +215,9 @@ class NumberButton extends StatelessWidget {
           child: Text(
             number.toString(),
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Color.fromRGBO(51, 64, 79, 1), fontSize: 25),
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(51, 64, 79, 1),
+                fontSize: 25),
           ),
         ),
       ),
