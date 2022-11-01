@@ -70,6 +70,9 @@ class UserController extends GetxController {
   }
 
   getPieChartData(){
+    /*% of spending compear to incum */
+    var income = user.income != null ? user.income : 10000;
+    return double.parse(getSpendingTotal.toString()) * income ;
 
   }
 
