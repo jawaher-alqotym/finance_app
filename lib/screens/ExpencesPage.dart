@@ -53,7 +53,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                               alignment: Alignment.topRight,
                               child: Text("مصاريف جديدة",
                                   style: TextStyle(
-                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontFamily: 'HacenDigital',
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                   )),
@@ -63,7 +63,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                               child: Text(
                                 "حدد الفئة التي تريد  تتبع ميزانيتها",
                                 style: TextStyle(
-                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontFamily: 'HacenDigital',
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
                                     color: Color.fromRGBO(83, 210, 88, 1)),
@@ -222,7 +222,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                                                   text: Text(
                                                     "المأكولات &المشروبات",
                                                     style: TextStyle(
-                                                        fontSize: 13,
+                                                        fontSize: 11,
                                                         color: Color.fromARGB(
                                                             255,
                                                             255,

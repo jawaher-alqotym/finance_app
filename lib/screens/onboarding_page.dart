@@ -34,7 +34,7 @@ class OnBoardingPage extends StatelessWidget {
                     textAlign: TextAlign.right,
                     text: TextSpan(
                       text: 'قروش ',
-                      style: TextStyle(
+                      style: TextStyle(fontFamily: 'HacenDigital',
                           fontWeight: FontWeight.w700,
                           fontSize: 30,
                           color: Color.fromRGBO(83, 210, 88, 1)),
@@ -42,7 +42,7 @@ class OnBoardingPage extends StatelessWidget {
                         TextSpan(
                             text: '''.. لدعم أحلامك 
                         المالية''',
-                            style: TextStyle(
+                            style: TextStyle(fontFamily: 'HacenDigital',
                                 color: Color.fromRGBO(255, 255, 255, 1))),
                       ],
                     )),
@@ -55,7 +55,7 @@ class OnBoardingPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                   validator: (value){
                     // check if the value contains only letters for name
-                    if(value!.isNotEmpty && isAlpha(value) && value.length<=30){
+                    if(value!.isNotEmpty && (RegExp(r'^[\u0621-\u064A0-9 ]+$').hasMatch(value)|| isAlpha(value)) && value.length<=30){
                       return null; // everything is correct
                     } else if(value!.isEmpty){
                       return "يجب ادخال الإسم";
@@ -94,7 +94,7 @@ class OnBoardingPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                   validator: (value){
                     // check if the value contains only int or float for balance
-                    if(value!.isNotEmpty && value.length<=10 && (isInt(value) || isFloat(value))){
+                    if(value!.isNotEmpty && value.length<=10 && (isInt(value) || isFloat(value) || RegExp(r'^[\u0660-\u06690-9 ]+$').hasMatch(value))){
                       return null; // everything is correct
                     } else if(value!.isEmpty){
                       return "يجب ادخال المبلغ";
@@ -143,7 +143,7 @@ class OnBoardingPage extends StatelessWidget {
                         TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     child: Text(
                       "بدء",
-                      style: TextStyle(
+                      style: TextStyle(fontFamily: 'HacenDigital',
                           color: Color.fromRGBO(51, 64, 79, 1),
                           fontSize: 20,
                           fontWeight: FontWeight.w600),

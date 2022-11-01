@@ -32,9 +32,9 @@ class _ExpenseCardState extends State<ExpenseCard> {
           child: widget.date == today ?
           Padding(
             padding: const EdgeInsets.only(left: 0.0),
-            child: Text("اليوم", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter")),
+            child: Text("اليوم", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital')),
           )
-              :Text("${DateFormat.yMMMMd().format(now)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: "Inter"),),
+              :Text("${DateFormat.yMMMMd().format(now)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
         ),
         Container(
           height: 70,
@@ -50,11 +50,11 @@ class _ExpenseCardState extends State<ExpenseCard> {
                             flex:3,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 8.0),
-                              child: Text("-${widget.amount}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
+                              child: Text("-${widget.amount}", style: TextStyle(fontFamily: 'HacenDigital',color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
                             )),
                         Expanded(
                             flex: 0,
-                            child: Text("${widget.name}", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600,),)),
+                            child: Text("${widget.name}", style: TextStyle(fontFamily: 'HacenDigital', color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600,),)),
                         Expanded(
                           flex: 1,
                           child: CircleAvatar(
