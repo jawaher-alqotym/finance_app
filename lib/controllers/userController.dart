@@ -18,9 +18,8 @@ DateTime today = new DateTime(now.year, now.month, now.day);
 class UserController extends GetxController {
   User user = new User(income: 0,oldIncome: 0, savingList:
   <Saving>[
-               new Saving(0.30, now, now , "البيت"),
-               new Saving(0.50, now, now, "السيارة"),
-               new Saving(0.50, now, now, "السيارة"),
+               new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "البيت"),
+               new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "السيارة"),
 
   ],
       expenseList: <Expense>[
@@ -56,6 +55,22 @@ class UserController extends GetxController {
   bool subtractExpenseFromIncome(amount){
     this.user.income = this.user.income - amount;
     return true;
+  }
+
+  num getSpendingTotal(){
+    final num total = user.expenseList.fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
+    return total;
+  }
+
+  num getSavingTotal(){
+    var income = user.income != null ? user.income : 10000;
+    final num total = user.savingList.fold(0, (sum, item) => sum + num.parse((income * item.percenst).toString()));
+    return total;
+
+  }
+
+  getPieChartData(){
+
   }
 
   DateTime getLoginDate(){

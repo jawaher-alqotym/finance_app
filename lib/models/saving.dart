@@ -7,20 +7,12 @@ import 'package:finance_app/models/user.dart';
 class Saving {
   DateTime? fromDate;
   DateTime? toDate;
-  double percenst =0.0;
+  double percenst ;
   Catgory? catgory;
-  String title = "";
+  String title ;
   User? user;
 
-  Saving(double percent,  DateTime toDate, DateTime fromDate, String title){
-         this.percenst = percent;
-         //this.amount_of_saving =( userIncoum * percent).round();
-         this.catgory = null;
-         this.title = "null";
-         this.title = title;
-
-  }
-
+  Saving({ required this.percenst, this.fromDate, this.toDate, required this.title, this.catgory, this.user});
 
 
   }

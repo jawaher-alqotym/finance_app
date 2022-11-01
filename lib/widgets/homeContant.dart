@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/navBar.dart';
-import 'package:finance_app/widgets/floatingButton.dart';
 
 import 'package:finance_app/widgets/expenseCard.dart';
 import 'package:finance_app/widgets/savingCard.dart';
@@ -10,13 +9,11 @@ import 'package:finance_app/widgets/savingCard.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 
-import 'package:finance_app/widgets/addBalance.dart';
 import 'package:finance_app/widgets/num_pad.dart';
 
 import "package:finance_app/controllers/userController.dart";
-import "package:finance_app/models/user.dart";
-import "package:finance_app/models/saving.dart";
-import "package:finance_app/models/expense.dart";
+
+
 
 class HomeContant extends StatefulWidget {
   const HomeContant({super.key});
@@ -112,14 +109,13 @@ class _HomeContantState extends State<HomeContant> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
-                        child: userController.user.savingList.length > 0 && userController.user.income >0
-                            ? Column(
+                        child:  Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
                                     margin:
                                         EdgeInsets.only(
-                                            left:MediaQuery.of(context).size.width-140,
+                                            left:MediaQuery.of(context).size.width-80,
                                             top: 180,),
                                     child: Text(
                                       "الإدخار",
@@ -128,7 +124,8 @@ class _HomeContantState extends State<HomeContant> {
                                           fontSize: 20,
                                           color: Color(0xFF33404F)),
                                     ),
-                                  ),
+                                  ),userController.user.savingList.length > 0 && userController.user.income >0
+    ?
                                   Container(
                                     height: 90,
                                     margin: EdgeInsets.only(
@@ -146,10 +143,10 @@ class _HomeContantState extends State<HomeContant> {
                                             user: userController.user,
                                       ),
                                     ),
-                                  ),
+                                  )   : Text(""),
                                 ],
                               )
-                            : Text(""),
+
                       ),
                       SingleChildScrollView(
                         child: userController.user.expenseList.length > 0
@@ -157,14 +154,42 @@ class _HomeContantState extends State<HomeContant> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        left:
-                                            MediaQuery.of(context).size.width - 140, top: 20),
-                                    child: Text(
-                                      "المصاريف",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20,
-                                          color: Color(0xFF33404F)),
+                                        left:0, top: 35),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: TextButton(
+                                            onPressed: () => showBottomSheet(
+                                                enableDrag: true,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(26.0),
+                                                ),
+                                                backgroundColor: Colors.white,
+                                                context: context,
+                                                builder: (context) => buildExpencesSheet()),
+                                            child: Text(
+                                                "الكل",
+                                                style: TextStyle(
+                                                color: Color(0xff33404F),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Text(
+                                            "المصاريف",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 20,
+                                                color: Color(0xFF33404F)),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   Container(
@@ -202,8 +227,22 @@ class _HomeContantState extends State<HomeContant> {
           child: Container(
             height: 207,
             width: 271,
-            color: Colors.deepPurple,
-            child: Text("xxx"),
+            decoration: BoxDecoration(
+              color:  Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.3),
+                  offset: Offset(2, 3),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                )
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("xxx")
+            ),
           ),
         ),
         navBar(),
@@ -276,4 +315,32 @@ class _HomeContantState extends State<HomeContant> {
           ],
         ),
       );
+
+  Widget buildExpencesSheet() => Container(
+    height:  MediaQuery.of(context).size.height-100,
+    child: Column(
+      children: [
+        Container(
+         margin: EdgeInsets.only(top: 40),
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: userController
+                .user.expenseList.length,
+            itemBuilder: (context, index) =>
+                ExpenseCard(
+                  date: userController
+                      .user.expenseList[index].date,
+                  amount: userController
+                      .user.expenseList[index].amount,
+                  name: userController
+                      .user.expenseList[index].name,
+                  //catgory : userController.user.expenseList[index].catgory,
+                ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
+
