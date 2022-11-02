@@ -35,7 +35,7 @@ class _HomeContantState extends State<HomeContant> {
         .of(context)
         .size
         .width;
-    String welcomeMessage = "صباح الخير";
+    String welcomeMessage = "مساء الخير";
 
     Widget buildExpencesSheet() {
       return Search();
@@ -134,7 +134,7 @@ class _HomeContantState extends State<HomeContant> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, right: 0),
                     child: Text(
-                      "${userController.user.name} رصيدك هنا ",
+                      "${userController.user.name} رصيدك الحالي هنا ",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -160,7 +160,7 @@ class _HomeContantState extends State<HomeContant> {
                       child:
                       userController.user.income >= userController.getSpendingTotal()?
                       Text(
-                       " ${userController.user.income}+ س.ر",
+                       " ${userController.user.income} س.ر",
                         style: TextStyle(
                           color: userController.user.income > 0
                               ? Colors.white
@@ -168,10 +168,10 @@ class _HomeContantState extends State<HomeContant> {
                           fontSize: 32,
                           fontWeight: FontWeight.w600,
                         ),
-                      ):Text( "${userController.user.income}- س.ر", style: TextStyle(
-                        color: userController.user.income > 0
+                      ):Text( "${userController.user.income} س.ر", style: TextStyle(
+                        color: userController.user.income >= 0
                             ? Colors.white
-                            : Colors.grey,
+                            : Colors.redAccent,
                         fontSize: 32,
                         fontWeight: FontWeight.w600,
                       ),),
@@ -208,7 +208,7 @@ class _HomeContantState extends State<HomeContant> {
                                   left: MediaQuery
                                       .of(context)
                                       .size
-                                      .width - 88,
+                                      .width - 109,
                                   top: 180,),
                                 child: Text(
                                   "الإدخار",
@@ -223,7 +223,7 @@ class _HomeContantState extends State<HomeContant> {
                               Container(
                                 height: 90,
                                 margin: EdgeInsets.only(
-                                    left: 0.0, top: 39.0, bottom: 25),
+                                    left: 0.0, top: 19.0, bottom: 25),
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount:

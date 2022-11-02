@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:finance_app/controllers/userController.dart';
+import 'package:get/get.dart';
 
 class CustomContainer extends StatefulWidget {
   CustomContainer({required this.text, required this.icon});
-
   final Text text;
   final ImageIcon icon;
 
@@ -22,7 +23,8 @@ class _CustomContainerState extends State<CustomContainer> {
 
   var isSelected = false;
   late Color color;
-  var selectedText = "";
+  final userController = Get.find<UserController>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,8 @@ class _CustomContainerState extends State<CustomContainer> {
             if (isSelected == true) {
               print("isSelected");
               print(widget.text.data);
-              selectedText = widget.text.data!;
-              print("text / ${selectedText}");
+              userController.selectedText = widget.text.data!;
+              print("text / ${userController.selectedText}");
             }
           });
         },

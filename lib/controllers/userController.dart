@@ -25,12 +25,14 @@ class UserController extends GetxController {
 
   ],
       expenseList: <Expense>[
-         new Expense(date: today , amount: 100, name: 'الايجار', catgory: new Catgory(title: "المنزل", icon: Icon(Icons.home))),
+         // new Expense(date: today , amount: 100, name: 'الايجار', catgory: new Catgory(title: "المنزل", icon: Icon(Icons.home))),
         // new Expense(date: today , amount: 3500, name: 'البيت', catgory: new Catgory(title: "انترنت", icon: Icon(Icons.wifi))),
 
       ], name: "احمد");
 
   List<Expense> searchResuilt = <Expense>[];
+
+  var selectedText = "";
 
   @override
   void onInit() {
@@ -58,8 +60,8 @@ class UserController extends GetxController {
   }
   updateIncome(newIncome){
     print("in updateIncome $newIncome");
-    this.user.oldIncome = this.user.income;
-    this.user.income = newIncome.round();
+    this.user.oldIncome += this.user.income;
+    this.user.income += newIncome.round();
     update();
 
   }
@@ -115,17 +117,19 @@ class UserController extends GetxController {
   getPieChartData(){
     /*% of spending compear to incum */
     var income = user.income != null ? user.income : 10000;
+
     var percent = double.parse((double.parse(getSpendingTotal().toString()) / income).toStringAsFixed(2));
     print(getSpendingTotal());
     print(income);
     print(percent.toString());
 
 
-    if(percent.isFinite && getSpendingTotal()>0){
+    if(percent.isFinite && getSpendingTotal()>0.0){
       if(percent > 0.0 && percent <1.0){
         return  percent;
       }else{
         percent = income / double.parse((double.parse(getSpendingTotal().toString())).toStringAsFixed(2))*-1;
+        print(percent);
         return percent;
       }
     }else{
