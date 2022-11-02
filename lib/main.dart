@@ -24,14 +24,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   // For the splash screen, delayed 3 sec
-  void initState(){
+  void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3)).then((value)=>{
-      FlutterNativeSplash.remove()
-    });
+    Future.delayed(Duration(seconds: 3))
+        .then((value) => {FlutterNativeSplash.remove()});
   }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

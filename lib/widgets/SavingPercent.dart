@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class SavingWidget extends StatefulWidget {
-  SavingWidget({required this.child});
-  final Widget child;
+  SavingWidget({required this.text});
+  final Text text;
   @override
   State<SavingWidget> createState() => _SavingWidgetState();
 }
 
 class _SavingWidgetState extends State<SavingWidget> {
-  var isSelected = true;
+  var isSelected = false;
+  var selectedText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,12 @@ class _SavingWidgetState extends State<SavingWidget> {
         setState(() {
           isSelected = !isSelected;
         });
+        if (isSelected == false) {
+          print("isSelected");
+          print(widget.text.data);
+          selectedText = widget.text.data!;
+          print("text / ${selectedText}");
+        }
       },
       child: Container(
         margin: EdgeInsets.only(left: 5, right: 5, top: 50),
@@ -29,7 +36,7 @@ class _SavingWidgetState extends State<SavingWidget> {
         height: 44,
         width: 44,
         padding: EdgeInsets.only(top: 15, left: 10),
-        child: widget.child,
+        child: widget.text,
       ),
     );
   }
