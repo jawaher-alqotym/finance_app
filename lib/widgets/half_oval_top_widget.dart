@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'dart:ui' as ui;
 // The half oval top design at the top of insight page
 
 Widget halfOvalWidget(BuildContext context) {
@@ -23,7 +23,15 @@ class ShapesPainter extends CustomPainter {
     p.lineTo(size.width, 0);
     p.close();
     // canvas.drawImage()
-    canvas.drawPath(p, Paint()..color = Color.fromRGBO(51, 64, 79, 1));
+    canvas.drawPath(p, Paint()..shader = RadialGradient(
+      colors: [
+        Color.fromRGBO(57,92,80,1),
+        // Color.fromRGBO(83, 210, 88, 1),
+        Color.fromRGBO(51, 64, 79, 1),
+      ],
+    ).createShader(Rect.fromCircle(
+      center: Offset(200,-100),
+      radius:270,)));
 
   }
 
