@@ -20,7 +20,7 @@ Widget chartWidget(BuildContext context) {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: new Text(
-            "470 SAR",
+            "٤٧٠ س.ر",
             style: TextStyle(
                 color: Color.fromRGBO(255, 203, 102, 1), fontSize: 20),
           ),
@@ -33,9 +33,11 @@ Widget chartWidget(BuildContext context) {
               child: SvgPicture.asset('assets/down_arrow.svg'),
             ),
             new Text(
-              "20% from last week",
+              "٢٠٪ من الإسبوع السابق",
               style: TextStyle(
-                  color: Color.fromRGBO(255, 203, 102, 1), fontSize: 12),
+                  fontFamily: 'HacenDigital',
+                  color: Color.fromRGBO(255, 203, 102, 1),
+                  fontSize: 12),
             ),
           ],
         ),

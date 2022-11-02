@@ -1,11 +1,10 @@
 /* lib/widgets/floatingButtonChildren.dart */
 
 import 'package:finance_app/screens/ExpencesPage.dart';
-import 'package:finance_app/screens/SavingPage.dart';
+import 'package:finance_app/screens/NewSavingPage.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
-
 
 class FlowMenu extends StatefulWidget {
   const FlowMenu({super.key});
@@ -16,14 +15,21 @@ class FlowMenu extends StatefulWidget {
 
 class _FlowMenuState extends State<FlowMenu>
     with SingleTickerProviderStateMixin {
-    late AnimationController menuAnimation;
-    SvgPicture lastTapped = SvgPicture.asset('assets/icons/homeIcon.svg',);
-
+  late AnimationController menuAnimation;
+  SvgPicture lastTapped = SvgPicture.asset(
+    'assets/icons/homeIcon.svg',
+  );
 
   final List<SvgPicture> menuItems = <SvgPicture>[
-    SvgPicture.asset('assets/icons/money.svg',),
-    SvgPicture.asset('assets/icons/Vector.svg',),
-    SvgPicture.asset('assets/icons/plusIcon.svg',),
+    SvgPicture.asset(
+      'assets/icons/money.svg',
+    ),
+    SvgPicture.asset(
+      'assets/icons/Vector.svg',
+    ),
+    SvgPicture.asset(
+      'assets/icons/plusIcon.svg',
+    ),
   ];
 
   void _updateMenu(SvgPicture icon) {
@@ -88,7 +94,7 @@ class _FlowMenuState extends State<FlowMenu>
 
     Route _createRouteSavingPage() {
       return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => SavingPage(),
+        pageBuilder: (context, animation, secondaryAnimation) => NewSaving(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return child;
         },
@@ -124,8 +130,9 @@ class _FlowMenuState extends State<FlowMenu>
   Widget build(BuildContext context) {
     return Flow(
       delegate: FlowMenuDelegate(menuAnimation: menuAnimation),
-      children:
-          menuItems.map<Widget>((SvgPicture icon) => flowMenuItem(icon)).toList(),
+      children: menuItems
+          .map<Widget>((SvgPicture icon) => flowMenuItem(icon))
+          .toList(),
     );
   }
 }

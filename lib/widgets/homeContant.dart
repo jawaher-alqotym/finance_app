@@ -16,8 +16,6 @@ import 'package:finance_app/widgets/num_pad.dart';
 import "package:finance_app/controllers/userController.dart";
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-
-
 class HomeContant extends StatefulWidget {
   const HomeContant({super.key});
 
@@ -225,7 +223,7 @@ class _HomeContantState extends State<HomeContant> {
                               Container(
                                 height: 90,
                                 margin: EdgeInsets.only(
-                                    left: 0.0, top: 39.0, bottom: 32),
+                                    left: 0.0, top: 39.0, bottom: 25),
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount:
@@ -244,12 +242,11 @@ class _HomeContantState extends State<HomeContant> {
                           )
 
                       ),
-                      SingleChildScrollView(
-                        child:  Column(
+                        Column(
                           children: [
                             Container(
                               margin: EdgeInsets.only(
-                                  left: 0, top: 35),
+                                  left: 0, top: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment
                                     .spaceBetween,
@@ -311,14 +308,12 @@ class _HomeContantState extends State<HomeContant> {
                             ): Text(""),
                           ],
                         )
-                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ],
-
         ),
         Positioned(
           top: 1080 - MediaQuery
@@ -369,5 +364,4 @@ class _HomeContantState extends State<HomeContant> {
 
   }
     }
-
 

@@ -1,7 +1,7 @@
+import 'package:finance_app/screens/ExpencesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/num_pad2.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-
 
 class addExpensesPage extends StatefulWidget {
   const addExpensesPage({super.key});
@@ -19,7 +19,7 @@ class _addExpensesPageState extends State<addExpensesPage> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: (AssetImage("assets/images/background.png")),
+                image: (AssetImage("assets/images/Ellipse 249.png")),
                 fit: BoxFit.cover)),
         child: Padding(
           padding: const EdgeInsets.only(top: 160),
@@ -33,61 +33,36 @@ class _addExpensesPageState extends State<addExpensesPage> {
                 Container(
                     height: 30,
                     width: 30,
-                    margin: const EdgeInsets.only(left: 350.0, bottom: 15),
+                    margin: const EdgeInsets.only(right: 400.0, bottom: 30),
                     child: IconButton(
                       iconSize: 35,
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.of(context).push(_createRouteExpencesPage());
                       },
                       icon: const Icon(
                         Icons.cancel,
                         color: Color.fromRGBO(83, 210, 88, 1),
                       ),
                     )),
-                Padding(
-                  padding: const EdgeInsets.only(left: 63.0, right: 63),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Expenses', style: TextStyle(fontSize:20, color: Color.fromRGBO(51, 64, 79, 1), fontWeight: FontWeight.w700  ),),
-                      Text('Savings plan', style: TextStyle(fontSize:20, color: Color.fromRGBO(51, 64, 79, 1),))
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 39),
-                  child: ToggleSwitch(
-                    cornerRadius: 0.0,
-                    minWidth: 200.0,
-                    minHeight: 3.0,
-                    fontSize: 20.0,
-                    initialLabelIndex: 0,
-                    activeBgColor: [Color.fromRGBO(83, 210, 88, 1)],
-                    activeFgColor: Color.fromRGBO(51, 64, 79, 1),
-                    inactiveBgColor: Color.fromRGBO(51, 64, 79, 1),
-                    inactiveFgColor: Color.fromRGBO(51, 64, 79, 1),
-                    totalSwitches: 2,
-                    labels: ['Expenses', 'Savings plan'],
-                    onToggle: (index) {
-                      print('switched to: $index');
-                    },
-                  ),
-                ),
+
                 //num pad
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
-                      child: Text(
-                        'New Housing plan',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                            color: Color.fromRGBO(51, 64, 79, 1)),
+                      padding: const EdgeInsets.only(right: 51),
+                      child: Container(
+                        child: Text(
+                          'خطة جديدة',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 20,
+                              color: Color.fromRGBO(51, 64, 79, 1)),
+                        ),
                       ),
                     ),
+
                     // display the entered numbers
                     Padding(
                       padding: const EdgeInsets.all(60),
@@ -101,7 +76,7 @@ class _addExpensesPageState extends State<addExpensesPage> {
                                   fontWeight: FontWeight.w400,
                                   color: Color.fromRGBO(138, 135, 135, 0.5)),
                               border: InputBorder.none,
-                              hintText: '0 SAR/Month'),
+                              hintText: 'س.ر/شهريا'),
                           controller: _myController2,
                           textAlign: TextAlign.center,
                           showCursor: false,
@@ -129,10 +104,28 @@ class _addExpensesPageState extends State<addExpensesPage> {
                         showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
-                                  content: Text(
-                                    "Your added expense: \n ${_myController2.text} SAR",
-                                    style: const TextStyle(fontSize: 20),
-                                  ),
+                                content: Text(
+                                  "تم الاضافة بنجاح :${_myController2.text} ر.س",
+                                  style: const TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.end,
+                                ),
+                                // icon: Icon(
+                                //   Icons.check,
+                                //   color: Colors.green,
+                                //   size: 150,
+                                // ),
+
+                                icon: Icon(Icons.check_circle_rounded,
+                                    size: 150,
+                                    color: Color.fromRGBO(83, 210, 88, 1))
+
+                                // ImageIcon(
+                                //   AssetImage(
+                                //       "assets/images/icons8-ok-512 1.pn "),
+                                //   color: Color.fromRGBO(83, 210, 88, 1),
+                                //   size: 150,
+                                // ),
+
                                 ));
                       },
                     ),
@@ -145,4 +138,13 @@ class _addExpensesPageState extends State<addExpensesPage> {
       ),
     );
   }
+}
+
+Route _createRouteExpencesPage() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => ExpensesPage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }
