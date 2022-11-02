@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(primarySwatch: Colors.lightGreen),
       debugShowCheckedModeBanner: false,
       home: Home(),
       initialBinding: ControllerBindings(),

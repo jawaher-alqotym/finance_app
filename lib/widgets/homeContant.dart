@@ -1,10 +1,12 @@
 /* lib/widgets/floatingButton.dart */
 
+import 'package:finance_app/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/navBar.dart';
 
 import 'package:finance_app/widgets/expenseCard.dart';
 import 'package:finance_app/widgets/savingCard.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
@@ -12,6 +14,7 @@ import 'package:get/route_manager.dart';
 import 'package:finance_app/widgets/num_pad.dart';
 
 import "package:finance_app/controllers/userController.dart";
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 
 
@@ -27,11 +30,90 @@ class _HomeContantState extends State<HomeContant> {
   final TextEditingController _myController = TextEditingController();
   final userController = Get.find<UserController>();
 
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     String welcomeMessage = "صباح الخير";
 
+    Widget buildExpencesSheet() {
+      return Search();
+    }
+    Widget buildSheet() {
+        return Container(
+          height: (MediaQuery
+              .of(context)
+              .size
+              .height) - 70,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Add Your Balance',
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16,
+                    color: Color.fromRGBO(51, 64, 79, 1)),
+              ),
+              // display the entered numbers
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                  height: 70,
+                  child: Center(
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400,
+                                color: Color.fromRGBO(138, 135, 135, 0.5)),
+                            border: InputBorder.none,
+                            hintText: '0 SAR/Month'),
+                        controller: _myController,
+                        textAlign: TextAlign.center,
+                        showCursor: false,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w400),
+                        // Disable the default soft keybaord
+                        keyboardType: TextInputType.none,
+                      )),
+                ),
+              ),
+              // implement the custom NumPad
+              NumPad(
+                buttonSize: 20,
+                buttonColor: Colors.white,
+                iconColor: Color.fromRGBO(226, 92, 92, 1),
+                controller: _myController,
+                delete: () {
+                  _myController.text = _myController.text
+                      .substring(0, _myController.text.length - 1);
+                },
+                // do something with the input numbers
+                onSubmit: () {
+                  userController.updateIncome(double.parse(_myController.text));
+                  print(userController.user.income);
+                  debugPrint('Your added Balance: ${_myController.text}');
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (_) => AlertDialog(
+                  //       content: Text(
+                  //         "Your added balance: \n ${_myController.text}",
+                  //         style: const TextStyle(fontSize: 20),
+                  //       ),
+                  //     ));
+                },
+              ),
+            ],
+          ),
+        );}
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -67,16 +149,20 @@ class _HomeContantState extends State<HomeContant> {
                       right: 0.0,
                     ),
                     child: TextButton(
-                      onPressed: () => showBottomSheet(
-                          enableDrag: true,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(26.0),
-                          ),
-                          backgroundColor: Colors.white,
-                          context: context,
-                          builder: (context) => buildSheet()),
-                      child: Text(
-                        "+ س.ر${userController.user.income}",
+                      onPressed: () =>
+                          showBottomSheet(
+                              enableDrag: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(26.0),
+                              ),
+                              backgroundColor: Colors.white,
+                              context: context,
+                              builder: (context) => buildSheet()),
+
+                      child:
+                      userController.user.income >= userController.getSpendingTotal()?
+                      Text(
+                       " ${userController.user.income}+ س.ر",
                         style: TextStyle(
                           color: userController.user.income > 0
                               ? Colors.white
@@ -84,7 +170,13 @@ class _HomeContantState extends State<HomeContant> {
                           fontSize: 32,
                           fontWeight: FontWeight.w600,
                         ),
-                      ),
+                      ):Text( "${userController.user.income}- س.ر", style: TextStyle(
+                        color: userController.user.income > 0
+                            ? Colors.white
+                            : Colors.grey,
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                      ),),
                     ),
                   ),
                 ],
@@ -109,110 +201,116 @@ class _HomeContantState extends State<HomeContant> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                margin:
+                                EdgeInsets.only(
+                                  left: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width - 88,
+                                  top: 180,),
+                                child: Text(
+                                  "الإدخار",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20,
+                                      color: Color(0xFF33404F)),
+                                ),
+                              ), userController.user.savingList.length > 0 &&
+                                  userController.user.income > 0
+                                  ?
+                              Container(
+                                height: 90,
+                                margin: EdgeInsets.only(
+                                    left: 0.0, top: 39.0, bottom: 32),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:
+                                  userController.user.savingList.length,
+                                  itemBuilder: (context, index) =>
+                                      SavingCard(
+                                        percenst: userController
+                                            .user.savingList[index].percenst,
+                                        title: userController.user
+                                            .savingList[index].title,
+                                        user: userController.user,
+                                      ),
+                                ),
+                              ) : Text(""),
+                            ],
+                          )
+
+                      ),
+                      SingleChildScrollView(
                         child:  Column(
-                                mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: 0, top: 35),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
                                 children: [
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(
-                                            left:MediaQuery.of(context).size.width-80,
-                                            top: 180,),
+                                  Expanded(
+                                    flex: 3,
+                                    child: TextButton(
+                                      onPressed: () =>
+                                          showBottomSheet(
+                                              enableDrag: true,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius
+                                                    .circular(26.0),
+                                              ),
+                                              backgroundColor: Colors.white,
+                                              context: context,
+                                              builder: (context) =>
+                                                  buildExpencesSheet()),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 199.0),
+                                        child: Text(
+                                          "الكل",
+                                          style: TextStyle(
+                                            color: Color(0xff33404F),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
                                     child: Text(
-                                      "الإدخار",
+                                      "المصاريف",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           fontSize: 20,
                                           color: Color(0xFF33404F)),
                                     ),
-                                  ),userController.user.savingList.length > 0 && userController.user.income >0
-    ?
-                                  Container(
-                                    height: 90,
-                                    margin: EdgeInsets.only(
-                                        left: 0.0, top: 39.0, bottom: 32),
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount:
-                                          userController.user.savingList.length,
-                                      itemBuilder: (context, index) =>
-                                          SavingCard(
-                                        percenst: userController
-                                            .user.savingList[index].percenst,
-                                            title: userController.user
-                                                .savingList[index].title,
-                                            user: userController.user,
-                                      ),
-                                    ),
-                                  )   : Text(""),
+                                  ),
                                 ],
-                              )
+                              ),
+                            ),userController.user.expenseList.length > 0 ?
+                            Container(
+                              //height: 190,
+                              child:
+                                    ExpenseCard(
+                                      date: userController
+                                          .user.expenseList[0].date,
+                                      amount: userController
+                                          .user.expenseList[0].amount,
+                                      name: userController
+                                          .user.expenseList[0].name,
+                                      //catgory : userController.user.expenseList[index].catgory,
+                                    ),
 
-                      ),
-                      SingleChildScrollView(
-                        child: userController.user.expenseList.length > 0
-                            ? Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left:0, top: 35),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 3,
-                                          child: TextButton(
-                                            onPressed: () => showBottomSheet(
-                                                enableDrag: true,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(26.0),
-                                                ),
-                                                backgroundColor: Colors.white,
-                                                context: context,
-                                                builder: (context) => buildExpencesSheet()),
-                                            child: Text(
-                                                "الكل",
-                                                style: TextStyle(
-                                                color: Color(0xff33404F),
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Text(
-                                            "المصاريف",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 20,
-                                                color: Color(0xFF33404F)),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    //height: 190,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      itemCount: 1,
-                                      itemBuilder: (context, index) =>
-                                          ExpenseCard(
-                                        date: userController
-                                            .user.expenseList[index].date,
-                                        amount: userController
-                                            .user.expenseList[index].amount,
-                                        name: userController
-                                            .user.expenseList[index].name,
-                                        //catgory : userController.user.expenseList[index].catgory,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : Text(""),
+                            ): Text(""),
+                          ],
+                        )
                       ),
                     ],
                   ),
@@ -223,12 +321,15 @@ class _HomeContantState extends State<HomeContant> {
 
         ),
         Positioned(
-          top: 1080 - MediaQuery.of(context).size.height,
+          top: 1080 - MediaQuery
+              .of(context)
+              .size
+              .height,
           child: Container(
             height: 207,
             width: 271,
             decoration: BoxDecoration(
-              color:  Colors.white,
+              color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
@@ -240,107 +341,33 @@ class _HomeContantState extends State<HomeContant> {
               ],
             ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("xxx")
+                padding: const EdgeInsets.all(8.0),
+                child: CircularPercentIndicator(
+                  animation: true,
+                  animationDuration: 2000,
+                  radius: 90.0,
+                  lineWidth: 7.0,
+                  percent: userController.getPieChartData() >= 0 ? userController.getPieChartData(): userController.getPieChartData()*-1,
+                  center: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("${(userController.getPieChartData()*100).toStringAsFixed(0)}%"),
+                      userController.getPieChartData() >= 0 ?
+                      Text("نسب الصرف من الرصيد", style: TextStyle(fontSize:16 ,fontWeight:FontWeight.w700),):
+                      Text("مصروفاتك اعلى من رصيدك", style: TextStyle(fontSize:16 , fontWeight:FontWeight.w700 ),),
+                    ],
+                  ),
+                  progressColor: userController.getPieChartData() > 0 ? Colors.green : Color(0xffFD6969)
+
+                )
             ),
           ),
         ),
         navBar(),
       ],
     );
+
   }
+    }
 
-  Widget buildSheet() => Container(
-        height: (MediaQuery.of(context).size.height) - 70,
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Add Your Balance',
-              style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                  color: Color.fromRGBO(51, 64, 79, 1)),
-            ),
-            // display the entered numbers
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: SizedBox(
-                height: 70,
-                child: Center(
-                    child: TextField(
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromRGBO(138, 135, 135, 0.5)),
-                      border: InputBorder.none,
-                      hintText: '0 SAR/Month'),
-                  controller: _myController,
-                  textAlign: TextAlign.center,
-                  showCursor: false,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w400),
-                  // Disable the default soft keybaord
-                  keyboardType: TextInputType.none,
-                )),
-              ),
-            ),
-            // implement the custom NumPad
-            NumPad(
-              buttonSize: 20,
-              buttonColor: Colors.white,
-              iconColor: Color.fromRGBO(226, 92, 92, 1),
-              controller: _myController,
-              delete: () {
-                _myController.text = _myController.text
-                    .substring(0, _myController.text.length - 1);
-              },
-              // do something with the input numbers
-              onSubmit: () {
-                userController.updateIncome(double.parse(_myController.text));
-                print(userController.user.income);
-                debugPrint('Your added Balance: ${_myController.text}');
-                // showDialog(
-                //     context: context,
-                //     builder: (_) => AlertDialog(
-                //       content: Text(
-                //         "Your added balance: \n ${_myController.text}",
-                //         style: const TextStyle(fontSize: 20),
-                //       ),
-                //     ));
-              },
-            ),
-          ],
-        ),
-      );
-
-  Widget buildExpencesSheet() => Container(
-    height:  MediaQuery.of(context).size.height-100,
-    child: Column(
-      children: [
-        Container(
-         margin: EdgeInsets.only(top: 40),
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: userController
-                .user.expenseList.length,
-            itemBuilder: (context, index) =>
-                ExpenseCard(
-                  date: userController
-                      .user.expenseList[index].date,
-                  amount: userController
-                      .user.expenseList[index].amount,
-                  name: userController
-                      .user.expenseList[index].name,
-                  //catgory : userController.user.expenseList[index].catgory,
-                ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
 

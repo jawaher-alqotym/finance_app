@@ -49,7 +49,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         Expanded(
                             flex:3,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
+                              padding: const EdgeInsets.only(left: 10.0),
                               child: Text("-${widget.amount}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
                             )),
                         Expanded(

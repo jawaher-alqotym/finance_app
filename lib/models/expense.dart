@@ -6,11 +6,11 @@ import 'package:finance_app/models/user.dart';
 class Expense {
   DateTime date;
   num amount;
-  String? name;
+  String name;
   Catgory? catgory;
   User? user;
 
-  Expense({ required this.date, required this.amount, this.name, this.catgory});
+  Expense({ required this.date, required this.amount, required this.name, this.catgory});
 
 
 }
