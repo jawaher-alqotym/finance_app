@@ -13,8 +13,8 @@ Widget addBtnWidget(BuildContext context) {
           ),
           backgroundColor: Color.fromRGBO(51, 64, 79, 1),
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-      child: Text("Add"),
+          textStyle: TextStyle(fontFamily: 'HacenDigital',fontSize: 14, fontWeight: FontWeight.w600)),
+      child: Text("إضافة"),
       onPressed: () {},
     ),
   );
