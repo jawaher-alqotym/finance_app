@@ -1,6 +1,7 @@
 import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/widgets/SavingPercent.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewSaving extends StatefulWidget {
   const NewSaving({super.key});
@@ -15,7 +16,10 @@ class _nextRouteState extends State<NewSaving> {
     var _color = Color.fromRGBO(51, 64, 79, 0.5);
     DateTime date = DateTime.now();
     Text? text;
+    final TextEditingController _myControllerName = TextEditingController();
+    TextEditingController dateinput = TextEditingController();
 
+    var rtl = TextDirection.RTL;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -29,15 +33,28 @@ class _nextRouteState extends State<NewSaving> {
             color: Colors.white,
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.only(left: 0, right: 20),
             child: Column(
               //  mainAxisAlignment: MainAxisAlignment.end,
 
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 500),
+                  child: IconButton(
+                    iconSize: 35,
+                    onPressed: () {
+                      Navigator.of(context).push(_createRouteHomePage());
+                    },
+                    icon: const Icon(
+                      Icons.cancel,
+                      color: Color.fromRGBO(83, 210, 88, 1),
+                    ),
+                  ),
+                ),
                 Container(
                   alignment: Alignment.topRight,
                   margin:
-                      const EdgeInsets.only(bottom: 30.0, right: 51.0, top: 30),
+                      const EdgeInsets.only(bottom: 30.0, right: 30.0, top: 30),
                   child: Text(
                     " خطة إدخار",
                     style: TextStyle(
@@ -47,13 +64,17 @@ class _nextRouteState extends State<NewSaving> {
                     ),
                   ),
                 ),
-                TextField(
-                  textAlign: TextAlign.end,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextField(
+                    textAlign: TextAlign.end,
+                    controller: _myControllerName,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'مالذي تريد ادخاره',
                     ),
-                    hintText: 'مالذي تريد ادخاره',
                   ),
                 ),
                 SizedBox(
@@ -74,54 +95,86 @@ class _nextRouteState extends State<NewSaving> {
                   height: 10,
                 ),
                 //  CupertinoRoundedDatePicker()
-                Text("${date.year}/ ${date.month}/ ${date.day}"),
 
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 400,
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      DateTime? newDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2030));
+//                 SizedBox(
+//                   height: 55,
+//                   width: 400,
+//                   child: Padding(
+//                     padding: const EdgeInsets.only(left: 20),
+//                     child: OutlinedButton(
+//                       style: OutlinedButton.styleFrom(
+//                         side: BorderSide(color: Colors.grey, width: 1), //<-- SEE HERE
+//                         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+//
+//                       ),
+//
+//
+//                       onPressed: () async {
+//                         DateTime? newDate = await showDatePicker(
+//                             context: context,
+//                             initialDate: DateTime.now(),
+//                             firstDate: DateTime(2022),
+//                             lastDate: DateTime(2030)
+//                         );
+//
+//                         if (newDate == null) return;
+//                         setState(() {
+//                           date = newDate;
+// //                          Text("${date.year}/ ${date.month}/ ${date.day}");
+//
+//                         });
+//                         // print(text?.data);
+//                         print(date);
+//                       },
+//                       child: Text(
+//                         "اختار التاريخ ",
+//                         style: TextStyle(color: Colors.black),
+//                       ),
+//
+//                     ),
+//                   ),
+//                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextFormField(
+                      textAlign: TextAlign.end,
+                      controller: dateinput,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        // hintTextDirection: textDirectionToAxisDir
+                        prefixIcon:
+                            Icon(Icons.calendar_today), //icon of text field
+                        labelText: "ادخل التاريخ",
+                        hintText: dateinput.text,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        //label text of field
+                      ),
 
-                      if (newDate == null) return;
-                      setState(() {
-                        date = newDate;
-                      });
-                      // print(text?.data);
-                      print(date);
-                    },
-                    child: Text(
-                      "اختار التاريخ",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
+//                    readOnly: true,
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2022),
+                            //DateTime.now() - not to allow to choose before today.
+                            lastDate: DateTime(2030));
+
+                        if (pickedDate != null) {
+                          setState(() {
+                            (dateinput.text = DateFormat("yyyy-dd-mm")
+                                .format(DateTime.now()));
+                          });
+                        } else {
+                          print("Date is not selected");
+                        }
+                      }),
                 ),
+
                 SizedBox(
                   height: 20,
                 ),
-
-                // SizedBox(
-                //   width: 400,
-                //   height: 45.28,
-                //   // child: OutlinedButton.icon(
-                //   //   onPressed: () async {
-                //   DateTime? newDate = await showDatePicker(
-                //       context: context,
-                //       initialDate: date,
-                //       firstDate: DateTime(2000),
-                //       lastDate: DateTime(2100));
-                // },
-                //   //   icon: Icon(Icons.date_range_outlined),
-                //   //   label: Text("${date.day}/${date.month}/${date.year}"),
-                //   // ),
-                // ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +221,7 @@ class _nextRouteState extends State<NewSaving> {
                   ],
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 150,
                 ),
                 Container(
                     margin: EdgeInsets.only(bottom: 50),
@@ -197,4 +250,13 @@ class _nextRouteState extends State<NewSaving> {
       ),
     );
   }
+}
+
+Route _createRouteHomePage() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => Home(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }
