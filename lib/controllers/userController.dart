@@ -20,8 +20,8 @@ DateTime today = new DateTime(now.year, now.month, now.day);
 class UserController extends GetxController {
   User user = new User(income: 0,oldIncome: 0, savingList:
   <Saving>[
-               new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "البيت"),
-               new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "السيارة"),
+               // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "البيت"),
+               // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "السيارة"),
 
   ],
       expenseList: <Expense>[
@@ -33,6 +33,8 @@ class UserController extends GetxController {
   List<Expense> searchResuilt = <Expense>[];
 
   var selectedText = "";
+  var selectedPercent ;
+
 
   @override
   void onInit() {
@@ -69,6 +71,7 @@ class UserController extends GetxController {
   addSavings(Saving saving){
     this.user.savingList.add(saving);
     subtractSavingFromIncome(saving.percenst);
+    print(user.savingList[0].title);
     update();
 
   }

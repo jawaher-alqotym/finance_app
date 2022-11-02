@@ -217,8 +217,8 @@ class _HomeContantState extends State<HomeContant> {
                                       fontSize: 20,
                                       color: Color(0xFF33404F)),
                                 ),
-                              ), userController.user.savingList.length > 0 &&
-                                  userController.user.income > 0
+                              ),
+                                  userController.user.income >= 0
                                   ?
                               Container(
                                 height: 90,

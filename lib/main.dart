@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
     primarySwatch: Colors.lightGreen,
     fontFamily: 'HacenDigital'),
       debugShowCheckedModeBanner: false,
-      home: NewSaving(),
+      home: OnBoardingPage(),
       initialBinding: ControllerBindings(),
     );
   }

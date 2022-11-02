@@ -2,6 +2,10 @@ import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/widgets/SavingPercent.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:finance_app/controllers/userController.dart';
+import 'package:finance_app/models/saving.dart';
 
 class NewSaving extends StatefulWidget {
   const NewSaving({super.key});
@@ -11,6 +15,7 @@ class NewSaving extends StatefulWidget {
 }
 
 class _nextRouteState extends State<NewSaving> {
+
   @override
   Widget build(BuildContext context) {
     var _color = Color.fromRGBO(51, 64, 79, 0.5);
@@ -18,6 +23,8 @@ class _nextRouteState extends State<NewSaving> {
     Text? text;
     final TextEditingController _myControllerName = TextEditingController();
     TextEditingController dateinput = TextEditingController();
+    final userController = Get.find<UserController>();
+
 
     var rtl = TextDirection.RTL;
     return Scaffold(
@@ -239,7 +246,12 @@ class _nextRouteState extends State<NewSaving> {
                             // foreground
                           ),
                           onPressed: () {
-                            Navigator.pop(context);
+                            userController.addSavings(new Saving(
+                                percenst: num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100,
+                                title: _myControllerName.text,
+                                fromDate:"dateinput.text"),);
+                            Navigator.of(context).push(_createRouteHomePage());
+
                           },
                           child: Text("حفظ", style: TextStyle(fontSize: 20)),
                         )))

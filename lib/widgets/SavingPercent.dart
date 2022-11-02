@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:finance_app/controllers/userController.dart';
 
 class SavingWidget extends StatefulWidget {
   SavingWidget({required this.text});
@@ -9,7 +12,8 @@ class SavingWidget extends StatefulWidget {
 
 class _SavingWidgetState extends State<SavingWidget> {
   var isSelected = false;
-  var selectedText = "";
+  final userController = Get.find<UserController>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +25,8 @@ class _SavingWidgetState extends State<SavingWidget> {
         if (isSelected == false) {
           print("isSelected");
           print(widget.text.data);
-          selectedText = widget.text.data!;
-          print("text / ${selectedText}");
+          userController.selectedPercent = widget.text.data!;
+          print("text / ${userController.selectedPercent}");
         }
       },
       child: Container(
