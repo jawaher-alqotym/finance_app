@@ -16,28 +16,28 @@ Widget wmyBarWidget(BuildContext context) {
         fontSize: 15,
         radiusStyle: true,
         dividerColor: Colors.transparent,
-        activeBorders: [
-          Border.all(
-            color: Color.fromRGBO(255, 255, 255, 0.6),
-            width: 1.0,
-          ),
-          Border.all(
-            color: Color.fromRGBO(255, 255, 255, 0.6),
-            width: 1.0,
-          ),
-          Border.all(
-            color:  Color.fromRGBO(255, 255, 255, 0.6),
-            width: 1.0,
-          ),
-        ],
-        activeBgColors: [[Color.fromRGBO(83, 210, 88, 1)], [Color.fromRGBO(83, 210, 88, 1)], [Color.fromRGBO(83, 210, 88, 1)]],
+        // activeBorders: [
+        //   Border.all(
+        //     color: Color.fromRGBO(255, 255, 255, 0.6),
+        //     width: 1.0,
+        //   ),
+        //   Border.all(
+        //     color: Color.fromRGBO(255, 255, 255, 0.6),
+        //     width: 1.0,
+        //   ),
+        //   Border.all(
+        //     color:  Color.fromRGBO(255, 255, 255, 0.6),
+        //     width: 1.0,
+        //   ),
+        // ],
+        activeBgColors: [[Color.fromRGBO(51, 64, 79, 1)], [Color.fromRGBO(51, 64, 79, 1)], [Color.fromRGBO(51, 64, 79, 1)]],
         activeFgColor: Colors.white,
         inactiveBgColor: Color.fromRGBO(51, 64, 79, 1),
         inactiveFgColor: Colors.white,
-        initialLabelIndex: 0,
+        initialLabelIndex: 1,
         doubleTapDisable: false, // re-tap active widget to de-activate
-        totalSwitches: 3,
-        labels: ['Week', 'Month', 'Year'],
+        totalSwitches: 1,
+        labels: [ 'التقرير الشهري'],
         onToggle: (index) {
           // chartWidget(context);
         },
