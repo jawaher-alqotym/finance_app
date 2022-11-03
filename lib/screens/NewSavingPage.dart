@@ -18,10 +18,7 @@ class _nextRouteState extends State<NewSaving> {
 
   @override
   Widget build(BuildContext context) {
-    var _color = Color.fromRGBO(51, 64, 79, 0.5);
-    DateTime date = DateTime.now();
-    Text? text;
-    final TextEditingController _myControllerName = TextEditingController();
+    TextEditingController _myControllerName = TextEditingController();
     TextEditingController dateinput = TextEditingController();
     final userController = Get.find<UserController>();
 
@@ -246,7 +243,8 @@ class _nextRouteState extends State<NewSaving> {
                             // foreground
                           ),
                           onPressed: () {
-                            userController.addSavings(new Saving(
+                            userController.addSavings(
+                              new Saving(
                                 percenst: num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100,
                                 title: _myControllerName.text,
                                 fromDate:"dateinput.text"),);

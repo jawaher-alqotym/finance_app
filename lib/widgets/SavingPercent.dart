@@ -25,7 +25,7 @@ class _SavingWidgetState extends State<SavingWidget> {
         if (isSelected == false) {
           print("isSelected");
           print(widget.text.data);
-          userController.selectedPercent = widget.text.data!;
+          userController.selectedPercent = widget.text.data;
           print("text / ${userController.selectedPercent}");
         }
       },
