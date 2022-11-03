@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: 'HacenDigital'),
       debugShowCheckedModeBanner: false,
-      home: NewSaving(),
+      home: OnBoardingPage(),
       initialBinding: ControllerBindings(),
     );
   }

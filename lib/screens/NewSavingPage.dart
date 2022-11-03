@@ -16,7 +16,7 @@ class _nextRouteState extends State<NewSaving> {
     var _color = Color.fromRGBO(51, 64, 79, 0.5);
     DateTime date = DateTime.now();
     Text? text;
-    final TextEditingController _myControllerName = TextEditingController();
+    TextEditingController _myControllerName = TextEditingController();
     TextEditingController dateinput = TextEditingController();
 
     var rtl = TextDirection.RTL;
@@ -137,6 +137,7 @@ class _nextRouteState extends State<NewSaving> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: TextFormField(
+                      autofocus: true,
                       textAlign: TextAlign.end,
                       controller: dateinput,
                       obscureText: true,
@@ -145,14 +146,13 @@ class _nextRouteState extends State<NewSaving> {
                         prefixIcon:
                             Icon(Icons.calendar_today), //icon of text field
                         labelText: "ادخل التاريخ",
-                        hintText: dateinput.text,
+
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         //label text of field
                       ),
-
-//                    readOnly: true,
+                      readOnly: true,
                       onTap: () async {
                         DateTime? pickedDate = await showDatePicker(
                             context: context,
@@ -163,8 +163,9 @@ class _nextRouteState extends State<NewSaving> {
 
                         if (pickedDate != null) {
                           setState(() {
-                            (dateinput.text = DateFormat("yyyy-dd-mm")
-                                .format(DateTime.now()));
+                            dateinput.text =
+                                DateFormat("yyyy-dd-mm").format(DateTime.now());
+                            print("dd ${dateinput}");
                           });
                         } else {
                           print("Date is not selected");
