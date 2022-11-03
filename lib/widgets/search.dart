@@ -19,9 +19,9 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
 
     return GetBuilder<UserController>(
-        init: UserController(),
-    initState: (_) {},
-    builder: (userController) {
+       init: UserController(),
+       initState: (_) {},
+       builder: (userController) {
 
 
       return Container(
