@@ -346,6 +346,8 @@ class _HomeContantState extends State<HomeContant> {
                   center: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      userController.getPieChartData()  < 0 ?
+                      Text("${((userController.getPieChartData()*100)*-1).toStringAsFixed(0)}%"):
                       Text("${(userController.getPieChartData()*100).toStringAsFixed(0)}%"),
                       userController.getPieChartData() >= 0 ?
                       Text("نسب الصرف من الرصيد", style: TextStyle(fontSize:16 ,fontWeight:FontWeight.w700),):
