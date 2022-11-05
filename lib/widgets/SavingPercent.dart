@@ -30,7 +30,7 @@ class _SavingWidgetState extends State<SavingWidget> {
       child: Container(
         margin: EdgeInsets.only(left: 5, right: 5, top: 50),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
           color: isSelected
               ? Color.fromRGBO(51, 64, 79, 1)
               : Color.fromRGBO(51, 64, 79, 0.5),

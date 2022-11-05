@@ -133,7 +133,17 @@ class _SavingPage extends State<SavingPage> {
                             },
                           ))),
                       Container(
-                          padding: EdgeInsets.all(15),
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 20, top: 30),
+                          child: Text(
+                            "ادخل نسبة الادخار ",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      Container(
+                          padding: EdgeInsets.only(left: 15, right: 15),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -166,7 +176,7 @@ class _SavingPage extends State<SavingPage> {
                                 )
                               ])),
                       SizedBox(
-                        height: 60,
+                        height: 90,
                       ),
                       SizedBox(
                         width: 316,
