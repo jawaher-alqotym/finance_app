@@ -28,13 +28,16 @@ class _ExpenseCardState extends State<ExpenseCard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 360.0, top: 15, bottom: 12),
+          padding: const EdgeInsets.only(left: 38.0, top: 0, bottom: 12),
           child: widget.date == today ?
           Padding(
             padding: const EdgeInsets.only(left: 0.0),
             child: Text("اليوم", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital')),
           )
-              :Text("${DateFormat.yMMMMd().format(now)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
+              :Padding(
+                padding: const EdgeInsets.only(right: 0.0),
+                child: Text("${DateFormat.yMMMMd().format(now)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
+              ),
         ),
         Container(
           height: 70,
@@ -49,8 +52,8 @@ class _ExpenseCardState extends State<ExpenseCard> {
                         Expanded(
                             flex:3,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text("-${widget.amount}", style: TextStyle(fontFamily: 'HacenDigital',color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text("-${widget.amount}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
                             )),
                         Expanded(
                             flex: 0,

@@ -3,9 +3,24 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../screens/Home.dart';
 import 'package:string_validator/string_validator.dart';
 
+import 'package:get/get.dart';
+import 'package:finance_app/controllers/userController.dart';
 
-class OnBoardingPage extends StatelessWidget {
+class OnBoardingPage extends StatefulWidget {
+  @override
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
+}
+
+class _OnBoardingPageState extends State<OnBoardingPage> {
   final formKey = GlobalKey<FormState>();
+
+  final incomeController = TextEditingController();
+
+  final TextEditingController nameController = TextEditingController();
+
+  final userController = Get.find<UserController>();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +67,7 @@ class OnBoardingPage extends StatelessWidget {
                 width: 316,
                 height: 54,
                 child: TextFormField(
+                  controller: nameController,
                   style: TextStyle(color: Colors.white),
                   validator: (value){
                     // check if the value contains only letters for name
@@ -91,10 +107,11 @@ class OnBoardingPage extends StatelessWidget {
                 width: 316,
                 height: 54,
                 child: TextFormField(
+                  controller:incomeController,
                   style: TextStyle(color: Colors.white),
                   validator: (value){
                     // check if the value contains only int or float for balance
-                    if(value!.isNotEmpty && value.length<=10 && (isInt(value) || isFloat(value) || RegExp(r'^[\u0660-\u06690-9 ]+$').hasMatch(value))){
+                    if(value!.isNotEmpty && value.length<=10 && (isInt(value) || isFloat(value))){
                       return null; // everything is correct
                     } else if(value!.isEmpty){
                       return "يجب ادخال المبلغ";
@@ -150,6 +167,9 @@ class OnBoardingPage extends StatelessWidget {
                     ),
                     onPressed: () {
                       if(formKey.currentState!.validate()){
+                        userController.user.name = nameController.text;
+                        userController.user.oldIncome = num.parse(incomeController.text);
+                        userController.user.income = num.parse(incomeController.text);
                         Navigator.of(context).push(_createRouteHomePage());
                       }
                     },

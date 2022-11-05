@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/num_pad2.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import 'package:get/get.dart';
+import 'package:finance_app/controllers/userController.dart';
+import 'package:finance_app/models/expense.dart';
+
 class addExpensesPage extends StatefulWidget {
   const addExpensesPage({super.key});
   @override
@@ -10,11 +14,13 @@ class addExpensesPage extends StatefulWidget {
 }
 
 class _addExpensesPageState extends State<addExpensesPage> {
+  final userController = Get.find<UserController>();
   bool isSelected = false;
   // text controller
   final TextEditingController _myController2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -101,6 +107,8 @@ class _addExpensesPageState extends State<addExpensesPage> {
                       onSubmit: () {
                         debugPrint(
                             'Your added Balance: ${_myController2.text}');
+                        userController.addExpense(new Expense(date: userController.getLoginDate(), amount: num.parse(_myController2.text), name: userController.selectedText) );
+
                         showDialog(
                             context: context,
                             builder: (_) => AlertDialog(

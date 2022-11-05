@@ -8,9 +8,9 @@ import 'package:finance_app/widgets/half_oval_top_widget.dart';
 import 'package:finance_app/widgets/goals_widget.dart';
 import 'package:finance_app/widgets/spending_cati_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:finance_app/widgets/navBar.dart';
 import 'package:finance_app/widgets/floatingButton.dart';
+import 'package:finance_app/widgets/monthly_report_widget.dart';
 
 class InsightPage extends StatefulWidget {
   @override
@@ -30,18 +30,18 @@ class _InsightPageState extends State<InsightPage> {
         Spacer(),
         wmyBarWidget(context),
         Spacer(),
-        /** Needs to toggle between week and month chart **/
+        /** Needs to toggle between week and month chart (cancelled idea) **/
         // chartWidget(context),
         // month_chartWidget(context),
-        year_chartWidget(context),
+        // year_chartWidget(context),
+
+            /** monthly report **/
+            monthlyReportWidget(context),
+
         Spacer(),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 25.0),
-              child: Text('Spending Categories', style: TextStyle(color: Color.fromRGBO(51, 64, 79, 1), fontWeight: FontWeight.w500),),
-            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 61.0),
               child: spendingWidget(context),
@@ -51,19 +51,10 @@ class _InsightPageState extends State<InsightPage> {
         Spacer(),
         Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 60.0, bottom: 30),
-                  child: Text('My Goals', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
-                ),),
-                Padding(padding:
-                const EdgeInsets.only(right: 59.0, bottom: 24),
-                  child:addBtnWidget(context),
-                ),
-              ],
-            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 190,bottom: 30),
+              child: Text('مجموع العمليات', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
+            ),),
             goalsWidget(context),
           ],
 
