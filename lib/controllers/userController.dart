@@ -119,22 +119,24 @@ class UserController extends GetxController {
 
   getPieChartData(){
     /*% of spending compear to incum */
-    var income = user.income != null ? user.income : 10000;
-
+    var income = user.oldIncome != null ? user.oldIncome : 10000;
     var percent = double.parse((double.parse(getSpendingTotal().toString()) / income).toStringAsFixed(2));
+
+
     print(getSpendingTotal());
     print(income);
     print(percent.toString());
 
 
-    if(percent.isFinite && getSpendingTotal()>0.0){
-      if(percent > 0.0 && percent <1.0){
-        return  percent;
-      }else{
-        percent = income / double.parse((double.parse(getSpendingTotal().toString())).toStringAsFixed(2))*-1;
-        print(percent);
-        return percent;
-      }
+    if(income.isFinite && getSpendingTotal()>0.0){
+      return percent;
+      // if(percent > 0.0 && percent <1.0){
+      //   return  percent;
+      // }else{
+      //   percent = income / double.parse((double.parse(getSpendingTotal().toString())).toStringAsFixed(2))*-1;
+      //   print(percent);
+      //   return percent;
+      // }
     }else{
       return 0.0;
     }

@@ -97,7 +97,7 @@ class _HomeContantState extends State<HomeContant> {
                 // do something with the input numbers
                 onSubmit: () {
                   userController.updateIncome(double.parse(_myController.text));
-                  print(userController.user.income);
+                  print(userController.user.oldIncome);
                   debugPrint('Your added Balance: ${_myController.text}');
                   // showDialog(
                   //     context: context,
@@ -342,19 +342,17 @@ class _HomeContantState extends State<HomeContant> {
                   animationDuration: 2000,
                   radius: 90.0,
                   lineWidth: 7.0,
-                  percent: userController.getPieChartData() >= 0 ? userController.getPieChartData(): userController.getPieChartData()*-1,
+                  percent: userController.getPieChartData() >= 0.0 &&  userController.getPieChartData() < 1.0 ? userController.getPieChartData(): 0,
                   center: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       userController.getPieChartData()  < 0 ?
                       Text("${((userController.getPieChartData()*100)*-1).toStringAsFixed(0)}%"):
                       Text("${(userController.getPieChartData()*100).toStringAsFixed(0)}%"),
-                      userController.getPieChartData() >= 0 ?
-                      Text("نسب الصرف من الرصيد", style: TextStyle(fontSize:16 ,fontWeight:FontWeight.w700),):
-                      Text("مصروفاتك اعلى من رصيدك", style: TextStyle(fontSize:16 , fontWeight:FontWeight.w700 ),),
+                      Text("نسب الصرف من الرصيد", style: TextStyle(fontSize:16 ,fontWeight:FontWeight.w700),),
                     ],
                   ),
-                  progressColor: userController.getPieChartData() > 0 ? Colors.green : Color(0xffFD6969)
+                  progressColor: Color(0xffFD6969)
 
                 )
             ),
