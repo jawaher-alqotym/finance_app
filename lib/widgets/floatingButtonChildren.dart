@@ -1,7 +1,8 @@
 /* lib/widgets/floatingButtonChildren.dart */
 
+import 'package:finance_app/models/saving.dart';
 import 'package:finance_app/screens/ExpencesPage.dart';
-import 'package:finance_app/screens/NewSavingPage.dart';
+import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -94,7 +95,7 @@ class _FlowMenuState extends State<FlowMenu>
 
     Route _createRouteSavingPage() {
       return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => NewSaving(),
+        pageBuilder: (context, animation, secondaryAnimation) => SavingPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return child;
         },

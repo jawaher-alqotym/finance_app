@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:finance_app/controllers/userController.dart';
@@ -14,7 +13,6 @@ class _SavingWidgetState extends State<SavingWidget> {
   var isSelected = false;
   final userController = Get.find<UserController>();
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,14 +27,20 @@ class _SavingWidgetState extends State<SavingWidget> {
           }
         });
 
+        if (isSelected == true) {
+          print("isSelected");
+          print(widget.text.data);
+          userController.selectedPercent = widget.text.data;
+          print("text / ${userController.selectedPercent}");
+        }
       },
       child: Container(
         margin: EdgeInsets.only(left: 5, right: 5, top: 50),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
           color: isSelected
-              ? Color.fromRGBO(51, 64, 79, 0.5)
-              : Color.fromRGBO(51, 64, 79, 1),
+              ? Color.fromRGBO(51, 64, 79, 1)
+              : Color.fromRGBO(51, 64, 79, 0.5),
         ),
         height: 44,
         width: 44,

@@ -1,5 +1,5 @@
 import 'package:finance_app/screens/ExpencesPage.dart';
-import 'package:finance_app/screens/NewSavingPage.dart';
+import 'package:finance_app/screens/SavingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/screens/add_new_expense_page.dart';
@@ -34,9 +34,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(
-    primarySwatch: Colors.lightGreen,
-    fontFamily: 'HacenDigital'),
+      theme: ThemeData(fontFamily: 'HacenDigital'),
       debugShowCheckedModeBanner: false,
       home: OnBoardingPage(),
       initialBinding: ControllerBindings(),
