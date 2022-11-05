@@ -103,7 +103,7 @@ class _SavingPage extends State<SavingPage> {
                             controller: dateinput,
                             decoration: InputDecoration(
                               suffixIcon: Icon(Icons.calendar_today),
-                              labelText: "ادخل التاريخ",
+                              // labelText: "ادخل التاريخ",
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(width: 1, color: Colors.grey),
