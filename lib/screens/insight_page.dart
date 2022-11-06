@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:finance_app/widgets/navBar.dart';
 import 'package:finance_app/widgets/floatingButton.dart';
 import 'package:finance_app/widgets/monthly_report_widget.dart';
-
+import 'package:finance_app/widgets/expense_vs_savings_widget.dart';
 class InsightPage extends StatefulWidget {
   @override
   _InsightPageState createState() => _InsightPageState();
@@ -44,7 +44,7 @@ class _InsightPageState extends State<InsightPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 61.0),
-              child: spendingWidget(context),
+              child: ExpenseVsSavingCard(),
             ),
           ],
         ),
