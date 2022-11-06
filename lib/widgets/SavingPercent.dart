@@ -19,7 +19,14 @@ class _SavingWidgetState extends State<SavingWidget> {
       onTap: () {
         setState(() {
           isSelected = !isSelected;
+          if (isSelected == false) {
+            print("isSelected");
+            print(widget.text.data);
+            userController.selectedPercent = widget.text.data;
+            print("text / ${userController.selectedPercent}");
+          }
         });
+
         if (isSelected == true) {
           print("isSelected");
           print(widget.text.data);

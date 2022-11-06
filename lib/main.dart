@@ -34,7 +34,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(fontFamily: 'HacenDigital'),
+      theme: ThemeData(
+          splashColor: Color(0xff53D258),
+          fontFamily: 'HacenDigital'),
       debugShowCheckedModeBanner: false,
       home: OnBoardingPage(),
       initialBinding: ControllerBindings(),
