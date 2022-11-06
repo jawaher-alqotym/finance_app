@@ -13,20 +13,43 @@ class SavingCard extends StatefulWidget {
   Catgory? catgory;
   String title;
   User user;
+  String fromDate = new DateTime.now().toString();
+  String toDate;
 
 
-  SavingCard({super.key, required this.percenst, this.catgory, required this.title, required this.user});
+
+  SavingCard({super.key,
+    required this.percenst,
+    this.catgory,
+    required this.title,
+    required this.user,
+    required this.toDate,
+    required this.fromDate});
 
 
   @override
   State<SavingCard> createState() => _SavingCardState();
 }
 
+
 class _SavingCardState extends State<SavingCard> {
+
+  Widget buildSheet() {
+    return   SavingCardDetails(fromDate: widget.fromDate,toDate:  widget.toDate,title: widget.title,percenst: widget.percenst);
+  }
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
-      onTap: () => {SavingCardDetails()},
+      onTap: () =>
+          showBottomSheet(
+              enableDrag: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius
+                    .circular(26.0),
+              ),
+              context: context,
+              builder: (context) =>
+                  buildSheet()),
       child: Container(
           margin: EdgeInsets.only(left: 40),
           decoration: BoxDecoration(

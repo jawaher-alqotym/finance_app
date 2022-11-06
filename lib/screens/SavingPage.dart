@@ -19,6 +19,8 @@ class _SavingPage extends State<SavingPage> {
   TextEditingController dateinput = TextEditingController();
   TextEditingController _myControllerName = TextEditingController();
   final userController = Get.find<UserController>();
+  DateTime now = new DateTime.now();
+
 
   @override
   void initState() {
@@ -200,7 +202,8 @@ class _SavingPage extends State<SavingPage> {
                                           .replaceAll("%", "")) /
                                       100,
                                   title: _myControllerName.text,
-                                  fromDate: "dateinput.text"),
+                                  toDate: now.toString(),
+                                  fromDate: dateinput.text.toString()),
                             );
                             Navigator.of(context).push(_createRouteHomePage());
                           },

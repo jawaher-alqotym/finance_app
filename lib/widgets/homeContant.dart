@@ -6,7 +6,6 @@ import 'package:finance_app/widgets/navBar.dart';
 
 import 'package:finance_app/widgets/expenseCard.dart';
 import 'package:finance_app/widgets/savingCard.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
@@ -235,6 +234,8 @@ class _HomeContantState extends State<HomeContant> {
                                         title: userController.user
                                             .savingList[index].title,
                                         user: userController.user,
+                                        fromDate: userController.user.savingList[index].fromDate,
+                                        toDate: userController.user.savingList[index].toDate,
                                       ),
                                 ),
                               ) : Text(""),
@@ -342,17 +343,17 @@ class _HomeContantState extends State<HomeContant> {
                   animationDuration: 2000,
                   radius: 90.0,
                   lineWidth: 7.0,
-                  percent: userController.getPieChartData() >= 0.0 &&  userController.getPieChartData() < 1.0 ? userController.getPieChartData(): 0,
+                  percent: userController.getPieChartData(),
                   center: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      userController.getPieChartData()  < 0 ?
-                      Text("${((userController.getPieChartData()*100)*-1).toStringAsFixed(0)}%"):
                       Text("${(userController.getPieChartData()*100).toStringAsFixed(0)}%"),
                       Text("نسب الصرف من الرصيد", style: TextStyle(fontSize:16 ,fontWeight:FontWeight.w700),),
                     ],
                   ),
-                  progressColor: Color(0xffFD6969)
+                  progressColor: userController.getPieChartData() >= 0.0 && userController.getPieChartData() <= 0.5?
+                  Color(0xff53D258):
+                  Color(0xffFD6969)
 
                 )
             ),

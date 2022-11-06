@@ -60,8 +60,8 @@ class UserController extends GetxController {
     searchResuilt = results;
     update();
   }
+
   updateIncome(newIncome){
-    print("in updateIncome $newIncome");
     this.user.oldIncome += this.user.income;
     this.user.income += newIncome.round();
     update();
@@ -102,7 +102,6 @@ class UserController extends GetxController {
 
   num getSpendingTotal(){
     num total = user.expenseList.fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
-    total > 0 ? total: total = 0;
     update();
     return total;
 
@@ -118,8 +117,11 @@ class UserController extends GetxController {
   }
 
   getPieChartData(){
-    /*% of spending compear to incum */
     var income = user.oldIncome != null ? user.oldIncome : 10000;
+
+    if(income <= getSpendingTotal()){
+      return 1.0;
+    }
     var percent = double.parse((double.parse(getSpendingTotal().toString()) / income).toStringAsFixed(2));
 
 
@@ -128,15 +130,8 @@ class UserController extends GetxController {
     print(percent.toString());
 
 
-    if(income.isFinite && getSpendingTotal()>0.0){
+    if(income.isFinite && getSpendingTotal()>=0.0){
       return percent;
-      // if(percent > 0.0 && percent <1.0){
-      //   return  percent;
-      // }else{
-      //   percent = income / double.parse((double.parse(getSpendingTotal().toString())).toStringAsFixed(2))*-1;
-      //   print(percent);
-      //   return percent;
-      // }
     }else{
       return 0.0;
     }
@@ -146,6 +141,6 @@ class UserController extends GetxController {
 
   DateTime getLoginDate(){
     DateTime now = new DateTime.now();
-    return new DateTime( now.hour, now.minute);
+    return new DateTime(now.hour, now.minute);
   }
 }
