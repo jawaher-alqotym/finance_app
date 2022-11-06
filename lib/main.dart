@@ -1,20 +1,22 @@
-import 'package:finance_app/screens/ExpencesPage.dart';
-import 'package:finance_app/screens/SavingPage.dart';
+
 import 'package:flutter/material.dart';
-import 'package:finance_app/screens/Home.dart';
-import 'package:finance_app/screens/add_new_expense_page.dart';
-import 'package:finance_app/screens/insight_page.dart';
 import 'package:finance_app/controllers_binding.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:finance_app/screens/onboarding_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  // for splash screen
+
+void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+
+  );
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);  // for splash screen
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {

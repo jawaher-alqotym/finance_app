@@ -24,6 +24,10 @@ dependencies:
   flutter_native_splash: ^2.2.13
   google_fonts: ^3.0.1
   string_validator: ^0.3.0
+  cloud_firestore: ^4.0.4
+  firebase_auth: ^4.1.1
+  firebase_core: ^2.1.1
+  firebase_core_dart: ^1.0.1
 
 dev_dependencies:
   flutter_test:

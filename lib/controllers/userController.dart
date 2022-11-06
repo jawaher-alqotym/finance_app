@@ -9,8 +9,8 @@ import 'package:finance_app/models/saving.dart';
 import 'package:finance_app/models/expense.dart';
 
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 import 'dart:math';
 
@@ -32,14 +32,31 @@ class UserController extends GetxController {
 
   List<Expense> searchResuilt = <Expense>[];
 
-  var selectedText = "";
-  var selectedPercent ;
-
+  var selectedText = "";  // this must be moved to savings controller
+  var selectedPercent ;  // this must be moved to savings controller
 
   @override
   void onInit() {
     super.onInit();
     searchResuilt = user.expenseList;
+  }
+
+  Future<void> getUserData(String user_name) async {
+    try {
+      QuerySnapshot _Snap = await FirebaseFirestore.instance
+          .collection('Users')
+          .where("name", isEqualTo: user_name)
+          .get();
+
+      update();
+      for (var item in _Snap.docs) {
+        print(
+          item['name']
+        );
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -83,6 +100,20 @@ class UserController extends GetxController {
 
 
   }
+
+  // Future<void> createNewExpense(Expense expense) async {
+  //   await FirebaseFirestore.instance
+  //       .collection('Expenses')
+  //       .doc(now.toString())
+  //       .set(
+  //     {
+  //
+  //     },
+  //     SetOptions(merge: true),
+  //   ).then(
+  //         (value) => print(""),
+  //   );
+  // }
 
   bool subtractSavingFromIncome(percenst){
     this.user.income = this.user.income - (this.user.income*percenst);
