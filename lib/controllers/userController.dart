@@ -143,4 +143,13 @@ class UserController extends GetxController {
     DateTime now = new DateTime.now();
     return new DateTime(now.hour, now.minute);
   }
+  String welcomeMsg(){
+    var currentHour= DateTime.now().hour;
+    if(currentHour<12){
+      return'صباح الخير';
+    }
+    else{
+      return'مساء الخير';
+    }
+  }
 }
