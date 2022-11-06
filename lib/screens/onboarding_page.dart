@@ -71,10 +71,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   style: TextStyle(color: Colors.white),
                   validator: (value){
                     // check if the value contains only letters for name
-                    if(value!.isNotEmpty && (RegExp(r'^[\u0621-\u064A0-9 ]+$').hasMatch(value)|| isAlpha(value)) && value.length<=30){
+                    if(value!.isNotEmpty && (RegExp(r'^[\u0621-\u064A0-9 ]+$').hasMatch(value)|| isAlpha(value)) && value.length<=30 && !isNumeric(value)){
                       return null; // everything is correct
-                    } else if(value!.isEmpty){
+                    } else if(value!.isEmpty) {
                       return "يجب ادخال الإسم";
+                    }
+                    else if(isNumeric(value)){
+                      return "يجب ان لا يحتوي الإسم المدخل على أرقام";
                     } else{
                       return "ادخل الإسم بشكل صحيح";
                     }
