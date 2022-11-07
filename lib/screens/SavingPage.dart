@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:custom_date_range_picker/custom_date_range_picker.dart';
 
 class SavingPage extends StatefulWidget {
   @override
@@ -16,11 +17,12 @@ class SavingPage extends StatefulWidget {
 }
 
 class _SavingPage extends State<SavingPage> {
+  DateTime? startDate = DateTime.now();
+  DateTime? endDate;
   TextEditingController dateinput = TextEditingController();
   TextEditingController _myControllerName = TextEditingController();
   final userController = Get.find<UserController>();
   DateTime now = new DateTime.now();
-
 
   @override
   void initState() {
@@ -30,6 +32,8 @@ class _SavingPage extends State<SavingPage> {
 
   @override
   Widget build(BuildContext context) {
+    userController.selectedText = _myControllerName.text;
+
     return Scaffold(
         body: Container(
             decoration: BoxDecoration(
@@ -101,39 +105,74 @@ class _SavingPage extends State<SavingPage> {
                           padding: EdgeInsets.all(15),
                           child: Center(
                               child: TextField(
-                            textAlign: TextAlign.right,
-                            controller: dateinput,
-                            decoration: InputDecoration(
-                              suffixIcon: Icon(Icons.calendar_today),
-                              // labelText: "ادخل التاريخ",
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                            readOnly: true,
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(2022),
-                                  lastDate: DateTime(2030));
+                                  textAlign: TextAlign.right,
+                                  controller: dateinput,
+                                  decoration: InputDecoration(
+                                    suffixIcon: Icon(Icons.calendar_today),
+                                    // labelText: "ادخل التاريخ",
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    showCustomDateRangePicker(
+                                      context,
+                                      dismissible: true,
+                                      endDate: endDate,
+                                      startDate: DateTime.now(),
+                                      maximumDate: DateTime.now()
+                                          .add(const Duration(days: 500)),
+                                      minimumDate: DateTime.now(),
+                                      onApplyClick: (s, e) {
+                                        setState(() {
+                                          endDate = e;
+                                          startDate = s;
+                                          dateinput.text =
+                                              '${startDate != null ? DateFormat("yyyy-MM-dd").format(startDate!) : '-'} - ${endDate != null ? DateFormat("yyyy-MM-dd").format(endDate!) : '-'}';
+                                          userController.selectedFromDate =
+                                              DateFormat("yyyy-MM-dd")
+                                                  .format(startDate!);
+                                          userController.selectedToDate =
+                                              DateFormat("yyyy-MM-dd")
+                                                  .format(endDate!);
+                                          print(endDate);
+                                          print(endDate);
+                                        });
+                                      },
+                                      onCancelClick: () {
+                                        setState(() {
+                                          endDate = null;
+                                          startDate = null;
+                                        });
+                                      },
+                                    );
+                                    //   DateTimeRange? pickedDate =
+                                    //       await showDateRangePicker(
+                                    //           context: context,
+                                    //           initialDateRange: dateRange,
+                                    //           firstDate: DateTime.now(),
+                                    //           lastDate: DateTime(2030));
 
-                              if (pickedDate != null) {
-                                print(pickedDate);
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                                print(formattedDate);
+                                    //   if (pickedDate != null) {
+                                    //     print(pickedDate);
+                                    //     //  String formattedDate =
+                                    //     //    DateFormat('yyyy-MM-dd').format(DateTimeRange(start: dateRange.start, end: dateRange.end);
+                                    //     //  print(formattedDate);
 
-                                setState(() {
-                                  dateinput.text = formattedDate;
-                                });
-                              } else {
-                                print("Date is not selected");
-                              }
-                            },
-                          ))),
+                                    //     setState(() {
+                                    //       dateinput.text = DateTimeRange(
+                                    //               start: dateRange.start,
+                                    //               end: dateRange.end)
+                                    //           .toString();
+                                    //     });
+                                    //   } else {
+                                    //     print("Date is not selected");
+                                    //   }
+                                    // },
+                                  }))),
                       Container(
                         alignment: Alignment.centerRight,
                         child: Padding(

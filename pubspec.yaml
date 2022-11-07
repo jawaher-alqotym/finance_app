@@ -24,6 +24,8 @@ dependencies:
   flutter_native_splash: ^2.2.13
   google_fonts: ^3.0.1
   string_validator: ^0.3.0
+  custom_date_range_picker: ^1.0.6
+
 
 dev_dependencies:
   flutter_test:
@@ -71,3 +73,4 @@ flutter:
      - assets/icons/money.svg
      - assets/undraw_treasure_of-9-i 1.svg
      - assets/SPLASH.png
+     - assets/images/Frame 8753.png
