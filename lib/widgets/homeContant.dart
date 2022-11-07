@@ -6,6 +6,7 @@ import 'package:finance_app/widgets/navBar.dart';
 
 import 'package:finance_app/widgets/expenseCard.dart';
 import 'package:finance_app/widgets/savingCard.dart';
+import 'package:get/get.dart';
 
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
@@ -217,7 +218,7 @@ class _HomeContantState extends State<HomeContant> {
                             ),
                           ),
                           userController.user.income >= 0
-                              ? Container(
+                              ? Obx(()=>Container(
                                   height: 90,
                                   margin: EdgeInsets.only(
                                       left: 0.0, top: 19.0, bottom: 25),
@@ -237,7 +238,7 @@ class _HomeContantState extends State<HomeContant> {
                                           .user.savingList[index].toDate,
                                     ),
                                   ),
-                                )
+                                ))
                               : Text(""),
                         ],
                       )),
@@ -288,7 +289,7 @@ class _HomeContantState extends State<HomeContant> {
                               ],
                             ),
                           ),
-                          userController.user.expenseList.length > 0
+                              Obx(() => userController.user.expenseList.length > 0
                               ? Container(
                                   //height: 190,
                                   child: ExpenseCard(
@@ -301,7 +302,8 @@ class _HomeContantState extends State<HomeContant> {
                                     //catgory : userController.user.expenseList[index].catgory,
                                   ),
                                 )
-                              : Text(""),
+
+                              : Text(""),)
                         ],
                       )
                     ],
@@ -356,6 +358,6 @@ class _HomeContantState extends State<HomeContant> {
         ),
         navBar(),
       ],
-    );
+     );
   }
 }

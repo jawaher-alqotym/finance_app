@@ -23,12 +23,12 @@ class UserController extends GetxController {
                // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "البيت"),
                // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "السيارة"),
 
-  ],
+  ].obs,
       expenseList: <Expense>[
          // new Expense(date: today , amount: 100, name: 'الايجار', catgory: new Catgory(title: "المنزل", icon: Icon(Icons.home))),
         // new Expense(date: today , amount: 3500, name: 'البيت', catgory: new Catgory(title: "انترنت", icon: Icon(Icons.wifi))),
 
-      ], name: "احمد");
+      ].obs, name: "jhone");
 
   List<Expense> searchResuilt = <Expense>[];
 
@@ -43,16 +43,28 @@ class UserController extends GetxController {
 
   Future<void> getUserData(String user_name) async {
     try {
-      QuerySnapshot _Snap = await FirebaseFirestore.instance
-          .collection('Users')
-          .where("name", isEqualTo: user_name)
+      QuerySnapshot _snapSavings = await FirebaseFirestore.instance
+          .collection('Savings')
+          .where("user_name", isEqualTo: user_name)
           .get();
 
-      update();
-      for (var item in _Snap.docs) {
-        print(
-          item['name']
+      QuerySnapshot _snapExpences = await FirebaseFirestore.instance
+          .collection('Expenses')
+          .where("user_name", isEqualTo: user_name)
+          .get();
+
+      user.savingList.clear();
+      user.expenseList.clear();
+
+
+      for (var item in _snapSavings.docs) {
+        user.savingList.add(
+          new Saving(percenst: double.parse(item["percenst"]), fromDate: item["fromDate"], toDate: item["toDate"], title: item["title"])
         );
+      }
+      for (var item in _snapExpences.docs) {
+        user.expenseList.add(
+          new Expense(date: (item["date"]).toDate(), amount: item["amount"], name: item["name"]));
       }
     } catch (e) {
       print(e.toString());
@@ -100,20 +112,6 @@ class UserController extends GetxController {
 
 
   }
-
-  // Future<void> createNewExpense(Expense expense) async {
-  //   await FirebaseFirestore.instance
-  //       .collection('Expenses')
-  //       .doc(now.toString())
-  //       .set(
-  //     {
-  //
-  //     },
-  //     SetOptions(merge: true),
-  //   ).then(
-  //         (value) => print(""),
-  //   );
-  // }
 
   bool subtractSavingFromIncome(percenst){
     this.user.income = this.user.income - (this.user.income*percenst);

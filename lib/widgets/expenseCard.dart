@@ -21,8 +21,6 @@ class ExpenseCard extends StatefulWidget {
 class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
-    DateTime now = new DateTime.now();
-    DateTime today = new DateTime(now.year, now.month, now.day);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +28,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
 
           Padding(
                 padding: const EdgeInsets.only(top: 10.0, left: 45.0),
-                child: Text("${DateFormat.yMMMMd().format(now)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
+                child: Text("${DateFormat.yMMMMd().format(widget.date)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
               ),
         Container(
           height: 70,
