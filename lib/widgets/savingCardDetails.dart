@@ -1,36 +1,127 @@
+import 'dart:ui';
 
+import 'package:finance_app/screens/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+import '../controllers/userController.dart';
+
 class SavingCardDetails extends StatelessWidget {
   double percenst;
   String title;
-  String fromDate ;
+  String fromDate;
   String toDate;
 
-  SavingCardDetails({required this.percenst, required this.title, required this.fromDate, required this.toDate});
+  SavingCardDetails(
+      {required this.percenst,
+      required this.title,
+      required this.fromDate,
+      required this.toDate});
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double screenHight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHight = MediaQuery.of(context).size.height;
+    final userController = Get.find<UserController>();
 
     return Container(
-      decoration: BoxDecoration(
-        borderRadius:  BorderRadius.circular(26.0),
-        color: Colors.redAccent
-      ),
-        height: screenHight-490,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(26.0), color: Colors.white),
+        height: screenHight - 490,
         width: screenWidth,
-        child: Text("data"));
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.all(10),
+              child: IconButton(
+                iconSize: 30,
+                onPressed: () {
+                  Navigator.of(context).push(_createRouteHomePage());
+                },
+                icon: const Icon(
+                  Icons.cancel,
+                  color: Color.fromRGBO(83, 210, 88, 1),
+                ),
+              ),
+            ),
+            Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(top: 40),
+                child: Text("${title}")),
+            Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(top: 15),
+                child: Text("${(percenst*100).round()}%")),
+            Container(
+              padding: EdgeInsets.only(right: 50, top: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("${fromDate}"),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  ImageIcon(
+                    AssetImage("assets/images/Frame 8753.png"),
+                    color: Color.fromRGBO(83, 210, 88, 1),
+                  ),
+                  SizedBox(
+                    width: 120,
+                  ),
+                  Text("${toDate}"),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  ImageIcon(
+                    AssetImage("assets/images/Frame 8753.png"),
+                    color: Color.fromRGBO(83, 210, 88, 1),
+                  ),
+
+                  //  OutlinedButton
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Container(
+                child: TextButton(
+                    onPressed: () {
+                      Get.defaultDialog(
+                        title: "تنبيه",
+                        middleText: "سوف يتم حذف هذا العنصر",
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text("لا"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // userController.user.savingList.removeAt
+                            },
+                            child: Text("نعم"),
+                          ),
+                        ],
+                      );
+                    },
+                    child: Text(
+                      "حذف",
+                      style: TextStyle(color: Colors.red),
+                    )))
+          ],
+        ));
   }
+}
 
-
+Route _createRouteHomePage() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => Home(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }

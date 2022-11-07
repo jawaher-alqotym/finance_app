@@ -28,6 +28,8 @@ dependencies:
   firebase_auth: ^4.1.1
   firebase_core: ^2.1.1
   firebase_core_dart: ^1.0.1
+  custom_date_range_picker: ^1.0.6
+
 
 dev_dependencies:
   flutter_test:
@@ -78,3 +80,4 @@ flutter:
      - assets/downGreenArrow.svg
      - assets/filter.svg
      - assets/upArrow.svg
+     - assets/images/Frame 8753.png

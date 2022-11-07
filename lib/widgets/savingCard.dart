@@ -13,7 +13,7 @@ class SavingCard extends StatefulWidget {
   Catgory? catgory;
   String title;
   User user;
-  String fromDate = new DateTime.now().toString();
+  String fromDate;
   String toDate;
 
 

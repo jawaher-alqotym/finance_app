@@ -12,6 +12,7 @@ import 'package:finance_app/models/expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
+
 import 'dart:math';
 
 DateTime now = new DateTime.now();
@@ -24,16 +25,20 @@ class UserController extends GetxController {
                // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "السيارة"),
 
   ].obs,
+
       expenseList: <Expense>[
-         // new Expense(date: today , amount: 100, name: 'الايجار', catgory: new Catgory(title: "المنزل", icon: Icon(Icons.home))),
+        // new Expense(date: today , amount: 100, name: 'الايجار', catgory: new Catgory(title: "المنزل", icon: Icon(Icons.home))),
         // new Expense(date: today , amount: 3500, name: 'البيت', catgory: new Catgory(title: "انترنت", icon: Icon(Icons.wifi))),
 
       ].obs, name: "jhone");
 
   List<Expense> searchResuilt = <Expense>[];
 
-  var selectedText = "";  // this must be moved to savings controller
-  var selectedPercent ;  // this must be moved to savings controller
+  var selectedText;
+  var selectedPercent;
+  var selectedFromDate;
+  var selectedToDate;  // this must be moved to savings controller
+
 
   @override
   void onInit() {
@@ -81,94 +86,83 @@ class UserController extends GetxController {
     } else {
       results = user.expenseList
           .where((element) => element.name
-          .toString()
-          .toLowerCase()
-          .contains(name.toLowerCase()))
+              .toString()
+              .toLowerCase()
+              .contains(name.toLowerCase()))
           .toList();
     }
     searchResuilt = results;
     update();
   }
 
-  updateIncome(newIncome){
+  updateIncome(newIncome) {
     this.user.oldIncome += this.user.income;
     this.user.income += newIncome.round();
     update();
-
   }
 
-  addSavings(Saving saving){
+  addSavings(Saving saving) {
     this.user.savingList.add(saving);
     subtractSavingFromIncome(saving.percenst);
     print(user.savingList[0].title);
     update();
-
   }
 
-  addExpense(Expense expense){
+  addExpense(Expense expense) {
     this.user.expenseList.add(expense);
     subtractExpenseFromIncome(expense.amount);
     update();
-
-
   }
 
-  bool subtractSavingFromIncome(percenst){
-    this.user.income = this.user.income - (this.user.income*percenst);
+  bool subtractSavingFromIncome(percenst) {
+    this.user.income = this.user.income - (this.user.income * percenst);
     update();
     return true;
-
-
   }
 
-  bool subtractExpenseFromIncome(amount){
+  bool subtractExpenseFromIncome(amount) {
     this.user.income = this.user.income - amount;
     update();
     return true;
-
-
   }
 
-  num getSpendingTotal(){
-    num total = user.expenseList.fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
+  num getSpendingTotal() {
+    num total = user.expenseList
+        .fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
     update();
     return total;
-
-
   }
 
-  num getSavingTotal(){
+  num getSavingTotal() {
     var income = user.income != null ? user.income : 10000;
-    final num total = user.savingList.fold(0, (sum, item) => sum + num.parse((income * item.percenst).toString()));
+    final num total = user.savingList.fold(
+        0, (sum, item) => sum + num.parse((income * item.percenst).toString()));
     update();
     return total;
-
   }
 
-  getPieChartData(){
+  getPieChartData() {
     var income = user.oldIncome != null ? user.oldIncome : 10000;
 
-    if(income <= getSpendingTotal()){
+    if (income <= getSpendingTotal()) {
       return 1.0;
     }
-    var percent = double.parse((double.parse(getSpendingTotal().toString()) / income).toStringAsFixed(2));
-
+    var percent = double.parse(
+        (double.parse(getSpendingTotal().toString()) / income)
+            .toStringAsFixed(2));
 
     print(getSpendingTotal());
     print(income);
     print(percent.toString());
 
-
-    if(income.isFinite && getSpendingTotal()>=0.0){
+    if (income.isFinite && getSpendingTotal() >= 0.0) {
       return percent;
-    }else{
+    } else {
       return 0.0;
     }
-
-
   }
 
-  DateTime getLoginDate(){
+  DateTime getLoginDate() {
     DateTime now = new DateTime.now();
     return new DateTime(now.hour, now.minute);
   }
