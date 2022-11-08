@@ -64,14 +64,25 @@ class UserController extends GetxController {
 
       for (var item in _snapSavings.docs) {
         user.savingList.add(
-          new Saving(percenst: double.parse(item["percenst"]), fromDate: item["fromDate"], toDate: item["toDate"], title: item["title"])
+          new Saving(
+              id: item["id"],
+              percentage: double.parse(item["percentage"].toString()),
+              fromDate: item["fromDate"],
+              toDate: item["toDate"], title: item["title"],
+              user_name: item["user_name"])
         );
       }
       for (var item in _snapExpences.docs) {
         user.expenseList.add(
-          new Expense(date: (item["date"]).toDate(), amount: item["amount"], name: item["name"]));
+          new Expense(
+              id: item["id"],
+              date: (item["date"]).toDate(),
+              amount: item["amount"],
+              name: item["name"] ,
+              user_name: item["user_name"]));
       }
     } catch (e) {
+      print("getUserData method");
       print(e.toString());
     }
   }
@@ -101,17 +112,62 @@ class UserController extends GetxController {
     update();
   }
 
-  addSavings(Saving saving) {
-    this.user.savingList.add(saving);
-    subtractSavingFromIncome(saving.percenst);
-    print(user.savingList[0].title);
-    update();
+  addSavings(Saving saving) async{
+    var now = DateTime.now().toString();
+    try{
+    await FirebaseFirestore.instance
+        .collection('Savings')
+        .doc(now)
+        .set(
+      {
+        "id": now,
+        'fromDate': saving.fromDate,
+        'toDate': saving.toDate,
+        'percentage': saving.percentage,
+        'title': saving.title,
+        'user_name': user.name,
+      },
+      SetOptions(merge: true),
+    );
+    getUserData(user.name!);
+
+    }catch(e){
+      print("addSavings method");
+      print(e.toString());
+    }
+    subtractSavingFromIncome(saving.percentage);
   }
 
-  addExpense(Expense expense) {
-    this.user.expenseList.add(expense);
+  addExpense(Expense expense) async{
+    var now = DateTime.now().toString();
+    try{
+      await FirebaseFirestore.instance
+          .collection('Expenses')
+          .doc(now)
+          .set(
+        {
+          "id": now,
+          'amount': expense.amount,
+          'date': Timestamp.fromDate(expense.date),
+          'name': expense.name,
+          'user_name': user.name,
+        },
+        SetOptions(merge: true),
+      );
+      getUserData(user.name!);
+
+    }catch(e){
+      print("addExpense method");
+      print(e.toString());
+    }
     subtractExpenseFromIncome(expense.amount);
-    update();
+  }
+
+  void deleteSavings(String? id) {
+    print(" delet savings methods ${id}");
+    FirebaseFirestore.instance.collection('Savings').doc(id).delete();
+    getUserData(user.name!);
+
   }
 
   bool subtractSavingFromIncome(percenst) {
@@ -136,7 +192,7 @@ class UserController extends GetxController {
   num getSavingTotal() {
     var income = user.income != null ? user.income : 10000;
     final num total = user.savingList.fold(
-        0, (sum, item) => sum + num.parse((income * item.percenst).toString()));
+        0, (sum, item) => sum + num.parse((income * item.percentage).toString()));
     update();
     return total;
   }

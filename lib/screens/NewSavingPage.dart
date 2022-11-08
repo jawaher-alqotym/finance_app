@@ -245,7 +245,7 @@ class _nextRouteState extends State<NewSaving> {
                           onPressed: () {
                             userController.addSavings(
                               new Saving(
-                                percenst: num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100,
+                                  percentage: num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100,
                                 title:_myControllerName.text,
                                   toDate: now.toString(),
                                   fromDate: dateinput.text.toString()),);

@@ -8,13 +8,15 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import '../controllers/userController.dart';
 
 class SavingCardDetails extends StatelessWidget {
-  double percenst;
+  String? id;
+  double percentage;
   String title;
   String fromDate;
   String toDate;
 
-  SavingCardDetails(
-      {required this.percenst,
+  SavingCardDetails({
+      required this.id,
+      required this.percentage,
       required this.title,
       required this.fromDate,
       required this.toDate});
@@ -53,7 +55,7 @@ class SavingCardDetails extends StatelessWidget {
             Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(top: 15),
-                child: Text("${(percenst*100).round()}%")),
+                child: Text("${(percentage*100).round()}%")),
             Container(
               padding: EdgeInsets.only(right: 50, top: 15),
               child: Row(
@@ -108,10 +110,14 @@ class SavingCardDetails extends StatelessWidget {
                         ],
                       );
                     },
-                    child: Text(
-                      "حذف",
-                      style: TextStyle(color: Colors.red),
-                    )))
+                    child: TextButton(
+                      child: Text("حذف", style: TextStyle(color: Colors.red),),
+                      onPressed: () =>{
+                          userController.deleteSavings(id)
+                          },
+                    )
+                )
+            )
           ],
         ));
   }

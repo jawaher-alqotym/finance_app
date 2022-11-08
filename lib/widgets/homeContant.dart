@@ -227,8 +227,9 @@ class _HomeContantState extends State<HomeContant> {
                                     itemCount:
                                         userController.user.savingList.length,
                                     itemBuilder: (context, index) => SavingCard(
-                                      percenst: userController
-                                          .user.savingList[index].percenst,
+                                      id: userController.user.savingList[index].id,
+                                      percentage: userController
+                                          .user.savingList[index].percentage,
                                       title: userController
                                           .user.savingList[index].title,
                                       user: userController.user,

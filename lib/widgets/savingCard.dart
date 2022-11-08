@@ -9,7 +9,8 @@ import 'package:finance_app/widgets/savingCardDetails.dart';
 
 
 class SavingCard extends StatefulWidget {
-  double percenst;
+  String? id;
+  double percentage;
   Catgory? catgory;
   String title;
   User user;
@@ -18,8 +19,10 @@ class SavingCard extends StatefulWidget {
 
 
 
-  SavingCard({super.key,
-    required this.percenst,
+  SavingCard({
+    super.key,
+    required this.id,
+    required this.percentage,
     this.catgory,
     required this.title,
     required this.user,
@@ -35,7 +38,7 @@ class SavingCard extends StatefulWidget {
 class _SavingCardState extends State<SavingCard> {
 
   Widget buildSheet() {
-    return   SavingCardDetails(fromDate: widget.fromDate,toDate:  widget.toDate,title: widget.title,percenst: widget.percenst);
+    return   SavingCardDetails(id: widget.id, fromDate: widget.fromDate,toDate:  widget.toDate,title: widget.title,percentage: widget.percentage);
   }
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,7 @@ class _SavingCardState extends State<SavingCard> {
 
                   Padding(
                     padding: const EdgeInsets.only(left: 0.0, right: 10.0, top: 10.0),
-                    child: Text("${(widget.percenst*100).round()}%", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),),
+                    child: Text("${(widget.percentage*100).round()}%", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 0.0, top: 10.0),
@@ -104,7 +107,7 @@ class _SavingCardState extends State<SavingCard> {
                       barRadius: const Radius.circular(16),
                       width: 135.0,
                       lineHeight: 6.0,
-                      percent: widget.percenst,
+                      percent: widget.percentage,
                       progressColor: Color(0xff53D258),
                       backgroundColor: Color(0xff364f50),
                     ),

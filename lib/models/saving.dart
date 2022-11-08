@@ -5,14 +5,15 @@ import 'package:finance_app/models/user.dart';
 
 
 class Saving {
+  String? id;
   String fromDate;
   String toDate;
-  double percenst ;
+  double percentage ;
   Catgory? catgory;
   String title ;
-  User? user;
+  String? user_name;
 
-  Saving({ required this.percenst,required this.fromDate, required this.toDate, required this.title, this.catgory, this.user});
+  Saving({this.id, required this.percentage,required this.fromDate, required this.toDate, required this.title, this.catgory, this.user_name});
 
 
   }

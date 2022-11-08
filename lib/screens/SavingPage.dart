@@ -235,7 +235,7 @@ class _SavingPage extends State<SavingPage> {
                           onPressed: () {
                             userController.addSavings(
                               new Saving(
-                                  percenst: num.parse(userController
+                                  percentage: num.parse(userController
                                           .selectedPercent
                                           .toString()
                                           .replaceAll("%", "")) /
