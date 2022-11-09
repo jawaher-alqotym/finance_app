@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../screens/Home.dart';
@@ -20,7 +22,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   final userController = Get.find<UserController>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +41,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 height: MediaQuery.of(context).size.height / 2.5,
                 child: FittedBox(
                     fit: BoxFit.scaleDown,
-                    child: SvgPicture.asset('assets/undraw_treasure_of-9-i 1.svg',
-                        width: 250, height: 212)),
+                    child: SvgPicture.asset(
+                        'assets/undraw_treasure_of-9-i 1.svg',
+                        width: 250,
+                        height: 212)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 70.0),
@@ -49,7 +52,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     textAlign: TextAlign.right,
                     text: TextSpan(
                       text: 'قروش ',
-                      style: TextStyle(fontFamily: 'HacenDigital',
+                      style: TextStyle(
+                          fontFamily: 'HacenDigital',
                           fontWeight: FontWeight.w700,
                           fontSize: 30,
                           color: Color.fromRGBO(83, 210, 88, 1)),
@@ -57,7 +61,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         TextSpan(
                             text: '''.. لدعم أحلامك 
                         المالية''',
-                            style: TextStyle(fontFamily: 'HacenDigital',
+                            style: TextStyle(
+                                fontFamily: 'HacenDigital',
                                 color: Color.fromRGBO(255, 255, 255, 1))),
                       ],
                     )),
@@ -69,25 +74,27 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 child: TextFormField(
                   controller: nameController,
                   style: TextStyle(color: Colors.white),
-                  validator: (value){
+                  validator: (value) {
                     // check if the value contains only letters for name
-                    if(value!.isNotEmpty && (RegExp(r'^[\u0621-\u064A0-9 ]+$').hasMatch(value)|| isAlpha(value)) && value.length<=30 && !isNumeric(value)){
+                    if (value!.isNotEmpty &&
+                        (RegExp(r'^[\u0621-\u064A0-9 ]+$').hasMatch(value) ||
+                            isAlpha(value)) &&
+                        value.length <= 30 &&
+                        !isNumeric(value)) {
                       return null; // everything is correct
-                    } else if(value!.isEmpty) {
+                    } else if (value.isEmpty) {
                       return "يجب ادخال الإسم";
-                    }
-                    else if(isNumeric(value)){
+                    } else if (isNumeric(value)) {
                       return "يجب ان لا يحتوي الإسم المدخل على أرقام";
-                    } else{
+                    } else {
                       return "ادخل الإسم بشكل صحيح";
                     }
-
                   },
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
                     hintText: 'الاسم',
                     hintStyle:
-                    TextStyle(color: Color.fromRGBO(128, 128, 128, 1)),
+                        TextStyle(color: Color.fromRGBO(128, 128, 128, 1)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide(
@@ -110,24 +117,25 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 width: 316,
                 height: 54,
                 child: TextFormField(
-                  controller:incomeController,
+                  controller: incomeController,
                   style: TextStyle(color: Colors.white),
-                  validator: (value){
+                  validator: (value) {
                     // check if the value contains only int or float for balance
-                    if(value!.isNotEmpty && value.length<=10 && (isInt(value) || isFloat(value))){
+                    if (value!.isNotEmpty &&
+                        value.length <= 10 &&
+                        (isInt(value) || isFloat(value))) {
                       return null; // everything is correct
-                    } else if(value!.isEmpty){
+                    } else if (value.isEmpty) {
                       return "يجب ادخال المبلغ";
-                    } else{
+                    } else {
                       return "ادخل المبلغ بشكل صحيح";
                     }
-
                   },
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
                     hintText: 'ادخل المبلغ',
                     hintStyle:
-                    TextStyle(color: Color.fromRGBO(128, 128, 128, 1)),
+                        TextStyle(color: Color.fromRGBO(128, 128, 128, 1)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide(
@@ -158,21 +166,24 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         ),
                         backgroundColor: Color.fromRGBO(83, 210, 88, 1),
                         padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        textStyle:
-                        TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        textStyle: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500)),
                     child: Text(
                       "بدء",
-                      style: TextStyle(fontFamily: 'HacenDigital',
+                      style: TextStyle(
+                          fontFamily: 'HacenDigital',
                           color: Color.fromRGBO(51, 64, 79, 1),
                           fontSize: 20,
                           fontWeight: FontWeight.w600),
                     ),
                     onPressed: () {
-                      if(formKey.currentState!.validate()){
+                      if (formKey.currentState!.validate()) {
                         userController.user.name = nameController.text;
-                        userController.user.oldIncome = num.parse(incomeController.text);
-                        userController.user.income = num.parse(incomeController.text);
+                        userController.user.oldIncome =
+                            num.parse(incomeController.text);
+                        userController.user.income =
+                            num.parse(incomeController.text);
                         userController.getUserData(nameController.text);
                         Navigator.of(context).push(_createRouteHomePage());
                       }
