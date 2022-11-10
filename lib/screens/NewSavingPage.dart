@@ -243,10 +243,12 @@ class _nextRouteState extends State<NewSaving> {
                             // foreground
                           ),
                           onPressed: () {
+                            double temp = num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100;
                             userController.addSavings(
                               new Saving(
-                                  percentage: num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100,
-                                title:_myControllerName.text,
+                                  percentage: temp,
+                                  amount: num.parse((temp*userController.user.income).toString()),
+                                  title:_myControllerName.text,
                                   toDate: now.toString(),
                                   fromDate: dateinput.text.toString()),);
                             Navigator.of(context).push(_createRouteHomePage());

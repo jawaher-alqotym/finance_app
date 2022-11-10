@@ -233,6 +233,7 @@ class _SavingPage extends State<SavingPage> {
                             // foreground
                           ),
                           onPressed: () {
+                            double temp = num.parse(userController.selectedPercent.toString().replaceAll("%", ""))/100;
                             userController.addSavings(
                               new Saving(
                                   percentage: num.parse(userController
@@ -240,6 +241,7 @@ class _SavingPage extends State<SavingPage> {
                                           .toString()
                                           .replaceAll("%", "")) /
                                       100,
+                                  amount: num.parse((temp*userController.user.income).toString()),
                                   title: _myControllerName.text,
                                   toDate: DateFormat("yyyy-MM-dd").format(endDate!),
                                   fromDate: DateFormat("yyyy-MM-dd").format(startDate!)),

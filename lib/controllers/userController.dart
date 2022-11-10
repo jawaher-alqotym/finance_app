@@ -67,6 +67,7 @@ class UserController extends GetxController {
           new Saving(
               id: item["id"],
               percentage: double.parse(item["percentage"].toString()),
+              amount: item["amount"],
               fromDate: item["fromDate"],
               toDate: item["toDate"], title: item["title"],
               user_name: item["user_name"])
@@ -124,6 +125,7 @@ class UserController extends GetxController {
         'fromDate': saving.fromDate,
         'toDate': saving.toDate,
         'percentage': saving.percentage,
+        'amount': saving.amount,
         'title': saving.title,
         'user_name': user.name,
       },
@@ -165,6 +167,14 @@ class UserController extends GetxController {
 
   void deleteSavings(String? id) {
     print(" delet savings methods ${id}");
+
+    for(int i = 0 ; i< user.savingList.length;i++){
+     if(user.savingList[i].id == id){
+      user.income += user.savingList[i].amount;
+      user.oldIncome += user.savingList[i].amount;
+
+    }
+    }
     FirebaseFirestore.instance.collection('Savings').doc(id).delete();
     getUserData(user.name!);
 
@@ -190,11 +200,9 @@ class UserController extends GetxController {
   }
 
   num getSavingTotal() {
-    var income = user.income != null ? user.income : 10000;
-    final num total = user.savingList.fold(
-        0, (sum, item) => sum + num.parse((income * item.percentage).toString()));
+    final num total = user.savingList.fold(0, (sum, item) => sum + item.amount);
     update();
-    return total;
+    return total+user.income;
   }
 
   getPieChartData() {
@@ -207,9 +215,9 @@ class UserController extends GetxController {
         (double.parse(getSpendingTotal().toString()) / income)
             .toStringAsFixed(2));
 
-    print(getSpendingTotal());
-    print(income);
-    print(percent.toString());
+    // print(getSpendingTotal());
+    // print(income);
+    // print(percent.toString());
 
     if (income.isFinite && getSpendingTotal() >= 0.0) {
       return percent;
