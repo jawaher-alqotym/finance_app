@@ -1,8 +1,6 @@
 /* lib/models/saving,dart */
 
 import 'package:finance_app/models/category.dart';
-import 'package:finance_app/models/user.dart';
-
 
 class Saving {
   String? id;

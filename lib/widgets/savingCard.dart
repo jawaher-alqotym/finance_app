@@ -10,6 +10,7 @@ import 'package:finance_app/widgets/savingCardDetails.dart';
 
 class SavingCard extends StatefulWidget {
   String? id;
+  num amount;
   double percentage;
   Catgory? catgory;
   String title;
@@ -22,6 +23,7 @@ class SavingCard extends StatefulWidget {
   SavingCard({
     super.key,
     required this.id,
+    required this.amount,
     required this.percentage,
     this.catgory,
     required this.title,
@@ -38,7 +40,7 @@ class SavingCard extends StatefulWidget {
 class _SavingCardState extends State<SavingCard> {
 
   Widget buildSheet() {
-    return   SavingCardDetails(id: widget.id, fromDate: widget.fromDate,toDate:  widget.toDate,title: widget.title,percentage: widget.percentage);
+    return   SavingCardDetails(id: widget.id, amount: widget.amount, fromDate: widget.fromDate,toDate:  widget.toDate,title: widget.title,percentage: widget.percentage);
   }
   @override
   Widget build(BuildContext context) {

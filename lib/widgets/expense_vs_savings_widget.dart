@@ -30,7 +30,7 @@ class _ExpenseVsSavingCardState extends State<ExpenseVsSavingCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'مجموع الدخل',
+                  'مجموع الإدخار',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -38,7 +38,7 @@ class _ExpenseVsSavingCardState extends State<ExpenseVsSavingCard> {
                 ),
                 Text(
                   textDirection: TextDirection.rtl,
-                  '${formatter(userController.getSavingTotal().toString())}  س.ر',
+                  '${largNumbersformatter(userController.getSavingTotal().round().toString())}  س.ر',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -62,12 +62,12 @@ class _ExpenseVsSavingCardState extends State<ExpenseVsSavingCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'مجموع الإلتزامات',
+                  'مجموع الصرف',
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(
                   textDirection: TextDirection.rtl,
-                  '${formatter(userController.getSpendingTotal().toString())} س.ر',
+                  '${largNumbersformatter(userController.getSpendingTotal().toString())} س.ر',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -82,14 +82,14 @@ class _ExpenseVsSavingCardState extends State<ExpenseVsSavingCard> {
   }
 }
 
-String? formatter(String currentBalance) {
+String? largNumbersformatter(String currentBalance) {
   try {
     // suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
     double value = double.parse(currentBalance);
 
     if (value < 1000000) {
       // less than a million
-      return value.toStringAsFixed(2);
+      return value.toStringAsFixed(0);
     } else if (value >= 1000000 && value < (1000000 * 10 * 100)) {
       // less than 100 million
       double result = value / 1000000;

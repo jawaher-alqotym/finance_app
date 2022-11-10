@@ -107,7 +107,12 @@ class _addExpensesPageState extends State<addExpensesPage> {
                       onSubmit: () {
                         debugPrint(
                             'Your added Balance: ${_myController2.text}');
-                        userController.addExpense(new Expense(date: userController.getLoginDate(), amount: num.parse(_myController2.text), name: userController.selectedText) );
+                        userController.addExpense(
+                            new Expense(
+                                date: new DateTime.now(),
+                                amount: num.parse(_myController2.text),
+                                name: userController.selectedText,
+                                ) );
 
                         showDialog(
                             context: context,

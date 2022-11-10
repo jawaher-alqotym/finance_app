@@ -129,7 +129,7 @@ class _HomeContantState extends State<HomeContant> {
                     padding: const EdgeInsets.only(top: 20.0, right: 0),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
-                      child: Text(
+                      child:Text(
                         "${userController.user.name} رصيدك الحالي هنا ",
                         style: TextStyle(
                           color: Colors.white,
@@ -137,6 +137,7 @@ class _HomeContantState extends State<HomeContant> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
+
                     ),
                   ),
                   Padding(
@@ -157,7 +158,7 @@ class _HomeContantState extends State<HomeContant> {
                           ? Directionality(
                               textDirection: TextDirection.rtl,
                               child: Text(
-                                "  ${userController.user.income} س.ر ",
+                                "  ${userController.user.income.round()} س.ر ",
                                 style: TextStyle(
                                   color: userController.user.income > 0
                                       ? Colors.white
@@ -168,7 +169,7 @@ class _HomeContantState extends State<HomeContant> {
                               ),
                             )
                           : Text(
-                              "${userController.user.income} س.ر",
+                              "${userController.user.income.round()} س.ر",
                               style: TextStyle(
                                 color: userController.user.income >= 0
                                     ? Colors.white
@@ -228,6 +229,7 @@ class _HomeContantState extends State<HomeContant> {
                                         userController.user.savingList.length,
                                     itemBuilder: (context, index) => SavingCard(
                                       id: userController.user.savingList[index].id,
+                                      amount: userController.user.savingList[index].amount,
                                       percentage: userController
                                           .user.savingList[index].percentage,
                                       title: userController
@@ -333,7 +335,7 @@ class _HomeContantState extends State<HomeContant> {
             ),
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CircularPercentIndicator(
+                child: Obx(()=>CircularPercentIndicator(
                     animation: true,
                     animationDuration: 2000,
                     radius: 90.0,
@@ -354,7 +356,9 @@ class _HomeContantState extends State<HomeContant> {
                     progressColor: userController.getPieChartData() >= 0.0 &&
                             userController.getPieChartData() <= 0.5
                         ? Color(0xff53D258)
-                        : Color(0xffFD6969))),
+                        : Color(0xffFD6969))
+    ),
+            ),
           ),
         ),
         navBar(),

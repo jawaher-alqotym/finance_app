@@ -1,6 +1,7 @@
 /* lib/controller/userController */
 
 import 'package:finance_app/models/category.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:finance_app/models/user.dart';
@@ -11,42 +12,34 @@ import 'package:finance_app/models/expense.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
-import 'dart:math';
-
 DateTime now = new DateTime.now();
 DateTime today = new DateTime(now.year, now.month, now.day);
 
 class UserController extends GetxController {
-  User user = new User(income: 0,oldIncome: 0, savingList:
-  <Saving>[
-               // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "البيت"),
-               // new Saving(percenst: 0.30, fromDate: now, toDate: now , title: "السيارة"),
+  User user = new User(
+      income: 0,
+      oldIncome: 0,
+      savingList: <Saving>[].obs,
+      expenseList: <Expense>[].obs,
+      name: "jhone");
 
-  ].obs,
+  List<Expense> searchResult = <Expense>[];
 
-      expenseList: <Expense>[
-        // new Expense(date: today , amount: 100, name: 'الايجار', catgory: new Catgory(title: "المنزل", icon: Icon(Icons.home))),
-        // new Expense(date: today , amount: 3500, name: 'البيت', catgory: new Catgory(title: "انترنت", icon: Icon(Icons.wifi))),
+  var selectedText;     // this must be moved to savings controller
+  var selectedPercent; // this must be moved to savings controller
+  var selectedFromDate; // this must be moved to savings controller
+  var selectedToDate;// this must be moved to savings controller
 
-      ].obs, name: "jhone");
-
-  List<Expense> searchResuilt = <Expense>[];
-
-  var selectedText;
-  var selectedPercent;
-  var selectedFromDate;
-  var selectedToDate;  // this must be moved to savings controller
+  var selectedIcon;// this must be moved to expense controller
 
 
   @override
   void onInit() {
     super.onInit();
-    searchResuilt = user.expenseList;
+    searchResult = user.expenseList;
   }
 
-  Future<void> getUserData(String user_name) async {
+  getUserData(String user_name) async {
     try {
       QuerySnapshot _snapSavings = await FirebaseFirestore.instance
           .collection('Savings')
@@ -80,7 +73,10 @@ class UserController extends GetxController {
               date: (item["date"]).toDate(),
               amount: item["amount"],
               name: item["name"] ,
-              user_name: item["user_name"]));
+              user_name: item["user_name"],
+             // icon: item["icon"],
+          ),
+              );
       }
     } catch (e) {
       print("getUserData method");
@@ -103,14 +99,27 @@ class UserController extends GetxController {
               .contains(name.toLowerCase()))
           .toList();
     }
-    searchResuilt = results;
+    searchResult = results;
     update();
   }
 
   updateIncome(newIncome) {
     this.user.oldIncome += this.user.income;
     this.user.income += newIncome.round();
+    updateSavingsAmount();
     update();
+  }
+
+  updateSavingsAmount() async{
+    for(int i = 0; i < user.savingList.length; i++) {
+       await FirebaseFirestore.instance
+          .collection('Savings')
+          .doc(user.savingList[i].id)
+          .update({
+              "amount": user.savingList[i].percentage * user.income
+          });
+    }
+    getUserData(user.name!);
   }
 
   addSavings(Saving saving) async{
@@ -137,10 +146,11 @@ class UserController extends GetxController {
       print("addSavings method");
       print(e.toString());
     }
-    subtractSavingFromIncome(saving.percentage);
+    subtractFromIncome(saving.amount);
   }
 
   addExpense(Expense expense) async{
+    print(expense.date);
     var now = DateTime.now().toString();
     try{
       await FirebaseFirestore.instance
@@ -153,6 +163,7 @@ class UserController extends GetxController {
           'date': Timestamp.fromDate(expense.date),
           'name': expense.name,
           'user_name': user.name,
+          "icon": expense.icon.hashCode.toString(),
         },
         SetOptions(merge: true),
       );
@@ -162,10 +173,10 @@ class UserController extends GetxController {
       print("addExpense method");
       print(e.toString());
     }
-    subtractExpenseFromIncome(expense.amount);
+    subtractFromIncome(expense.amount);
   }
 
-  void deleteSavings(String? id) {
+  deleteSavings(String? id) {
     print(" delet savings methods ${id}");
 
     for(int i = 0 ; i< user.savingList.length;i++){
@@ -180,13 +191,7 @@ class UserController extends GetxController {
 
   }
 
-  bool subtractSavingFromIncome(percenst) {
-    this.user.income = this.user.income - (this.user.income * percenst);
-    update();
-    return true;
-  }
-
-  bool subtractExpenseFromIncome(amount) {
+  bool subtractFromIncome(amount) {
     this.user.income = this.user.income - amount;
     update();
     return true;
@@ -202,7 +207,8 @@ class UserController extends GetxController {
   num getSavingTotal() {
     final num total = user.savingList.fold(0, (sum, item) => sum + item.amount);
     update();
-    return total+user.income;
+    // return total+user.income;
+    return total;
   }
 
   getPieChartData() {
@@ -230,6 +236,7 @@ class UserController extends GetxController {
     DateTime now = new DateTime.now();
     return new DateTime(now.hour, now.minute);
   }
+
   String welcomeMsg(){
     var currentHour= DateTime.now().hour;
     if(currentHour<12){

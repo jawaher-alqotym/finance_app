@@ -23,6 +23,7 @@ class _CustomContainerState extends State<CustomContainer> {
 
   var isSelected = false;
   late Color color;
+
   final userController = Get.find<UserController>();
 
 
@@ -37,7 +38,9 @@ class _CustomContainerState extends State<CustomContainer> {
               print("isSelected");
               print(widget.text.data);
               userController.selectedText = widget.text.data!;
+              userController.selectedIcon = widget.icon.image.hashCode;
               print("text / ${userController.selectedText}");
+
             }
           });
         },

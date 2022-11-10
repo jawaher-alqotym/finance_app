@@ -53,7 +53,7 @@ class _InsightPageState extends State<InsightPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 190,bottom: 30),
-              child: Text('مجموع العمليات', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
+              child: Text('الأعلى صرفا', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
             ),),
             goalsWidget(context),
           ],

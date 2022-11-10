@@ -51,12 +51,12 @@ class _SearchState extends State<Search> {
       child: ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: userController.searchResuilt.length,
+      itemCount: userController.searchResult.length,
       itemBuilder: (context, index) =>
       ExpenseCard(
-      date: userController.searchResuilt[index].date,
-      amount: userController.searchResuilt[index].amount,
-      name: userController.searchResuilt[index].name,
+      date: userController.searchResult[index].date,
+      amount: userController.searchResult[index].amount,
+      name: userController.searchResult[index].name,
       //catgory : userController.user.expenseList[index].catgory,
       ),
       ),

@@ -9,6 +9,7 @@ import '../controllers/userController.dart';
 
 class SavingCardDetails extends StatelessWidget {
   String? id;
+  num amount;
   double percentage;
   String title;
   String fromDate;
@@ -16,6 +17,7 @@ class SavingCardDetails extends StatelessWidget {
 
   SavingCardDetails({
       required this.id,
+      required this.amount,
       required this.percentage,
       required this.title,
       required this.fromDate,
@@ -59,6 +61,10 @@ class SavingCardDetails extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(top: 15),
                   child: Text("${(percentage*100).round()}%")),
+              Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(top: 15),
+                  child: Text("${amount.round()}")),
               Container(
                 padding: EdgeInsets.only(right: 50, top: 15),
                 child: Row(

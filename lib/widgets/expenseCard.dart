@@ -10,9 +10,9 @@ class ExpenseCard extends StatefulWidget {
   DateTime date;
   num? amount;
   String? name;
-  Catgory? catgory;
+  String? icon;
 
-  ExpenseCard({super.key, required this.date, this.amount, this.name, this.catgory});
+  ExpenseCard({super.key, required this.date, this.amount, this.name, this.icon});
 
   @override
   State<ExpenseCard> createState() => _ExpenseCardState();
@@ -54,7 +54,8 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           child: CircleAvatar(
                             radius: 22,
                             backgroundColor: Color(0xff385650),
-                            child:  Icon( Icons.cabin, color: Color(0xff53D258),size: 20,),),
+                            child: Icon(Icons.home, color: Colors.white,),
+                            ),
                         ),
                  ],
                       ),
