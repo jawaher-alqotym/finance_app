@@ -6,7 +6,7 @@ class Saving {
   String? id;
   String fromDate;
   String toDate;
-  double percentage ;
+  var percentage ;
   num amount;
   Catgory? catgory;
   String title ;

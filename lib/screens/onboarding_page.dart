@@ -179,11 +179,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     ),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        userController.user.name = nameController.text;
-                        userController.user.oldIncome =
-                            num.parse(incomeController.text);
-                        userController.user.income =
-                            num.parse(incomeController.text);
+                        // userController.user.name = nameController.text;
+                        // userController.user.oldIncome =
+                        //     num.parse(incomeController.text);
+                        // userController.user.income =
+                        //     num.parse(incomeController.text);
                         userController.getUserData(nameController.text);
                         Navigator.of(context).push(_createRouteHomePage());
                       }

@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import "package:finance_app/controllers/userController.dart";
+import 'package:get/get.dart';
 
 // The new Monthly Report Chart to include in insight page
 
 Widget monthlyReportWidget(BuildContext context) {
-  late List<_ChartData> data;
-  late List<_ChartData> data2;
+  late List<_ChartData> expence;
+  late List<_ChartData> savings;
   late TooltipBehavior _tooltip;
+
+  final userController = Get.find<UserController>();
+  List<num> MonthlyExpenses = userController.getMonthlyExpenses();
+  List<num> MonthlySavings = userController.getMonthlySavings();
+
+
   /** one for spending, another for saving **/
-  data = [
-    _ChartData('الأسبوع ١', 4600),
-    _ChartData('الأسبوع ٢', 3500),
-    _ChartData('الأسبوع ٣', 4500),
-    _ChartData('الأسبوع ٤', 3700),
+  expence = [
+    _ChartData('الأسبوع ١', MonthlyExpenses[0].toDouble()),
+    _ChartData('الأسبوع ٢', MonthlyExpenses[1].toDouble()),
+    _ChartData('الأسبوع ٣', MonthlyExpenses[2].toDouble()),
+    _ChartData('الأسبوع ٤', MonthlyExpenses[3].toDouble()),
   ];
-  data2 = [
-    _ChartData('الأسبوع ١', 4000),
-    _ChartData('الأسبوع ٢', 3000),
-    _ChartData('الأسبوع ٣', 2200),
-    _ChartData('الأسبوع ٤', 2500),
+  savings = [
+    _ChartData('الأسبوع ١', MonthlySavings[0].toDouble()),
+    _ChartData('الأسبوع ٢', MonthlySavings[1].toDouble()),
+    _ChartData('الأسبوع ٣', MonthlySavings[2].toDouble()),
+    _ChartData('الأسبوع ٤', MonthlySavings[3].toDouble()),
   ];
   return Container(
     width: 271,
@@ -41,17 +49,17 @@ Widget monthlyReportWidget(BuildContext context) {
               width:0.5,
               spacing:0.3,
               borderRadius:BorderRadius.only(topRight: Radius.circular(16),topLeft:Radius.circular(16)),
-              dataSource: data,
+              dataSource: expence,
               xValueMapper: (_ChartData data, _) => data.x,
               yValueMapper: (_ChartData data, _) => data.y,
               name: 'Gold',
-              color: Color.fromRGBO(51, 64, 79, 1))
+              color: Color(0xffFD6969))
           ,
           ColumnSeries<_ChartData, String>(
               width:0.5,
               spacing:0.3,
               borderRadius:BorderRadius.only(topRight: Radius.circular(16),topLeft:Radius.circular(16)),
-              dataSource: data2,
+              dataSource: savings,
               xValueMapper: (_ChartData data2, _) => data2.x,
               yValueMapper: (_ChartData data2, _) => data2.y,
               name: 'Gold',

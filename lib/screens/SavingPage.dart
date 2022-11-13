@@ -241,7 +241,7 @@ class _SavingPage extends State<SavingPage> {
                                           .toString()
                                           .replaceAll("%", "")) /
                                       100,
-                                  amount: num.parse((temp*userController.user.income).toString()),
+                                  amount: num.parse((temp*userController.user.income.value).toString()),
                                   title: _myControllerName.text,
                                   toDate: DateFormat("yyyy-MM-dd").format(endDate!),
                                   fromDate: DateFormat("yyyy-MM-dd").format(startDate!)),

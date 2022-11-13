@@ -1,5 +1,7 @@
 /* lib/widgets/floatingButton.dart */
 
+import 'dart:io';
+
 import 'package:finance_app/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/navBar.dart';
@@ -129,7 +131,8 @@ class _HomeContantState extends State<HomeContant> {
                     padding: const EdgeInsets.only(top: 20.0, right: 0),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
-                      child:Text(
+                      child://Obx(()=>
+    Text(
                         "${userController.user.name} رصيدك الحالي هنا ",
                         style: TextStyle(
                           color: Colors.white,
@@ -137,14 +140,14 @@ class _HomeContantState extends State<HomeContant> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-
+                   //   ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                       right: 0.0,
                     ),
-                    child: TextButton(
+                    child: Obx(()=>TextButton(
                       onPressed: () => showBottomSheet(
                           enableDrag: true,
                           shape: RoundedRectangleBorder(
@@ -153,14 +156,14 @@ class _HomeContantState extends State<HomeContant> {
                           backgroundColor: Colors.white,
                           context: context,
                           builder: (context) => buildSheet()),
-                      child: userController.user.income >=
+                      child: userController.user.income.value >=
                               userController.getSpendingTotal()
                           ? Directionality(
                               textDirection: TextDirection.rtl,
                               child: Text(
-                                "  ${userController.user.income.round()} س.ر ",
+                                "  ${userController.user.income.value.round()} س.ر ",
                                 style: TextStyle(
-                                  color: userController.user.income > 0
+                                  color: userController.user.income.value > 0
                                       ? Colors.white
                                       : Colors.grey,
                                   fontSize: 32,
@@ -169,15 +172,16 @@ class _HomeContantState extends State<HomeContant> {
                               ),
                             )
                           : Text(
-                              "${userController.user.income.round()} س.ر",
+                              "${userController.user.income.value.round()} س.ر",
                               style: TextStyle(
-                                color: userController.user.income >= 0
+                                color: userController.user.income.value >= 0
                                     ? Colors.white
                                     : Colors.redAccent,
                                 fontSize: 32,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
+                    ),
                     ),
                   ),
                 ],
@@ -218,7 +222,7 @@ class _HomeContantState extends State<HomeContant> {
                                   color: Color(0xFF33404F)),
                             ),
                           ),
-                          userController.user.income >= 0
+                          userController.user.income.value >= 0
                               ? Obx(()=>Container(
                                   height: 90,
                                   margin: EdgeInsets.only(
@@ -353,10 +357,7 @@ class _HomeContantState extends State<HomeContant> {
                         ),
                       ],
                     ),
-                    progressColor: userController.getPieChartData() >= 0.0 &&
-                            userController.getPieChartData() <= 0.5
-                        ? Color(0xff53D258)
-                        : Color(0xffFD6969))
+                    progressColor: getChartColor())
     ),
             ),
           ),
@@ -364,5 +365,16 @@ class _HomeContantState extends State<HomeContant> {
         navBar(),
       ],
      );
+  }
+  Color getChartColor(){
+    var temp = userController.getPieChartData();
+    if(temp >= 0.0 && temp <= 0.4){
+      return Color(0xff53D258);
+    }else if(temp > 0.45 && temp <= 0.6){
+      return Color(0xffFFCB66);
+    }else{
+      return Color(0xffFD6969);
+    }
+
   }
 }

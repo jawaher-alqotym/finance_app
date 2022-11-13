@@ -1,27 +1,23 @@
 /* lib/controller/userController */
 
-import 'package:finance_app/models/category.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:finance_app/models/user.dart';
-
 import 'package:finance_app/models/saving.dart';
 import 'package:finance_app/models/expense.dart';
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 DateTime now = new DateTime.now();
 DateTime today = new DateTime(now.year, now.month, now.day);
 
 class UserController extends GetxController {
   User user = new User(
-      income: 0,
-      oldIncome: 0,
+      income: 0.obs,
+      oldIncome: 0.obs,
       savingList: <Saving>[].obs,
       expenseList: <Expense>[].obs,
-      name: "jhone");
+      name: "jhone".obs);
 
   List<Expense> searchResult = <Expense>[];
 
@@ -29,7 +25,6 @@ class UserController extends GetxController {
   var selectedPercent; // this must be moved to savings controller
   var selectedFromDate; // this must be moved to savings controller
   var selectedToDate;// this must be moved to savings controller
-
   var selectedIcon;// this must be moved to expense controller
 
 
@@ -51,8 +46,20 @@ class UserController extends GetxController {
           .where("user_name", isEqualTo: user_name)
           .get();
 
+      QuerySnapshot _snapUser = await FirebaseFirestore.instance
+          .collection('Users')
+          .where("name", isEqualTo: user_name)
+          .get();
+
       user.savingList.clear();
       user.expenseList.clear();
+
+      for (var item in _snapUser.docs) {
+        user.id = item["id"];
+        user.name = item["name"];
+        user.oldIncome.value = item["monthlyIncome"].toInt();
+        user.income.value = item["income"].toInt();
+      }
 
 
       for (var item in _snapSavings.docs) {
@@ -103,20 +110,29 @@ class UserController extends GetxController {
     update();
   }
 
-  updateIncome(newIncome) {
-    this.user.oldIncome += this.user.income;
-    this.user.income += newIncome.round();
+  updateIncome(newIncome) async{
+
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user.id)
+        .update({
+      "income": user.income.value + newIncome.round(),
+       "monthlyIncome": user.oldIncome.value + newIncome.round(),});
+
+    if(user.savingList.isNotEmpty){
     updateSavingsAmount();
-    update();
+    }
+    getUserData(user.name!);
   }
 
   updateSavingsAmount() async{
     for(int i = 0; i < user.savingList.length; i++) {
+      var temp = user.savingList[i].percentage * user.income.value;
        await FirebaseFirestore.instance
           .collection('Savings')
           .doc(user.savingList[i].id)
           .update({
-              "amount": user.savingList[i].percentage * user.income
+              "amount": temp
           });
     }
     getUserData(user.name!);
@@ -140,13 +156,13 @@ class UserController extends GetxController {
       },
       SetOptions(merge: true),
     );
+    print(subtractFromIncome(saving.amount));
     getUserData(user.name!);
 
     }catch(e){
       print("addSavings method");
       print(e.toString());
     }
-    subtractFromIncome(saving.amount);
   }
 
   addExpense(Expense expense) async{
@@ -167,52 +183,56 @@ class UserController extends GetxController {
         },
         SetOptions(merge: true),
       );
+      print(subtractFromIncome(expense.amount));
       getUserData(user.name!);
 
     }catch(e){
       print("addExpense method");
       print(e.toString());
     }
-    subtractFromIncome(expense.amount);
   }
 
-  deleteSavings(String? id) {
-    print(" delet savings methods ${id}");
-
+  deleteSavings(String? id) async{
+    print(" delete savings methods ${id}");
+    await FirebaseFirestore.instance.collection('Savings').doc(id).delete();
+    getUserData(user.name!);
     for(int i = 0 ; i< user.savingList.length;i++){
      if(user.savingList[i].id == id){
-      user.income += user.savingList[i].amount;
-      user.oldIncome += user.savingList[i].amount;
+      updateIncome(user.savingList[i].amount.toInt());
 
     }
     }
-    FirebaseFirestore.instance.collection('Savings').doc(id).delete();
-    getUserData(user.name!);
 
   }
 
-  bool subtractFromIncome(amount) {
-    this.user.income = this.user.income - amount;
-    update();
+  Future<bool> subtractFromIncome(amount) async{
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user.id)
+        .update({
+      "income": user.income.value - amount});
+
     return true;
   }
 
   num getSpendingTotal() {
-    num total = user.expenseList
-        .fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
+    num total = user.expenseList.fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
     update();
+    print('getSpendingTotal');
+    print(total);
     return total;
   }
 
   num getSavingTotal() {
     final num total = user.savingList.fold(0, (sum, item) => sum + item.amount);
     update();
-    // return total+user.income;
+    print("getSavingTotal");
+    print(total);
     return total;
   }
 
   getPieChartData() {
-    var income = user.oldIncome != null ? user.oldIncome : 10000;
+    var income = user.oldIncome.value;
 
     if (income <= getSpendingTotal()) {
       return 1.0;
@@ -221,14 +241,29 @@ class UserController extends GetxController {
         (double.parse(getSpendingTotal().toString()) / income)
             .toStringAsFixed(2));
 
-    // print(getSpendingTotal());
-    // print(income);
-    // print(percent.toString());
 
     if (income.isFinite && getSpendingTotal() >= 0.0) {
       return percent;
     } else {
       return 0.0;
+    }
+  }
+
+  Expense? getHighestExpensesCategory(){
+    List<Expense> temp = [];
+
+    for(int i = 0 ; i < user.expenseList.length; i++){
+      if(!temp.contains(user.expenseList[i].name)){
+        temp.add(user.expenseList[i]);
+      }else{
+        temp[i].amount += user.expenseList[i].amount;
+      }
+    }
+
+    if(temp.isNotEmpty) {
+      return temp.fold(temp[0], (max, e) => e.amount > max!.amount ? e : max);
+    }else{
+      return null;
     }
   }
 
@@ -245,5 +280,79 @@ class UserController extends GetxController {
     else{
       return'مساء الخير';
     }
+  }
+
+  List<num> getMonthlyExpenses(){
+    var now = DateTime.now();
+
+    num week1=0;
+    num week2=0;
+    num week3=0;
+    num week4=0;
+
+    for(int i= 0 ; i < user.expenseList.length; i++){
+      if(DateTime.parse(user.expenseList[i].id!).month == now.month){
+        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 1){
+          week1 += user.expenseList[i].amount;
+        }
+        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 2){
+          week2 += user.expenseList[i].amount;
+        }
+        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 3){
+          week3 += user.expenseList[i].amount;
+        }
+        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 4){
+          week4 += user.expenseList[i].amount;
+        }
+
+
+      }
+    }
+
+    return [week1, week2, week3, week4];
+  }
+
+  List<num> getMonthlySavings(){
+    var now = DateTime.now();
+
+    num week1=0;
+    num week2=0;
+    num week3=0;
+    num week4=0;
+
+    for(int i= 0 ; i < user.savingList.length; i++){
+      if(DateTime.parse(user.savingList[i].id!).month == now.month){
+        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 1){
+          week1 += user.savingList[i].amount;
+        }
+        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 2){
+          week2 += user.savingList[i].amount;
+        }
+        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 3){
+          week3 += user.savingList[i].amount;
+        }
+        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 4){
+          week4 += user.savingList[i].amount;
+        }
+
+
+      }
+    }
+    return [week1, week2, week3, week4];
+  }
+
+}
+
+extension DateTimeExtension on DateTime {
+  int get weekOfMonth {
+    var wom = 0;
+    var date = this;
+
+    while (date.month == month) {
+      wom++;
+      date = date.subtract(const Duration(days: 7));
+    }
+
+    return wom;
   }
 }

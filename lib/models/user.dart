@@ -5,10 +5,11 @@ import 'package:finance_app/models/saving.dart';
 import 'package:finance_app/models/expense.dart';
 
 class User {
+  String? id;
   DateTime? login;
-  String? name;
-  num oldIncome;
-  num income;
+  var name;
+  var oldIncome;
+  var income;
   List<Saving> savingList = <Saving>[];
   List<Expense> expenseList = <Expense>[];
 

@@ -1,4 +1,5 @@
 import 'package:finance_app/screens/ExpencesPage.dart';
+import 'package:finance_app/screens/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:finance_app/widgets/num_pad2.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -43,7 +44,7 @@ class _addExpensesPageState extends State<addExpensesPage> {
                     child: IconButton(
                       iconSize: 35,
                       onPressed: () {
-                        Navigator.of(context).push(_createRouteExpencesPage());
+                        Navigator.of(context).push(_createRouteHomePage());
                       },
                       icon: const Icon(
                         Icons.cancel,
@@ -153,9 +154,9 @@ class _addExpensesPageState extends State<addExpensesPage> {
   }
 }
 
-Route _createRouteExpencesPage() {
+Route _createRouteHomePage() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => ExpensesPage(),
+    pageBuilder: (context, animation, secondaryAnimation) => Home(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       return child;
     },
