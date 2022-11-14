@@ -306,7 +306,7 @@ class _HomeContantState extends State<HomeContant> {
                                         .user.expenseList[userController.user.expenseList.length-1].amount,
                                     name:
                                         userController.user.expenseList[userController.user.expenseList.length-1].name,
-                                    //catgory : userController.user.expenseList[index].catgory,
+                                    icon : userController.user.expenseList[userController.user.expenseList.length-1].icon,
                                   ),
                                 )
 

@@ -113,6 +113,7 @@ class _addExpensesPageState extends State<addExpensesPage> {
                                 date: new DateTime.now(),
                                 amount: num.parse(_myController2.text),
                                 name: userController.selectedText,
+                                icon: userController.selectedIcon,
                                 ) );
 
                         showDialog(

@@ -57,7 +57,7 @@ class _SearchState extends State<Search> {
       date: userController.searchResult[index].date,
       amount: userController.searchResult[index].amount,
       name: userController.searchResult[index].name,
-      //catgory : userController.user.expenseList[index].catgory,
+      icon: userController.user.expenseList[index].icon,
       ),
       ),
       ),

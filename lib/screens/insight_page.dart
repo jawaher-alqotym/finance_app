@@ -51,7 +51,7 @@ class _InsightPageState extends State<InsightPage> {
             ):
             Text(""),
             expense != null ?
-            ExpenseCard(date: expense.date, name: expense.name, amount: expense.amount,): Text(""),
+            ExpenseCard(date: expense.date, name: expense.name, amount: expense.amount,icon: expense.icon,): Text(""),
           ],
 
         ),

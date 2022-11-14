@@ -1,10 +1,7 @@
 /* lib/widgets/expenseCard.dart */
 
 import 'package:flutter/material.dart';
-import 'package:finance_app/models/category.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
-
 
 class ExpenseCard extends StatefulWidget {
   DateTime date;
@@ -21,11 +18,16 @@ class ExpenseCard extends StatefulWidget {
 class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
+    DateTime now = new DateTime.now();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
+         now == widget.date ?
+     Padding(
+    padding: const EdgeInsets.only(top: 10.0, left: 45.0),
+    child: Text("اليوم", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
+    ):
           Padding(
                 padding: const EdgeInsets.only(top: 10.0, left: 45.0),
                 child: Text("${DateFormat.yMMMMd().format(widget.date)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
@@ -54,7 +56,12 @@ class _ExpenseCardState extends State<ExpenseCard> {
                           child: CircleAvatar(
                             radius: 22,
                             backgroundColor: Color(0xff385650),
-                            child: Icon(Icons.home, color: Colors.white,),
+                            child: ImageIcon(
+                              AssetImage(
+                                  "${widget.icon}"
+                              ),
+                              color: Color(0xff53D258),
+                            ),
                             ),
                         ),
                  ],

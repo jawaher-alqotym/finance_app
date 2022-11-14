@@ -81,7 +81,7 @@ class UserController extends GetxController {
               amount: item["amount"],
               name: item["name"] ,
               user_name: item["user_name"],
-             // icon: item["icon"],
+              icon: item["icon"],
           ),
               );
       }
@@ -179,7 +179,7 @@ class UserController extends GetxController {
           'date': Timestamp.fromDate(expense.date),
           'name': expense.name,
           'user_name': user.name,
-          "icon": expense.icon.hashCode.toString(),
+          "icon": expense.icon,
         },
         SetOptions(merge: true),
       );

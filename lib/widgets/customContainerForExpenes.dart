@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:finance_app/controllers/userController.dart';
 import 'package:get/get.dart';
-
 class CustomContainer extends StatefulWidget {
   CustomContainer({required this.text, required this.icon});
   final Text text;
@@ -38,8 +37,12 @@ class _CustomContainerState extends State<CustomContainer> {
               print("isSelected");
               print(widget.text.data);
               userController.selectedText = widget.text.data!;
-              userController.selectedIcon = widget.icon.image.hashCode;
+              userController.selectedIcon = widget.icon.image.toString();
+              userController.selectedIcon = userController.selectedIcon.substring(32,userController.selectedIcon.length-2);
+
               print("text / ${userController.selectedText}");
+              print("${userController.selectedIcon}");
+
 
             }
           });

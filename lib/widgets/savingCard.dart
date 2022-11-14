@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:finance_app/models/category.dart';
 import 'package:finance_app/models/user.dart';
 import 'package:finance_app/widgets/savingCardDetails.dart';
 
@@ -12,7 +11,6 @@ class SavingCard extends StatefulWidget {
   String? id;
   num amount;
   double percentage;
-  Catgory? catgory;
   String title;
   User user;
   String fromDate;
@@ -25,7 +23,6 @@ class SavingCard extends StatefulWidget {
     required this.id,
     required this.amount,
     required this.percentage,
-    this.catgory,
     required this.title,
     required this.user,
     required this.toDate,

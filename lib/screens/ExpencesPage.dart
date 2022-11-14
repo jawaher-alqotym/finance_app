@@ -2,7 +2,6 @@ import 'package:finance_app/screens/Home.dart';
 import 'package:finance_app/screens/add_new_expense_page.dart';
 import 'package:finance_app/widgets/customContainerForExpenes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class ExpensesPage extends StatefulWidget {
   const ExpensesPage({super.key});
