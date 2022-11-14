@@ -249,7 +249,7 @@ class _nextRouteState extends State<NewSaving> {
                                   percentage: temp,
                                   amount: num.parse((temp*userController.user.income).toString()),
                                   title:_myControllerName.text,
-                                  toDate: now.toString(),
+                                  toDate: new DateTime.now().toString(),
                                   fromDate: dateinput.text.toString()),);
                             Navigator.of(context).push(_createRouteHomePage());
 

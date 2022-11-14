@@ -7,10 +7,6 @@ import 'package:finance_app/models/saving.dart';
 import 'package:finance_app/models/expense.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-DateTime now = new DateTime.now();
-DateTime today = new DateTime(now.year, now.month, now.day);
-
 class UserController extends GetxController {
   User user = new User(
       income: 0.obs,
@@ -217,7 +213,6 @@ class UserController extends GetxController {
 
   num getSpendingTotal() {
     num total = user.expenseList.fold(0, (sum, item) => sum + num.parse(item.amount.toString()));
-    update();
     print('getSpendingTotal');
     print(total);
     return total;
@@ -225,7 +220,6 @@ class UserController extends GetxController {
 
   num getSavingTotal() {
     final num total = user.savingList.fold(0, (sum, item) => sum + item.amount);
-    update();
     print("getSavingTotal");
     print(total);
     return total;
@@ -255,11 +249,6 @@ class UserController extends GetxController {
     }else{
       return null;
     }
-  }
-
-  DateTime getLoginDate() {
-    DateTime now = new DateTime.now();
-    return new DateTime(now.hour, now.minute);
   }
 
   String welcomeMsg(){
@@ -307,10 +296,14 @@ class UserController extends GetxController {
           }
         }
       }
+
     }catch(e) {
       print(e);
-    }
+
+    }finally {
     return [week1, week2, week3, week4];
+
+    }
 
   }
 
