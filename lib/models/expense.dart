@@ -10,5 +10,9 @@ class Expense {
 
   Expense({ this.id, required this.date, required this.amount, required this.name, this.icon, this.user_name});
 
+  @override
+  toString(){
+    return "name: ${name}, amount: ${amount}, date: ${date}";
+  }
 
 }

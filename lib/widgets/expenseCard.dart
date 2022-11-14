@@ -1,5 +1,6 @@
 /* lib/widgets/expenseCard.dart */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,13 +24,13 @@ class _ExpenseCardState extends State<ExpenseCard> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         now == widget.date ?
+         now.year == widget.date.year && now.month == widget.date.month && now.day == widget.date.day ?
      Padding(
-    padding: const EdgeInsets.only(top: 10.0, left: 45.0),
+    padding: const EdgeInsets.only(top: 10.0, left: 355.0, bottom: 8),
     child: Text("اليوم", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
     ):
           Padding(
-                padding: const EdgeInsets.only(top: 10.0, left: 45.0),
+                padding: const EdgeInsets.only(top: 10.0, left: 45.0, bottom: 8),
                 child: Text("${DateFormat.yMMMMd().format(widget.date)}", style: TextStyle(color: Colors.grey, fontSize: 16, fontFamily: 'HacenDigital'),),
               ),
         Container(

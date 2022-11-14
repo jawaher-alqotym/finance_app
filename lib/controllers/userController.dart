@@ -250,18 +250,8 @@ class UserController extends GetxController {
   }
 
   Expense? getHighestExpensesCategory(){
-    List<Expense> temp = [];
-
-    for(int i = 0 ; i < user.expenseList.length; i++){
-      if(!temp.contains(user.expenseList[i].name)){
-        temp.add(user.expenseList[i]);
-      }else{
-        temp[i].amount += user.expenseList[i].amount;
-      }
-    }
-
-    if(temp.isNotEmpty) {
-      return temp.fold(temp[0], (max, e) => e.amount > max!.amount ? e : max);
+    if(user.expenseList.isNotEmpty) {
+      return user.expenseList.fold(user.expenseList[0], (max, e) => e.amount > max!.amount ? e : max);
     }else{
       return null;
     }
