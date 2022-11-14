@@ -1,7 +1,9 @@
 /* lib/widgets/expenseCard.dart */
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finance_app/controllers/userController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class ExpenseCard extends StatefulWidget {
@@ -20,6 +22,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
   @override
   Widget build(BuildContext context) {
     DateTime now = new DateTime.now();
+    final userController = Get.find<UserController>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +50,7 @@ class _ExpenseCardState extends State<ExpenseCard> {
                             flex:3,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10.0),
-                              child: Text("-${widget.amount}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
+                              child: Text("-${userController.largNumbersformatter(widget.amount.toString())}", style: TextStyle(color: Color(0xffE25C5C), fontSize: 16, fontWeight: FontWeight.w600,)),
                             )),
                         Expanded(
                             flex: 0,
