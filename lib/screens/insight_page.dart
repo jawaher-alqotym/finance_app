@@ -42,11 +42,10 @@ class _InsightPageState extends State<InsightPage> {
             ),
           ],
         ),
-        Spacer(),
         Column(
           children: [
             expense != null ? Padding(
-              padding: const EdgeInsets.only(left: 190,bottom: 30),
+              padding: const EdgeInsets.only(left: 240,bottom: 10),
               child: Text('الأعلى صرفا', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: Color.fromRGBO(51, 64, 79, 1),),
             ),
             ):

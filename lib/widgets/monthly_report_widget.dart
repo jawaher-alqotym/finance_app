@@ -29,8 +29,8 @@ Widget monthlyReportWidget(BuildContext context) {
     _ChartData('الأسبوع ٤', MonthlySavings[3].toDouble()),
   ];
   return Container(
-    width: 271,
-    height: 207,
+    width: 290,
+    height: 220,
     decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -72,9 +72,11 @@ Widget monthlyReportWidget(BuildContext context) {
       ),
       primaryYAxis: NumericAxis(
           opposedPosition: true,
-          maximum: 5000,
+          maximum:  userController.getSavingTotal() > userController.getSpendingTotal() ?
+          userController.getSavingTotal().toDouble(): userController.getSpendingTotal().toDouble(),
           minimum: 0,
-          interval: 1000,
+          interval:userController.getSavingTotal() > userController.getSpendingTotal() ?
+          userController.getSavingTotal()/5: userController.getSpendingTotal()/5,
           axisLine: const AxisLine(width: 0),
           majorTickLines: const MajorTickLines(size: 0)),
       //series: _getDefaultColumn(),

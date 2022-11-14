@@ -161,7 +161,7 @@ class _HomeContantState extends State<HomeContant> {
                           ? Directionality(
                               textDirection: TextDirection.rtl,
                               child: Text(
-                                "  ${userController.user.income.value.round()} س.ر ",
+                                "  ${userController.largNumbersformatter(userController.user.income.value.round())} س.ر ",
                                 style: TextStyle(
                                   color: userController.user.income.value > 0
                                       ? Colors.white
@@ -172,7 +172,7 @@ class _HomeContantState extends State<HomeContant> {
                               ),
                             )
                           : Text(
-                              "${userController.user.income.value.round()} س.ر",
+                              "${userController.largNumbersformatter(userController.user.income.value.round())} س.ر",
                               style: TextStyle(
                                 color: userController.user.income.value >= 0
                                     ? Colors.white
@@ -301,11 +301,11 @@ class _HomeContantState extends State<HomeContant> {
                                   //height: 190,
                                   child: ExpenseCard(
                                     date:
-                                        userController.user.expenseList[0].date,
+                                        userController.user.expenseList[userController.user.expenseList.length-1].date,
                                     amount: userController
-                                        .user.expenseList[0].amount,
+                                        .user.expenseList[userController.user.expenseList.length-1].amount,
                                     name:
-                                        userController.user.expenseList[0].name,
+                                        userController.user.expenseList[userController.user.expenseList.length-1].name,
                                     //catgory : userController.user.expenseList[index].catgory,
                                   ),
                                 )

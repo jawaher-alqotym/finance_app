@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
+          primarySwatch:Colors.green,
           splashColor: Color(0xff53D258),
           fontFamily: 'HacenDigital'),
       debugShowCheckedModeBanner: false,
