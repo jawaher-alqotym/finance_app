@@ -17,7 +17,7 @@ class UserController extends GetxController {
       oldIncome: 0.obs,
       savingList: <Saving>[].obs,
       expenseList: <Expense>[].obs,
-      name: "jhone".obs);
+      name: "");
 
   List<Expense> searchResult = <Expense>[];
 

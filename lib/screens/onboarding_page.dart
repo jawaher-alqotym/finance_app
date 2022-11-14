@@ -184,6 +184,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         //     num.parse(incomeController.text);
                         // userController.user.income =
                         //     num.parse(incomeController.text);
+                        print(nameController.text);
                         userController.getUserData(nameController.text);
                         Navigator.of(context).push(_createRouteHomePage());
                       }

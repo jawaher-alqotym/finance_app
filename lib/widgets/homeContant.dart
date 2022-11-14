@@ -131,8 +131,8 @@ class _HomeContantState extends State<HomeContant> {
                     padding: const EdgeInsets.only(top: 20.0, right: 0),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
-                      child://Obx(()=>
-    Text(
+                      child:
+                       Text(
                         "${userController.user.name} رصيدك الحالي هنا ",
                         style: TextStyle(
                           color: Colors.white,
@@ -140,14 +140,14 @@ class _HomeContantState extends State<HomeContant> {
                           fontWeight: FontWeight.w300,
                         ),
                       ),
-                   //   ),
+
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                       right: 0.0,
                     ),
-                    child: Obx(()=>TextButton(
+                    child: TextButton(
                       onPressed: () => showBottomSheet(
                           enableDrag: true,
                           shape: RoundedRectangleBorder(
@@ -160,8 +160,8 @@ class _HomeContantState extends State<HomeContant> {
                               userController.getSpendingTotal()
                           ? Directionality(
                               textDirection: TextDirection.rtl,
-                              child: Text(
-                                "  ${userController.largNumbersformatter(userController.user.income.value.round())} س.ر ",
+                              child: Obx(()=>Text(
+                                "  ${userController.largNumbersformatter(userController.user.income.value.round().toString())} س.ر ",
                                 style: TextStyle(
                                   color: userController.user.income.value > 0
                                       ? Colors.white
@@ -170,9 +170,10 @@ class _HomeContantState extends State<HomeContant> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
+                              ),
                             )
-                          : Text(
-                              "${userController.largNumbersformatter(userController.user.income.value.round())} س.ر",
+                          : Obx(()=>Text(
+                              "${userController.largNumbersformatter(userController.user.income.value.round().toString())} س.ر",
                               style: TextStyle(
                                 color: userController.user.income.value >= 0
                                     ? Colors.white
@@ -180,8 +181,7 @@ class _HomeContantState extends State<HomeContant> {
                                 fontSize: 32,
                                 fontWeight: FontWeight.w600,
                               ),
-                            ),
-                    ),
+                            ),),
                     ),
                   ),
                 ],
