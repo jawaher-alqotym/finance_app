@@ -55,48 +55,98 @@ class SavingCardDetails extends StatelessWidget {
               ),
               Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 40),
-                  child: Text("${title}")),
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text("${title}", style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500
+                  ),)),
               Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 15),
-                  child: Text("${(percentage*100).round()}%")),
+                  padding: EdgeInsets.only(top: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("من الدخل"),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text("${(percentage*100).round()}%",
+                          style: TextStyle(color: Color(0xffF5EC00),
+                              fontSize: 20,
+                          fontWeight: FontWeight.w600),),
+                      ),
+                    ],
+                  )),
               Container(
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 15),
-                  child: Text("${amount.round()}")),
-              Container(
-                padding: EdgeInsets.only(right: 50, top: 15),
+                padding: EdgeInsets.only(right: 0, top: 75),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("${fromDate}"),
-                    SizedBox(
-                      width: 15,
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Text("من"),
+                            ),
+                            ImageIcon(
+                              AssetImage("assets/images/Frame 8753.png"),
+                              color: Color.fromRGBO(83, 210, 88, 1),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0, right: 20.0),
+                          child: Text("${fromDate}",
+                            style: TextStyle(fontSize: 13, color: Colors.grey),),
+                        ),
+                      ],
                     ),
-                    ImageIcon(
-                      AssetImage("assets/images/Frame 8753.png"),
-                      color: Color.fromRGBO(83, 210, 88, 1),
+
+
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Text("إلى"),
+                            ),
+                            ImageIcon(
+                              AssetImage("assets/images/downArrow.png"),
+                              color: Color.fromRGBO(83, 210, 88, 1),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0, right: 20.0),
+                          child: Text("${toDate}",
+                            style: TextStyle(fontSize: 13, color: Colors.grey),),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: 120,
-                    ),
-                    Text("${toDate}"),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    ImageIcon(
-                      AssetImage("assets/images/Frame 8753.png"),
-                      color: Color.fromRGBO(83, 210, 88, 1),
-                    ),
+
 
                     //  OutlinedButton
                   ],
                 ),
               ),
-              SizedBox(
-                height: 100,
-              ),
+              Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(top: 45),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Text("س.ر",
+                          style: TextStyle(fontSize: 20),),
+                      ),
+                      Text("${userController.largNumbersformatter(amount.toString())}",
+                        style: TextStyle(fontSize: 24),),
+                    ],
+                  )),
               Container(
                   child: TextButton(
                       onPressed: () {
@@ -120,7 +170,8 @@ class SavingCardDetails extends StatelessWidget {
                         );
                       },
                       child: TextButton(
-                        child: Text("حذف", style: TextStyle(color: Colors.red),),
+                        child: Text("حذف",
+                          style: TextStyle(color: Colors.red, fontSize: 14, fontWeight: FontWeight.w600),),
                         onPressed: () =>{
                             userController.deleteSavings(id)
                             },
