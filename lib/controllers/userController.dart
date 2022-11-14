@@ -272,7 +272,7 @@ class UserController extends GetxController {
     }
   }
 
-  List<num> getMonthlyExpenses(){
+  List<num> getMonthlyStat(List list){
     var now = DateTime.now();
 
     num week1=0;
@@ -280,55 +280,38 @@ class UserController extends GetxController {
     num week3=0;
     num week4=0;
 
-    for(int i= 0 ; i < user.expenseList.length; i++){
-      if(DateTime.parse(user.expenseList[i].id!).month == now.month){
-        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 1){
-          week1 += user.expenseList[i].amount;
+    try {
+      for (int i = 0; i < list.length; i++) {
+        if (DateTime
+            .parse(list[i].id!)
+            .month == now.month) {
+          if (DateTime
+              .parse(list[i].id!)
+              .weekOfMonth == 1) {
+            week1 += list[i].amount;
+          }
+          if (DateTime
+              .parse(list[i].id!)
+              .weekOfMonth == 2) {
+            week2 += list[i].amount;
+          }
+          if (DateTime
+              .parse(list[i].id!)
+              .weekOfMonth == 3) {
+            week3 += list[i].amount;
+          }
+          if (DateTime
+              .parse(list[i].id!)
+              .weekOfMonth == 4) {
+            week4 += list[i].amount;
+          }
         }
-        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 2){
-          week2 += user.expenseList[i].amount;
-        }
-        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 3){
-          week3 += user.expenseList[i].amount;
-        }
-        if(DateTime.parse(user.expenseList[i].id!).weekOfMonth == 4){
-          week4 += user.expenseList[i].amount;
-        }
-
-
       }
-    }
-
-    return [week1, week2, week3, week4];
-  }
-
-  List<num> getMonthlySavings(){
-    var now = DateTime.now();
-
-    num week1=0;
-    num week2=0;
-    num week3=0;
-    num week4=0;
-
-    for(int i= 0 ; i < user.savingList.length; i++){
-      if(DateTime.parse(user.savingList[i].id!).month == now.month){
-        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 1){
-          week1 += user.savingList[i].amount;
-        }
-        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 2){
-          week2 += user.savingList[i].amount;
-        }
-        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 3){
-          week3 += user.savingList[i].amount;
-        }
-        if(DateTime.parse(user.savingList[i].id!).weekOfMonth == 4){
-          week4 += user.savingList[i].amount;
-        }
-
-
-      }
+    }catch(e) {
+      print(e);
     }
     return [week1, week2, week3, week4];
+
   }
 
   String? largNumbersformatter(String currentBalance) {

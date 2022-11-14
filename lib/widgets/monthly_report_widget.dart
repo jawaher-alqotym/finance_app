@@ -11,8 +11,8 @@ Widget monthlyReportWidget(BuildContext context) {
   late TooltipBehavior _tooltip;
 
   final userController = Get.find<UserController>();
-  List<num> MonthlyExpenses = userController.getMonthlyExpenses();
-  List<num> MonthlySavings = userController.getMonthlySavings();
+  List<num> MonthlyExpenses = userController.getMonthlyStat(userController.user.expenseList);
+  List<num> MonthlySavings = userController.getMonthlyStat(userController.user.savingList);
 
 
   /** one for spending, another for saving **/
