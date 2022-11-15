@@ -37,8 +37,7 @@ class _CustomContainerState extends State<CustomContainer> {
               print("isSelected");
               print(widget.text.data);
               userController.selectedText = widget.text.data!;
-              userController.selectedIcon = widget.icon.image.toString();
-              userController.selectedIcon = userController.selectedIcon.substring(32,userController.selectedIcon.length-2);
+              userController.selectedIcon = widget.icon.image!.toString();
 
               print("text / ${userController.selectedText}");
               print("${userController.selectedIcon}");
