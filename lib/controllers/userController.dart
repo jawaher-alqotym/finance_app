@@ -355,9 +355,9 @@ extension DateTimeExtension on DateTime {
 
 }
 
-// extension AssetImageExtension on AssetImage {
-//    String getAssetName(){
-//      return keyName;
-//    }
-// }
+extension AssetImageExtension on AssetImage {
+   String get AssetName{
+     return keyName;
+   }
+}
 
